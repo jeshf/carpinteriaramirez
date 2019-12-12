@@ -1,0 +1,15 @@
+.head{
+    margin-top: 50px;
+    background-colo: #f2f2f2;
+}
+.down{
+    margin-top: 100px;
+    background-color: #f2f2f2;
+}
+.vertical{
+    vertical-align: top;
+}
+.size{
+    width: 90%;
+    height: 90%;
+}
