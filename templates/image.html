@@ -55,7 +55,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-xs-9 col-sm-9">
-                        <h1 class="text-uppercase text-center">{{ img.postTitle }}</h1>
+                        <h1 class="bg-info table-bordered text-uppercase text-center"><i>{{ img.postTitle }}</i></h1>
                     </div>
                 </div>
             </div>
@@ -63,9 +63,10 @@
             <section>
             <div class="container">
                 <div class="row">
-                    <div class="col-xs-9 col-sm-9 ">
-                            <img class="size" src="{{ img.image.url }}">
-                        <p>{{ img.postDescription }}</p>
+                    <div class="text-center col-xs-9 col-sm-9 ">
+                        <div class="bg-info text-center table-bordered "><b>Descripción:</b> <label>{{ img.postDescription }}</label></div>
+                        <br>  <div class="bg-info" ><img src="{{ img.image.url }}"></div>
+                    <br>
                         {% if comment != 0 %}
                         {% for comments in comment %}
                             <textarea  rows="2" cols="80" disabled="True">{{ print}} {{comments.createdBy}} dijo: {{ comments.text }}</textarea>
