@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="98b34b83-457f-4882-b1df-a206b47ef2fb" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sistema/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/sistema/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sistema/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/sistema/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/image.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/image.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -67,6 +69,9 @@
       <option name="presentableId" value="Default" />
       <updated>1576248673573</updated>
       <workItem from="1576248677945" duration="4277000" />
+      <workItem from="1576431497399" duration="3701000" />
+      <workItem from="1578523607523" duration="1360000" />
+      <workItem from="1578525055542" duration="1978000" />
     </task>
     <servers />
   </component>
@@ -78,7 +83,9 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>

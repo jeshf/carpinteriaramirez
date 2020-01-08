@@ -21,6 +21,7 @@ class CommentViewSet(viewsets.ModelViewSet):
 # desplegar una imagen en el archivo imagen.html
 def image(request,pk):
     form = ContactForm()
+    formr = ResponseForm()
     template = get_template('image.html')
     try:
         img = Post.objects.get(pk=pk)
@@ -29,14 +30,14 @@ def image(request,pk):
         except Comment.DoesNotExist:
             comment = 0
             if request.method == 'GET':
-                html = template.render({'img': img,'comment': comment, 'form':form }, request)
+                html = template.render({'img': img,'comment': comment, 'form':form, 'formr':formr }, request)
                 return HttpResponse(html)
     except Post.DoesNotExist:
         return HttpResponse(status=404)
     if request.method=='GET':
-        html = template.render({'img': img, 'comment':comment, 'form':form }, request)
+        html = template.render({'img': img, 'comment':comment, 'form':form, 'formr':formr }, request)
         return HttpResponse(html)
-    #corregir todo el POST
+
     elif request.method == 'POST':
         form = ContactForm(data=request.POST)
         form.fields['mensaje'].error_messages = {'required': 'Este campo es requerido'}
@@ -44,7 +45,7 @@ def image(request,pk):
         if form.is_valid():
             Comment.objects.create(createdBy=request.POST['usuario'], text=request.POST['mensaje'], post=img)
         comment = Comment.objects.filter(post=img)
-        html = template.render({'img': img, 'comment': comment, 'form': form}, request)
+        html = template.render({'img': img, 'comment': comment, 'form': form, 'formr':formr}, request)
         return HttpResponse(html)
 
 class ResponseViewSet(viewsets.ModelViewSet):

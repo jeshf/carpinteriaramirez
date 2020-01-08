@@ -5,8 +5,6 @@ class ContactForm(forms.Form):
     mensaje = forms.CharField(
         max_length=1000,
         widget=forms.Textarea(attrs={'rows': 2, 'cols': 35, 'placeholder':'Escribe aqui tu comentario'})
-        #widget=forms.TextInput(attrs={'size': 20})#,
-        #help_text='Escribe aqui'
     )
 
     def clean(self):
@@ -15,3 +13,14 @@ class ContactForm(forms.Form):
         mensaje = cleaned_data.get('mensaje')
         if not usuario or not mensaje:
             raise forms.ValidationError('Los campos usuario y/o mensaje no pueden estar vacios')
+class ResponseForm(forms.Form):
+    respuesta = forms.CharField(
+        max_length=1000,
+        widget=forms.Textarea(attrs={'rows': 2, 'cols': 68, 'placeholder':'Escribe aquí tu respuesta a este comentario'}), label=''
+    )
+
+    def clean(self):
+        cleaned_data = super(ContactForm, self).clean()
+        respuesta = cleaned_data.get('respuesta')
+        if not respuesta:
+            raise forms.ValidationError('El campo respuesta no puede estar vacío')
