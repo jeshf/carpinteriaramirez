@@ -73,6 +73,7 @@
                             <form method="post">
                                     {% csrf_token %}
                                     {{ formr }}<button type="submit" class="btn btn-default vertical">Responder</button><br/>
+                                    <input type="hidden" name="primarkey" value="{{ comments.id }}">
                             </form>
                         {% endfor %}{% endif %}
                     </div>
