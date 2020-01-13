@@ -29,9 +29,6 @@ def image(request,pk):
             comment = Comment.objects.filter(post=img)
         except Comment.DoesNotExist:
             comment = 0
-            if request.method == 'GET':
-                html = template.render({'img': img,'comment': comment, 'form':form, 'formr':formr }, request)
-                return HttpResponse(html)
     except Post.DoesNotExist:
         return HttpResponse(status=404)
     if request.method=='GET':
@@ -39,7 +36,7 @@ def image(request,pk):
         return HttpResponse(html)
 
     elif request.method == 'POST':
-        if request.POST['respuesta']:
+        if request.POST['flag']=="responder":
             try:
                 com=Comment.objects.get(pk=request.POST['primarkey'])
             except Comment.DoesNotExist:
@@ -48,16 +45,17 @@ def image(request,pk):
             formr.fields['respuesta'].error_messages = {'required': 'Este campo es requerido'}
             if formr.is_valid():
                 Response.objects.create(text=request.POST['respuesta'], comment=com)
-            comment = Comment.objects.filter(post=img)
+            formr= ResponseForm()
             html = template.render({'img': img, 'comment': comment, 'form': form, 'formr': formr}, request)
             return HttpResponse(html)
-        elif  request.POST['mensaje'] and request.POST['usuario']:
+        elif  request.POST['flag']=="comentar":
             form = ContactForm(data=request.POST)
             form.fields['mensaje'].error_messages = {'required': 'Este campo es requerido'}
             form.fields['usuario'].error_messages = {'required': 'Este campo es requerido'}
             if form.is_valid():
                 Comment.objects.create(createdBy=request.POST['usuario'], text=request.POST['mensaje'], post=img)
             comment = Comment.objects.filter(post=img)
+            form= ContactForm()
             html = template.render({'img': img, 'comment': comment, 'form': form, 'formr':formr}, request)
             return HttpResponse(html)
 

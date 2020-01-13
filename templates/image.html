@@ -74,6 +74,7 @@
                                     {% csrf_token %}
                                     {{ formr }}<button type="submit" class="btn btn-default vertical">Responder</button><br/>
                                     <input type="hidden" name="primarkey" value="{{ comments.id }}">
+                                    <input type="hidden" name="flag" value="{{ "responder" }}">
                             </form>
                         {% endfor %}{% endif %}
                     </div>
@@ -82,6 +83,7 @@
                                 <form method="post">
                                     {% csrf_token %}
                                     {{ form }}
+                                    <input type="hidden" name="flag" value="{{ "comentar" }}">
                                     <button type="submit" class="btn btn-primary center-block">Enviar</button>
                                 </form>
                 </div>
