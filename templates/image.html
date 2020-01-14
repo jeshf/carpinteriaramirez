@@ -9,7 +9,7 @@
     <!-- Bootstrap CSS -->
       <title>Carpinteria Ramírez</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static '/css/style.css' %}">
 
   </head>
   <body>
@@ -65,7 +65,7 @@
                 <div class="row">
                     <div class="text-center col-xs-9 col-sm-9 ">
                         <div class="bg-info text-center table-bordered "><b>Descripción:</b> <label>{{ img.postDescription }}</label></div>
-                        <br>  <div class="bg-info" ><img src="{{ img.image.url }}"></div>
+                        <br>  <div class="" ><img class="size" alt="{{ img.postTitle }}"src="{{ img.image.url }}"></div>
                     <br>
                         {% if comment != 0 %}
                         {% for comments in comment %}
