@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="98b34b83-457f-4882-b1df-a206b47ef2fb" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sistema/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/sistema/forms.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sistema/static/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/sistema/static/css/style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/image.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/image.html" afterDir="false" />
     </list>
@@ -18,7 +19,7 @@
   <component name="ProjectId" id="1Uvt0Xn5ZxPNEyAW4kxGCPxVLwD" />
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../carpinteriaarmando" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -79,6 +80,8 @@
       <workItem from="1579019439990" duration="1699000" />
       <workItem from="1579021231636" duration="1743000" />
       <workItem from="1579023067330" duration="59000" />
+      <workItem from="1579204161924" duration="1655000" />
+      <workItem from="1579206218579" duration="618000" />
     </task>
     <servers />
   </component>

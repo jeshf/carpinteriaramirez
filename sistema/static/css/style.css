@@ -1,13 +1,23 @@
 .head{
+    margin-top: 50px;
 
 }
-.borders{
-
+.bg-gray{
+    background-color: #f2f2f2;
+}
+.down{
+    margin-top: 100px;
 }
 .vertical{
-
+    vertical-align: top;
+}
+.borders{
+    border: 3px solid #bce8f1;
+    padding: 0;
 }
 .size{
-    height: 100%;
-    width: auto;
+    height: auto;
+    width: 99%;
+
+    /*position: initial;*/
 }

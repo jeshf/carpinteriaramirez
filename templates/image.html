@@ -55,7 +55,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-xs-9 col-sm-9">
-                        <h1 class="bg-info table-bordered text-uppercase text-center"><i>{{ img.postTitle }}</i></h1>
+                        <h1 class="bg-gray table-bordered text-uppercase text-center"><i>{{ img.postTitle }}</i></h1>
                     </div>
                 </div>
             </div>
@@ -64,8 +64,8 @@
             <div class="container">
                 <div class="row">
                     <div class="text-center col-xs-9 col-sm-9 ">
-                        <div class="bg-info text-center table-bordered "><b>Descripción:</b> <label>{{ img.postDescription }}</label></div>
-                        <br>  <div class="" ><img class="size" alt="{{ img.postTitle }}"src="{{ img.image.url }}"></div>
+                        <div class="bg-gray text-center table-bordered "><b>Descripción:</b> <label>{{ img.postDescription }}</label></div>
+                        <br>  <div class="" ><img class="size borders" alt="{{ img.postTitle }}"src="{{ img.image.url }}"></div>
                     <br>
                         {% if comment != 0 %}
                         {% for comments in comment %}
@@ -79,7 +79,7 @@
                         {% endfor %}{% endif %}
                     </div>
                 <aside >
-                <div class="col-xs-3 col-sm-3 head text-center">
+                <div class="col-xs-3 col-sm-3 head bg-gray table-bordered text-center">
                                 <form method="post">
                                     {% csrf_token %}
                                     {{ form }}
