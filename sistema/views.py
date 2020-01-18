@@ -63,3 +63,18 @@ class ResponseViewSet(viewsets.ModelViewSet):
     permission_classes = (permissions.IsAuthenticated,)
     queryset = Response.objects.all()
     serializer_class = ResponseSerializer
+
+class UserViewSet(viewsets.ModelViewSet):
+    permission_classes = (permissions.IsAuthenticated,)
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+class ServiceViewSet(viewsets.ModelViewSet):
+    permission_classes = (permissions.IsAuthenticated,)
+    queryset = Service.objects.all()
+    serializer_class = ServiceSerializer
+
+class PaymentViewSet(viewsets.ModelViewSet):
+    permission_classes = (permissions.IsAuthenticated,)
+    queryset = Payment.objects.all()
+    serializer_class = PaymentSerializer

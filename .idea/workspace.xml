@@ -3,15 +3,32 @@
   <component name="ChangeListManager">
     <list default="true" id="98b34b83-457f-4882-b1df-a206b47ef2fb" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sistema/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/sistema/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sistema/static/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/sistema/static/css/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/image.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/image.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/carpinteriaramirez/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/carpinteriaramirez/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/carpinteriaramirez/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/carpinteriaramirez/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sistema/migrations/0001_initial.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sistema/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/sistema/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sistema/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/sistema/serializers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sistema/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/sistema/views.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand />
+    <select />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -82,6 +99,11 @@
       <workItem from="1579023067330" duration="59000" />
       <workItem from="1579204161924" duration="1655000" />
       <workItem from="1579206218579" duration="618000" />
+      <workItem from="1579273970356" duration="248000" />
+      <workItem from="1579274887472" duration="1730000" />
+      <workItem from="1579277950087" duration="194000" />
+      <workItem from="1579299487523" duration="1109000" />
+      <workItem from="1579368538396" duration="1743000" />
     </task>
     <servers />
   </component>

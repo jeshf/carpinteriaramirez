@@ -27,7 +27,9 @@ router = DefaultRouter()
 router.register(r'posts', views.PostViewSet)
 router.register(r'comments', views.CommentViewSet)
 router.register(r'responses', views.ResponseViewSet)
-
+router.register(r'users', views.UserViewSet)
+router.register(r'services', views.ServiceViewSet)
+router.register(r'payments', views.PaymentViewSet)
 urlpatterns = [
     url(r'^api/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^api/', include(router.urls)),

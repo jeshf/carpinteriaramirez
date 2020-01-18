@@ -22,3 +22,18 @@ class ResponseSerializer(serializers.HyperlinkedModelSerializer):
         response.repliedBy = user
         response.save()
         return response
+
+class UserSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = User
+        fields = '__all__'
+
+class ServiceSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Service
+        fields = '__all__'
+
+class PaymentSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Payment
+        fields = '__all__'
