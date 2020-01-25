@@ -1,5 +1,5 @@
 from rest_framework.parsers import JSONParser
-
+from django.contrib.auth import get_user_model
 from .forms import *
 from django.http import HttpResponse
 from django.template.loader import get_template
@@ -66,7 +66,7 @@ class ResponseViewSet(viewsets.ModelViewSet):
 
 class UserViewSet(viewsets.ModelViewSet):
     permission_classes = (permissions.IsAuthenticated,)
-    queryset = User.objects.all()
+    queryset = CustomUser.objects.all()
     serializer_class = UserSerializer
 
 class ServiceViewSet(viewsets.ModelViewSet):

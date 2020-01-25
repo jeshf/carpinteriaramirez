@@ -2,9 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="98b34b83-457f-4882-b1df-a206b47ef2fb" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/carpinteriaramirez.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/carpinteriaramirez.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/carpinteriaramirez/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/carpinteriaramirez/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/carpinteriaramirez/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/carpinteriaramirez/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sistema/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/sistema/admin.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sistema/migrations/0001_initial.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/sistema/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/sistema/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sistema/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/sistema/serializers.py" afterDir="false" />
@@ -34,9 +37,10 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1Uvt0Xn5ZxPNEyAW4kxGCPxVLwD" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../carpinteriaarmando" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../salidasdeploy" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -104,6 +108,21 @@
       <workItem from="1579277950087" duration="194000" />
       <workItem from="1579299487523" duration="1109000" />
       <workItem from="1579368538396" duration="1743000" />
+      <workItem from="1579537215856" duration="1685000" />
+      <workItem from="1579540409519" duration="1728000" />
+      <workItem from="1579545080409" duration="1710000" />
+      <workItem from="1579546924562" duration="23000" />
+      <workItem from="1579727353355" duration="613000" />
+      <workItem from="1579795019279" duration="300000" />
+      <workItem from="1579795407807" duration="90000" />
+      <workItem from="1579795567580" duration="602000" />
+      <workItem from="1579797481121" duration="548000" />
+      <workItem from="1579799347376" duration="597000" />
+      <workItem from="1579801154835" duration="370000" />
+      <workItem from="1579977471839" duration="591000" />
+      <workItem from="1579979521586" duration="1682000" />
+      <workItem from="1579981354644" duration="1705000" />
+      <workItem from="1579983698087" duration="1750000" />
     </task>
     <servers />
   </component>

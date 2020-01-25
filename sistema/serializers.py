@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from sistema.models import *
-
+from django.contrib.auth import get_user_model
 class PostSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Post
@@ -25,7 +25,7 @@ class ResponseSerializer(serializers.HyperlinkedModelSerializer):
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
-        model = User
+        model = CustomUser
         fields = '__all__'
 
 class ServiceSerializer(serializers.HyperlinkedModelSerializer):
