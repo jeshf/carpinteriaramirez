@@ -2,14 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="98b34b83-457f-4882-b1df-a206b47ef2fb" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/carpinteriaramirez.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/carpinteriaramirez.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/carpinteriaramirez/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/carpinteriaramirez/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sistema/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/sistema/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/carpinteriaramirez/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/carpinteriaramirez/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sistema/migrations/0001_initial.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sistema/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/sistema/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sistema/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/sistema/serializers.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sistema/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/sistema/views.py" afterDir="false" />
     </list>
@@ -40,7 +36,7 @@
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../salidasdeploy" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../env-carpinteria/bin" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -57,13 +53,13 @@
   <component name="RunManager">
     <configuration name="carpinteriaramirez" type="Python.DjangoServer" factoryName="Django server">
       <module name="carpinteriaramirez" />
-      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="INTERPRETER_OPTIONS" value="$PROJECT_DIR$/../env-carpinteria/bin/python" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
+      <option name="SDK_HOME" value="$PROJECT_DIR$/../env/bin/python" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/../env-carpinteria/bin" />
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
@@ -123,6 +119,10 @@
       <workItem from="1579979521586" duration="1682000" />
       <workItem from="1579981354644" duration="1705000" />
       <workItem from="1579983698087" duration="1750000" />
+      <workItem from="1580135554168" duration="1192000" />
+      <workItem from="1580137330835" duration="1730000" />
+      <workItem from="1580139171912" duration="1376000" />
+      <workItem from="1580144266151" duration="542000" />
     </task>
     <servers />
   </component>

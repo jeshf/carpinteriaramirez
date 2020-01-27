@@ -41,10 +41,16 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'rest_framework.authtoken',
+    'rest_auth',
     'sistema',
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'rest_auth.registration',
 ]
 
-AUTH_USER_MODEL='sistema.CustomUser'
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -81,7 +87,7 @@ TEMPLATES = [
 MEDIA_ROOT=os.path.join(BASE_DIR, 'media')
 MEDIA_URL='/media/'
 WSGI_APPLICATION = 'carpinteriaramirez.wsgi.application'
-LOGIN_REDIRECT_URL = '/api/posts/'
+LOGIN_REDIRECT_URL = '/api/user/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATICFILES_DIRS = (
 '/home/jesus/django-projects-environments/carpinteriaramirez/sistema/static',
@@ -136,7 +142,23 @@ USE_L10N = True
 
 USE_TZ = True
 
+SITE_ID = 1
+AUTH_USER_MODEL='sistema.CustomUser'
+ACCOUNT_USER_MODEL_USERNAME_FIELD = 'username'
+ACCOUNT_AUTHENTICATION_METHOD = 'username'
 
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_UNIQUE_EMAIL = False
+ACCOUNT_USERNAME_REQUIRED = True
+ACCOUNT_USER_EMAIL_FIELD = 'email'
+ACCOUNT_LOGOUT_ON_GET = True
+
+REST_AUTH_SERIALIZERS = {
+    "USER_DETAILS_SERIALIZER": "sistema.serializers.CustomUserDetailsSerializer",
+}
+REST_AUTH_REGISTER_SERIALIZERS = {
+    "REGISTER_SERIALIZER": "sistema.serializers.CustomRegisterSerializer",
+}
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 

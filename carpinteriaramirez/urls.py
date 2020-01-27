@@ -27,7 +27,7 @@ router = DefaultRouter()
 router.register(r'posts', views.PostViewSet)
 router.register(r'comments', views.CommentViewSet)
 router.register(r'responses', views.ResponseViewSet)
-router.register(r'users', views.UserViewSet)
+#router.register(r'users', views.UserViewSet)
 router.register(r'services', views.ServiceViewSet)
 router.register(r'payments', views.PaymentViewSet)
 urlpatterns = [
@@ -35,6 +35,9 @@ urlpatterns = [
     url(r'^api/', include(router.urls)),
     url(r'^backend/', admin.site.urls),
     url(r'^api/posts/(?P<pk>[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})/image/$', views.image),
+    url(r'^api/rest-auth/', include('rest_auth.urls')),
+    url(r'^api/rest-auth/registration/', include('rest_auth.registration.urls')),
+    url(r'^api/user/', views.CustomRegisterView.as_view()),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

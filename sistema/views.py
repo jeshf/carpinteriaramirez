@@ -1,11 +1,12 @@
-from rest_framework.parsers import JSONParser
-from django.contrib.auth import get_user_model
+#from rest_framework.parsers import JSONParser
+#from django.contrib.auth import get_user_model
 from .forms import *
 from django.http import HttpResponse
 from django.template.loader import get_template
 from sistema.serializers import *
 from rest_framework import generics, permissions
 from rest_framework import viewsets
+from rest_auth.registration.views import RegisterView
 # Create your views here.
 class PostViewSet(viewsets.ModelViewSet):
     permission_classes = (permissions.IsAuthenticated,)
@@ -64,10 +65,8 @@ class ResponseViewSet(viewsets.ModelViewSet):
     queryset = Response.objects.all()
     serializer_class = ResponseSerializer
 
-class UserViewSet(viewsets.ModelViewSet):
-    permission_classes = (permissions.IsAuthenticated,)
+class CustomRegisterView(RegisterView):
     queryset = CustomUser.objects.all()
-    serializer_class = UserSerializer
 
 class ServiceViewSet(viewsets.ModelViewSet):
     permission_classes = (permissions.IsAuthenticated,)
