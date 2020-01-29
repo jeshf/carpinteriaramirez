@@ -1,4 +1,6 @@
 from django import forms
+#from django.contrib.auth.forms import UserCreationForm
+from .models import CustomUser
 
 class ContactForm(forms.Form):
     usuario = forms.CharField(max_length=30, widget=forms.TextInput(attrs={'placeholder':'Escribe tu nombre'}))
@@ -23,3 +25,15 @@ class ResponseForm(forms.Form):
         respuesta = cleaned_data.get('respuesta')
         if not respuesta:
             raise forms.ValidationError('El campo respuesta no puede estar vacío')
+
+class SignInForm(forms.Form):
+    usuario = forms.CharField(max_length=30, widget=forms.TextInput(attrs={'placeholder': 'Escribe tu nombre de usuario'}))
+    password = forms.CharField(
+        max_length=1000,
+        widget=forms.TextInput(attrs={'placeholder': 'Escribe aqui tu contraseña'}))
+    def clean(self):
+        cleaned_data = super(SignInForm, self).clean()
+        usuario = cleaned_data.get('usuario')
+        password = cleaned_data.get('password')
+        if not usuario or not password:
+            raise forms.ValidationError('Los campos usuario y/o password no pueden estar vacios')

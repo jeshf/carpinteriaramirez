@@ -1,12 +1,17 @@
 #from rest_framework.parsers import JSONParser
-#from django.contrib.auth import get_user_model
+from django.contrib.auth import get_user_model
 from .forms import *
 from django.http import HttpResponse
 from django.template.loader import get_template
 from sistema.serializers import *
 from rest_framework import generics, permissions
 from rest_framework import viewsets
-from rest_auth.registration.views import RegisterView
+#from rest_auth.registration.views import RegisterView
+from django.shortcuts import render, redirect
+from django.contrib.auth import login, authenticate
+from django.views.generic.detail import DetailView
+from .forms import SignInForm
+from rest_framework.views import APIView
 # Create your views here.
 class PostViewSet(viewsets.ModelViewSet):
     permission_classes = (permissions.IsAuthenticated,)
@@ -60,13 +65,48 @@ def image(request,pk):
             html = template.render({'img': img, 'comment': comment, 'form': form, 'formr':formr}, request)
             return HttpResponse(html)
 
+class Login(APIView):
+    def post(self, request, format=None):
+        #data = json.loads(request.body)
+        data = request.data
+        username = data.get('usuario')
+        password = data.get('password')
+        u=str(username)
+        p = str(password)
+        account = authenticate(username=username, password=password)
+        #s = str(data.get('is_superuser'))
+        t = u+p
+        if account is not None:
+            user = get_user_model().objects.get(username=username)
+            if user.is_staff:
+                if account.is_active:
+                    login(request, account)
+                    serialized = UserSerializer(account)
+                    return render(request, 'profile.html', {'object': serialized.data})
+                else:
+                    return Response({
+                        'status': 'Unauthorized',
+                        'message': 'This user cannot login to this site.'
+                    })
+            else:
+                return Response({
+                    'status': 'Unauthorized',
+                    'message': 'Username/password combination invalid.'
+                })
+        else:
+            print(t)
+            return Response({
+                'status': 'Unauthorized',
+                'message': 'Username/password combination invalid.'
+            })
+    def get(self, request, format=None):
+        #data = json.loads(request.body)
+        form = SignInForm()
+        return render(request, 'login.html', {'form': form})
 class ResponseViewSet(viewsets.ModelViewSet):
     permission_classes = (permissions.IsAuthenticated,)
     queryset = Response.objects.all()
     serializer_class = ResponseSerializer
-
-class CustomRegisterView(RegisterView):
-    queryset = CustomUser.objects.all()
 
 class ServiceViewSet(viewsets.ModelViewSet):
     permission_classes = (permissions.IsAuthenticated,)
@@ -77,3 +117,6 @@ class PaymentViewSet(viewsets.ModelViewSet):
     permission_classes = (permissions.IsAuthenticated,)
     queryset = Payment.objects.all()
     serializer_class = PaymentSerializer
+
+#class CustomRegisterView(RegisterView):
+    #queryset = CustomUser.objects.all()

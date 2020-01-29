@@ -15,8 +15,9 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
-from django.contrib.staticfiles.urls import staticfiles_urlpatterns
-from . import settings
+#from django.urls import path, include
+#from django.contrib.auth import views as auth_views
+from django.contrib.auth.decorators import login_required
 from sistema.views import *
 from django.conf.urls import url, include
 from sistema import views
@@ -31,13 +32,17 @@ router.register(r'responses', views.ResponseViewSet)
 router.register(r'services', views.ServiceViewSet)
 router.register(r'payments', views.PaymentViewSet)
 urlpatterns = [
-    url(r'^api/', include('rest_framework.urls', namespace='rest_framework')),
-    url(r'^api/', include(router.urls)),
+    url(r'^api/rest/', include('rest_framework.urls', namespace='rest_framework')),
+    url(r'^api/rest/', include(router.urls)),
     url(r'^backend/', admin.site.urls),
-    url(r'^api/posts/(?P<pk>[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})/image/$', views.image),
-    url(r'^api/rest-auth/', include('rest_auth.urls')),
-    url(r'^api/rest-auth/registration/', include('rest_auth.registration.urls')),
-    url(r'^api/user/', views.CustomRegisterView.as_view()),
+    url(r'^api/rest/posts/(?P<pk>[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})/image/$', views.image),
+    #url(r'^api/login/', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
+    #url(r'^api/logout/', auth_views.LogoutView.as_view(next_page='/api/accounts/login'), name='logout'),
+    #url(r'^api/profile/', login_required(UserView.as_view()), name='profile'),
+    #url(r'^api/signup/', signup, name='signup'),
+    #url(r'^api/accounts/', include('allauth.urls')),
+    url(r'^api/login/$', views.Login.as_view()),
+    #url(r'^api/user/', views.CustomRegisterView.as_view()),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

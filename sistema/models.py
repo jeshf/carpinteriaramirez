@@ -1,6 +1,6 @@
 import uuid
 from django.db import models
-from django.contrib.auth.base_user import AbstractBaseUser, BaseUserManager
+from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 from django.db import models
 from carpinteriaramirez import settings
 # Create your models here.
@@ -36,64 +36,72 @@ class Response (AbstractModel):
         return self.text
 
 class CustomUserManager(BaseUserManager):
-    def create_user(self, username, name,firstLastName,secondLastName, email, password=None):
+    use_in_migrations = True
+    def create_user(self, username, name,firstLastName,secondLastName, email, password):
         if not username:
             raise ValueError('Llena el campo de tu nombre de usuario')
         email = self.normalize_email(email)
-        user = self.model(email=email, name=name ,firstLastName=firstLastName, secondLastName=secondLastName)
+        user = self.model(username=username, email=email, name=name ,firstLastName=firstLastName, secondLastName=secondLastName)
         user.set_password(password)
         user.save(using=self._db)
         return user
 
-    def create_superuser(self, username, name,firstLastName,secondLastName, email, password=None):
+    def create_superuser(self, username, name,firstLastName,secondLastName, email, password):
         if not username:
             raise ValueError('Llena el campo de tu nombre de usuario')
         email = self.normalize_email(email)
-        user = self.model(email=email, name=name, firstLastName=firstLastName, secondLastName=secondLastName)
-        user.is_admin = True
+        user = self.model(username=username, email=email, name=name, firstLastName=firstLastName, secondLastName=secondLastName)
+        user.is_staff = True
+        user.is_superuser =True
         user.set_password(password)
         user.save(using=self._db)
         return user
 
-class CustomUser(AbstractBaseUser):
+class CustomUser(AbstractBaseUser,PermissionsMixin):
     username = models.CharField(max_length=20, null=False, blank=False, unique=True)
     # password = models.CharField(max_length=30, null=False, blank=False) clashes with the AbstractBaseUser field
     is_active = models.BooleanField(default=True)  # este campo es necesario
-    is_admin = models.BooleanField(default=False)  # este campo es necesario
+    is_staff = models.BooleanField(default=False)
+    is_superuser = models.BooleanField(default=False)  # este campo es necesario
     name = models.CharField(max_length=50, blank=False, null=False)
     firstLastName = models.CharField(max_length=50, blank=False, null=False)
     secondLastName = models.CharField(max_length=50, blank=False, null=False)
     date_joined = models.DateTimeField(auto_now_add=True)
+    last_login = models.DateTimeField(null=True, blank=True)
     email = models.EmailField(null=False, blank=False)
     objects = CustomUserManager()
     EMAIL_FIELD = 'email'
     USERNAME_FIELD = 'username'
     REQUIRED_FIELDS = ['name','firstLastName','secondLastName','email']
-    def get_full_name(self):
-        full_name=self.name+self.firstLastName+self.secondLastName
-        return full_name
-    def get_short_name(self):
-        return self.name
+    #def get_full_name(self):
+        #full_name=self.name+self.firstLastName+self.secondLastName
+        #return full_name
+    #def get_short_name(self):
+        #return self.name
     def __str__(self):
         return self.username
 
-    def has_perm(self, perm, obj=None):
-        "Does the user have a specific permission?"
+    #def has_perm(self, perm, obj=None):
+        #"Does the user have a specific permission?"
         # Simplest possible answer: Yes, always
-        return True
+        #return True
 
-    def has_module_perms(self, app_label):
-        "Does the user have permissions to view the app `app_label`?"
+    #def has_module_perms(self, app_label):
+        #"Does the user have permissions to view the app `app_label`?"
         # Simplest possible answer: Yes, always
-        return True
+        #return True
 
-    @property
-    def is_staff(self):
-        "Is the user a member of staff?"
-        # Simplest possible answer: All admins are staff
-        return self.is_admin
-#has_perm(perm, obj=None): aquí me quede en la documentación
-#Returns True if the user has the named permission. If obj is provided, the permission needs to be checked against a specific object instance.
+    #@property
+    #def is_superuser(self):
+        #return self.superuser
+
+    #@property
+    #def is_active(self):
+        #return self.active
+
+    #@property
+    #def is_staff(self):
+        #return self.is_staff
 class Service (AbstractModel):
      name = models.CharField(max_length=30, null=False, blank=False)
      description = models.CharField(max_length=200, null=False, blank=False)
