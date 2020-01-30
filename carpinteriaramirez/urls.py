@@ -28,7 +28,7 @@ router = DefaultRouter()
 router.register(r'posts', views.PostViewSet)
 router.register(r'comments', views.CommentViewSet)
 router.register(r'responses', views.ResponseViewSet)
-#router.register(r'users', views.UserViewSet)
+router.register(r'users', views.UserViewSet)
 router.register(r'services', views.ServiceViewSet)
 router.register(r'payments', views.PaymentViewSet)
 urlpatterns = [
@@ -36,11 +36,6 @@ urlpatterns = [
     url(r'^api/rest/', include(router.urls)),
     url(r'^backend/', admin.site.urls),
     url(r'^api/rest/posts/(?P<pk>[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})/image/$', views.image),
-    #url(r'^api/login/', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
-    #url(r'^api/logout/', auth_views.LogoutView.as_view(next_page='/api/accounts/login'), name='logout'),
-    #url(r'^api/profile/', login_required(UserView.as_view()), name='profile'),
-    #url(r'^api/signup/', signup, name='signup'),
-    #url(r'^api/accounts/', include('allauth.urls')),
     url(r'^api/login/$', views.Login.as_view()),
     #url(r'^api/user/', views.CustomRegisterView.as_view()),
 ]

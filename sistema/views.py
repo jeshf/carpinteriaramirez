@@ -14,13 +14,13 @@ from .forms import SignInForm
 from rest_framework.views import APIView
 # Create your views here.
 class PostViewSet(viewsets.ModelViewSet):
-    permission_classes = (permissions.IsAuthenticated,)
+    permission_classes = (permissions.IsAuthenticated, permissions.IsAdminUser)
     queryset = Post.objects.all()
     serializer_class = PostSerializer
 
 
 class CommentViewSet(viewsets.ModelViewSet):
-    permission_classes = (permissions.IsAuthenticated,)
+    permission_classes = ()
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer
 
@@ -71,52 +71,38 @@ class Login(APIView):
         data = request.data
         username = data.get('usuario')
         password = data.get('password')
-        u=str(username)
-        p = str(password)
         account = authenticate(username=username, password=password)
-        #s = str(data.get('is_superuser'))
-        t = u+p
         if account is not None:
             user = get_user_model().objects.get(username=username)
-            if user.is_staff:
-                if account.is_active:
-                    login(request, account)
-                    serialized = UserSerializer(account)
-                    return render(request, 'profile.html', {'object': serialized.data})
-                else:
-                    return Response({
-                        'status': 'Unauthorized',
-                        'message': 'This user cannot login to this site.'
-                    })
+            if user.is_active:
+                login(request, account)
+                serialized = UserSerializer(account)
+                return render(request, 'profile.html', {'object': serialized.data})
             else:
-                return Response({
-                    'status': 'Unauthorized',
-                    'message': 'Username/password combination invalid.'
-                })
+                return HttpResponse('Unauthorized', status=401)
         else:
-            print(t)
-            return Response({
-                'status': 'Unauthorized',
-                'message': 'Username/password combination invalid.'
-            })
+            return HttpResponse('Unauthorized', status=401)
     def get(self, request, format=None):
         #data = json.loads(request.body)
         form = SignInForm()
         return render(request, 'login.html', {'form': form})
+
+class UserViewSet(viewsets.ModelViewSet):
+    permission_classes = (permissions.IsAuthenticated, permissions.IsAdminUser)
+    queryset = get_user_model().objects.all()
+    serializer_class = UserSerializer
+
 class ResponseViewSet(viewsets.ModelViewSet):
-    permission_classes = (permissions.IsAuthenticated,)
+    permission_classes = (permissions.IsAuthenticated, permissions.IsAdminUser)
     queryset = Response.objects.all()
     serializer_class = ResponseSerializer
 
 class ServiceViewSet(viewsets.ModelViewSet):
-    permission_classes = (permissions.IsAuthenticated,)
+    permission_classes = (permissions.IsAuthenticated, permissions.IsAdminUser)
     queryset = Service.objects.all()
     serializer_class = ServiceSerializer
 
 class PaymentViewSet(viewsets.ModelViewSet):
-    permission_classes = (permissions.IsAuthenticated,)
+    permission_classes = (permissions.IsAuthenticated, permissions.IsAdminUser)
     queryset = Payment.objects.all()
     serializer_class = PaymentSerializer
-
-#class CustomRegisterView(RegisterView):
-    #queryset = CustomUser.objects.all()
