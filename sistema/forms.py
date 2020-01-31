@@ -27,10 +27,11 @@ class ResponseForm(forms.Form):
             raise forms.ValidationError('El campo respuesta no puede estar vacío')
 
 class SignInForm(forms.Form):
-    usuario = forms.CharField(max_length=30, widget=forms.TextInput(attrs={'placeholder': 'Escribe tu nombre de usuario'}))
+    usuario = forms.CharField(max_length=30, widget=forms.TextInput(attrs={'placeholder': 'Escribe tu nombre de usuario',
+                                                                           'class':'input-lg form-control'}))
     password = forms.CharField(
         max_length=1000,
-        widget=forms.TextInput(attrs={'placeholder': 'Escribe aqui tu contraseña'}))
+        widget=forms.PasswordInput(attrs={'placeholder': 'Escribe aqui tu contraseña','class':'input-lg form-control'}))
     def clean(self):
         cleaned_data = super(SignInForm, self).clean()
         usuario = cleaned_data.get('usuario')

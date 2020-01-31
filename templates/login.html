@@ -1,6 +1,101 @@
-<h1>Login</h1>
-<form method="post">
-  {% csrf_token %}
-  {{ form }}
-  <button type="submit">Login</button>
-</form>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+{% load static %}
+<!---*************welcome this is my simple empty strap by John Niro Yumang ******************* -->
+
+<!DOCTYPE html>
+<html lang="es">
+
+	<title>Registrate en el sitio de la Carpintería Ramírez</title>
+
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<head>
+		<script src="jquery/jquery.min.js"></script>
+		<!---- jquery link local dont forget to place this in first than other script or link or may not work ---->
+
+		<link rel="stylesheet" href="css/bootstrap.min.css">
+		<!---- boostrap.min link local ----->
+
+		<link rel="stylesheet"href="{% static '/css/style2.css' %}">
+		<!---- boostrap.min link local ----->
+
+		<script src="js/bootstrap.min.js"></script>
+		<!---- Boostrap js link local ----->
+
+		<link rel="icon" href="images/icon.png" type="image/x-icon" />
+		<!---- Icon link local ----->
+
+	<link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
+		<!---- Font awesom link local ----->
+	</head>
+	<body>
+	<div class="container-fluid">
+		<div class="container">
+			<h2 class="text-center" id="title">Carpintería Ramírez</h2>
+			 <p class="text-center">
+				<small id="passwordHelpInline" class="text-muted"> Propietario de la Carpintería Ramírez: Armando Ramírez Moreno Sígueme en facebook <a href="https://www.facebook.com/profile.php?id=100006842134922"> Cristofer Ramirez Ramirez</a></small>
+			</p>
+ 			<hr>
+			<div class="row">
+				<div class="col-md-5">
+ 					<form role="form" method="post" action="register.php">
+						<fieldset>
+							<p class="text-uppercase pull-center"> REGISTRATE</p>
+ 							<div class="form-group">
+								<input type="text" name="username" id="username" class="form-control input-lg" placeholder="username">
+							</div>
+
+							<div class="form-group">
+								<input type="email" name="email" id="email" class="form-control input-lg" placeholder="Email Address">
+							</div>
+							<div class="form-group">
+								<input type="password" name="password" id="password" class="form-control input-lg" placeholder="Password">
+							</div>
+								<div class="form-group">
+								<input type="password" name="password2" id="password2" class="form-control input-lg" placeholder="Password2">
+							</div>
+							<label>
+								  Al registrarte aceptas todas nuestras políticas de cookies y privacidad.
+							</label>
+
+ 							<div>
+ 									  <input type="submit" class="btn btn-lg btn-primary"   value="Registrarse">
+ 							</div>
+						</fieldset>
+					</form>
+				</div>
+
+				<div class="col-md-2">
+					<!-------null------>
+				</div>
+
+				<div class="col-md-5">
+                    <p class="text-uppercase"> Inicia sesión usando tu cuenta: </p>
+                    <form role="form" method="post">
+                        {% csrf_token %}
+                        <div class="form-group">
+								{{ form.usuario }}
+                        </div>
+                        <div class=" form-group">
+								    {{ form.password }}
+                        </div>
+                        <div class="text-center">
+							<input type="submit" class="btn btn-primary">
+						</div>
+                    </form>
+				</div>
+			</div>
+		</div>
+		<p class="text-center">
+			<i id="passwordHelpInline" class="text-muted"> Carpintería Ramírez: El mueble que se ajusta a su medida,
+            como usted lo necesite aquí se lo fabricamos.</i>
+		</p>
+	</div>
+	</body>
+
+
+</html>

@@ -84,7 +84,7 @@ TEMPLATES = [
 MEDIA_ROOT=os.path.join(BASE_DIR, 'media')
 MEDIA_URL='/media/'
 WSGI_APPLICATION = 'carpinteriaramirez.wsgi.application'
-LOGIN_REDIRECT_URL = 'api/rest/posts/'
+LOGIN_REDIRECT_URL = '/api/rest/posts/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATICFILES_DIRS = (
 '/home/jesus/django-projects-environments/carpinteriaramirez/sistema/static',
