@@ -2,4 +2,7 @@
 <p>
   {{ object }}
 </p>
-<a href="/api/posts/">Logout</a>
+<form role="form" method="post" action="/api/logout/">
+    {% csrf_token %}
+    <input type="submit" value="Cerrar sesión"></input>
+</form>

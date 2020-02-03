@@ -42,22 +42,32 @@
  			<hr>
 			<div class="row">
 				<div class="col-md-5">
- 					<form role="form" method="post" action="register.php">
-						<fieldset>
+ 					<form role="form" method="post">
+                        {% csrf_token %}
 							<p class="text-uppercase pull-center"> REGISTRATE</p>
  							<div class="form-group">
-								<input type="text" name="username" id="username" class="form-control input-lg" placeholder="username">
+                                {{ formu.username}}
 							</div>
 
 							<div class="form-group">
-								<input type="email" name="email" id="email" class="form-control input-lg" placeholder="Email Address">
+								{{ formu.password }}
 							</div>
 							<div class="form-group">
-								<input type="password" name="password" id="password" class="form-control input-lg" placeholder="Password">
+								{{ formu.password2 }}
 							</div>
-								<div class="form-group">
-								<input type="password" name="password2" id="password2" class="form-control input-lg" placeholder="Password2">
+                            <div class="form-group">
+								{{ formu.email }}
 							</div>
+                            <div class="form-group">
+								{{ formu.name }}
+							</div>
+                            <div class="form-group">
+								{{ formu.firstLastName }}
+							</div>
+                            <div class="form-group">
+								{{ formu.secondLastName }}
+							</div>
+                            <input type="hidden" name="flag" value="{{ "register" }}">
 							<label>
 								  Al registrarte aceptas todas nuestras políticas de cookies y privacidad.
 							</label>
@@ -65,7 +75,6 @@
  							<div>
  									  <input type="submit" class="btn btn-lg btn-primary"   value="Registrarse">
  							</div>
-						</fieldset>
 					</form>
 				</div>
 
@@ -86,6 +95,7 @@
                         <div class="text-center">
 							<input type="submit" class="btn btn-primary">
 						</div>
+                        <input type="hidden" name="flag" value="{{ "login" }}">
                     </form>
 				</div>
 			</div>

@@ -1,14 +1,14 @@
 #from rest_framework.parsers import JSONParser
 from django.contrib.auth import get_user_model
 from .forms import *
-from django.http import HttpResponse
+from django.http import HttpResponse,HttpResponseRedirect
 from django.template.loader import get_template
 from sistema.serializers import *
 from rest_framework import generics, permissions
 from rest_framework import viewsets
 #from rest_auth.registration.views import RegisterView
 from django.shortcuts import render, redirect
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login, authenticate, logout
 from django.views.generic.detail import DetailView
 from .forms import SignInForm
 from rest_framework.views import APIView
@@ -67,25 +67,33 @@ def image(request,pk):
 
 class Login(APIView):
     def post(self, request, format=None):
-        #data = json.loads(request.body)
         data = request.data
-        username = data.get('usuario')
-        password = data.get('password')
-        account = authenticate(username=username, password=password)
-        if account is not None:
-            user = get_user_model().objects.get(username=username)
-            if user.is_active:
-                login(request, account)
-                serialized = UserSerializer(account)
-                return render(request, 'profile.html', {'object': serialized.data})
+        flag = data.get('flag')
+        if flag == "login":
+            username = data.get('usuario')
+            password = data.get('password')
+            account = authenticate(username=username, password=password)
+            if account is not None:
+                user = get_user_model().objects.get(username=username)
+                if user.is_active:
+                    login(request, account)
+                    serialized = UserSerializer(account)
+                    return render(request, 'profile.html', {'object': serialized.data})
+                else:
+                    return HttpResponse('Unauthorized', status=401)
             else:
                 return HttpResponse('Unauthorized', status=401)
+        elif flag=="register":
+            serializer = UserSerializer(data=data)
+            if serializer.is_valid():
+                serializer.save()
+            return render(request, 'profile.html', {'object': serializer.data})
         else:
-            return HttpResponse('Unauthorized', status=401)
+            return HttpResponse('Bad Request', status=400)
     def get(self, request, format=None):
-        #data = json.loads(request.body)
+        formu = SignUpForm()
         form = SignInForm()
-        return render(request, 'login.html', {'form': form})
+        return render(request, 'login.html', {'form': form,'formu':formu})
 
 class UserViewSet(viewsets.ModelViewSet):
     permission_classes = (permissions.IsAuthenticated, permissions.IsAdminUser)
@@ -106,3 +114,8 @@ class PaymentViewSet(viewsets.ModelViewSet):
     permission_classes = (permissions.IsAuthenticated, permissions.IsAdminUser)
     queryset = Payment.objects.all()
     serializer_class = PaymentSerializer
+
+class LogoutView(APIView):
+    def post(self, request, format=None):
+        logout(request)
+        return HttpResponseRedirect("/api/login/")
