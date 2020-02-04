@@ -15,9 +15,6 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
-#from django.urls import path, include
-#from django.contrib.auth import views as auth_views
-from django.contrib.auth.decorators import login_required
 from sistema.views import *
 from django.conf.urls import url, include
 from sistema import views
@@ -26,6 +23,7 @@ from django.contrib.staticfiles.urls import static
 
 router = DefaultRouter()
 router.register(r'posts', views.PostViewSet)
+router.register(r'images', views.ImageViewSet)
 router.register(r'comments', views.CommentViewSet)
 router.register(r'responses', views.ResponseViewSet)
 router.register(r'users', views.UserViewSet)

@@ -17,7 +17,6 @@ class AbstractModel(models.Model):
 class Post (AbstractModel):
     postTitle = models.CharField(max_length=50, null=False, blank=False)
     postDescription = models.CharField(max_length=500, null=True, blank=True)
-    image = models.ImageField()
     def __str__(self):
         return self.postTitle
 
@@ -27,6 +26,12 @@ class Comment (AbstractModel):
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
     def __str__(self):
         return self.text
+
+class Image (AbstractModel):
+    imagePath = models.ImageField(null=False, blank=False)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    def __str__(self):
+        return self.imagePath
 
 class Response (AbstractModel):
     repliedBy = models.CharField(max_length=50, null=True, blank=True)

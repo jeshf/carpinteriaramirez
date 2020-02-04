@@ -2,6 +2,7 @@ from rest_framework import serializers
 from sistema.models import *
 #from rest_auth.registration.serializers import RegisterSerializer
 from django.contrib.auth import get_user_model
+
 class PostSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Post
@@ -10,6 +11,11 @@ class PostSerializer(serializers.HyperlinkedModelSerializer):
 class CommentSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Comment
+        fields = '__all__'
+
+class ImageSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Image
         fields = '__all__'
 
 class ResponseSerializer(serializers.HyperlinkedModelSerializer):

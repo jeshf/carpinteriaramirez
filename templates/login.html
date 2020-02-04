@@ -1,9 +1,9 @@
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-<!------ Include the above in your HEAD tag ---------->
+
 {% load static %}
-<!---*************welcome this is my simple empty strap by John Niro Yumang ******************* -->
+
 
 <!DOCTYPE html>
 <html lang="es">
@@ -17,13 +17,13 @@
 		<script src="jquery/jquery.min.js"></script>
 		<!---- jquery link local dont forget to place this in first than other script or link or may not work ---->
 
-		<link rel="stylesheet" href="css/bootstrap.min.css">
+		<link rel="stylesheet" href="{% static '/css/bootstrap.min.css' %}">
 		<!---- boostrap.min link local ----->
 
 		<link rel="stylesheet"href="{% static '/css/style2.css' %}">
 		<!---- boostrap.min link local ----->
 
-		<script src="js/bootstrap.min.js"></script>
+		<script src="{% static '/js/bootstrap.min.js' %}"></script>
 		<!---- Boostrap js link local ----->
 
 		<link rel="icon" href="images/icon.png" type="image/x-icon" />

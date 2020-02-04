@@ -24,6 +24,11 @@ class CommentViewSet(viewsets.ModelViewSet):
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer
 
+class ImageViewSet(viewsets.ModelViewSet):
+    permission_classes = (permissions.IsAuthenticated, permissions.IsAdminUser)
+    queryset = Image.objects.all()
+    serializer_class = ImageSerializer
+
 # desplegar una imagen en el archivo imagen.html
 def image(request,pk):
     form = ContactForm()
