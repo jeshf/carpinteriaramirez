@@ -3,12 +3,16 @@
   <component name="ChangeListManager">
     <list default="true" id="98b34b83-457f-4882-b1df-a206b47ef2fb" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/carpinteriaramirez/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/carpinteriaramirez/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sistema/migrations/0001_initial.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sistema/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/sistema/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sistema/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/sistema/serializers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/media/Botiquin.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/media/Captura_de_pantalla_de_2019-10-07_10-26-50.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/media/Closet.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/media/Closet_l99ykLv.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/media/cocina.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/media/cocina_integral_color_tabaco_semimate.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/media/puerta.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/media/ropero.jpg" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/sistema/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/sistema/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/image.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/image.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -35,6 +39,7 @@
       <list>
         <option value="HTML File" />
         <option value="CSS File" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
@@ -46,8 +51,15 @@
   <component name="PropertiesComponent">
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../salidasdeploy" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/sistema/static/css" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/sistema/static/css" />
+      <recent name="$PROJECT_DIR$/media" />
+      <recent name="$PROJECT_DIR$/sistema/static/js" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -170,6 +182,14 @@
       <workItem from="1580836719111" duration="1289000" />
       <workItem from="1580838564943" duration="1454000" />
       <workItem from="1580840393849" duration="310000" />
+      <workItem from="1580854410610" duration="151000" />
+      <workItem from="1580922766690" duration="1688000" />
+      <workItem from="1580924560506" duration="2139000" />
+      <workItem from="1580928723758" duration="1308000" />
+      <workItem from="1580932249162" duration="1667000" />
+      <workItem from="1580934060685" duration="1124000" />
+      <workItem from="1580936019773" duration="1933000" />
+      <workItem from="1580938100298" duration="418000" />
     </task>
     <servers />
   </component>

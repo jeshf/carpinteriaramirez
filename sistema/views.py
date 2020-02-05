@@ -18,7 +18,6 @@ class PostViewSet(viewsets.ModelViewSet):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
 
-
 class CommentViewSet(viewsets.ModelViewSet):
     permission_classes = ()
     queryset = Comment.objects.all()
@@ -35,15 +34,19 @@ def image(request,pk):
     formr = ResponseForm()
     template = get_template('image.html')
     try:
-        img = Post.objects.get(pk=pk)
+        post = Post.objects.get(pk=pk)
         try:
-            comment = Comment.objects.filter(post=img)
+            comment = Comment.objects.filter(post=post)
         except Comment.DoesNotExist:
             comment = 0
+        try:
+            img = Image.objects.filter(post=post)
+        except Comment.DoesNotExist:
+            img = 0
     except Post.DoesNotExist:
         return HttpResponse(status=404)
     if request.method=='GET':
-        html = template.render({'img': img, 'comment':comment, 'form':form, 'formr':formr }, request)
+        html = template.render({'img': img, 'post': post, 'comment':comment, 'form':form, 'formr':formr }, request)
         return HttpResponse(html)
 
     elif request.method == 'POST':
@@ -57,7 +60,7 @@ def image(request,pk):
             if formr.is_valid():
                 Response.objects.create(text=request.POST['respuesta'], comment=com)
             formr= ResponseForm()
-            html = template.render({'img': img, 'comment': comment, 'form': form, 'formr': formr}, request)
+            html = template.render({'img': img,'post': post, 'comment': comment, 'form': form, 'formr': formr}, request)
             return HttpResponse(html)
         elif  request.POST['flag']=="comentar":
             form = ContactForm(data=request.POST)
@@ -65,9 +68,9 @@ def image(request,pk):
             form.fields['usuario'].error_messages = {'required': 'Este campo es requerido'}
             if form.is_valid():
                 Comment.objects.create(createdBy=request.POST['usuario'], text=request.POST['mensaje'], post=img)
-            comment = Comment.objects.filter(post=img)
+            comment = Comment.objects.filter(post=post)
             form= ContactForm()
-            html = template.render({'img': img, 'comment': comment, 'form': form, 'formr':formr}, request)
+            html = template.render({'img': img,'post': post, 'comment': comment, 'form': form, 'formr':formr}, request)
             return HttpResponse(html)
 
 class Login(APIView):
