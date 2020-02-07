@@ -73,6 +73,12 @@ def image(request,pk):
             html = template.render({'img': img,'post': post, 'comment': comment, 'form': form, 'formr':formr}, request)
             return HttpResponse(html)
 
+def post(request):
+    formp = PostForm()
+    template = get_template('createpost.html')
+    if request.method=='GET':
+        html = template.render({'formp':formp }, request)
+        return HttpResponse(html)
 class Login(APIView):
     def post(self, request, format=None):
         data = request.data
