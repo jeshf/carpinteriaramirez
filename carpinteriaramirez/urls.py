@@ -36,6 +36,7 @@ urlpatterns = [
     url(r'^api/rest/posts/(?P<pk>[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})/image/$', views.image),
     url(r'^api/login/$', views.Login.as_view()),
     url(r'^api/newpost/$', views.post),
+    url(r'^api/allposts/$', views.allposts),
     url(r'^api/logout/$', views.LogoutView.as_view()),
     #url(r'^api/user/', views.CustomRegisterView.as_view()),
 ]

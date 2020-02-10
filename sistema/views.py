@@ -17,6 +17,11 @@ class PostViewSet(viewsets.ModelViewSet):
     permission_classes = (permissions.IsAuthenticated, permissions.IsAdminUser)
     queryset = Post.objects.all()
     serializer_class = PostSerializer
+    def create(self, request, *args, **kwargs):
+        response = super(PostViewSet, self).create(request, *args, **kwargs)
+        # here may be placed additional operations for
+        # extracting id of the object and using reverse()
+        return HttpResponseRedirect(redirect_to='/api/newpost/')
 
 class CommentViewSet(viewsets.ModelViewSet):
     permission_classes = ()
@@ -72,13 +77,21 @@ def image(request,pk):
             form= ContactForm()
             html = template.render({'img': img,'post': post, 'comment': comment, 'form': form, 'formr':formr}, request)
             return HttpResponse(html)
-
+#create a new post
 def post(request):
     formp = PostForm()
     template = get_template('createpost.html')
     if request.method=='GET':
         html = template.render({'formp':formp }, request)
         return HttpResponse(html)
+#retrieve all posts
+def allposts(request):
+    template = get_template('posts.html')
+    if request.method=='GET':
+        allposts = Post.objects.all()
+        html = template.render({'allposts':allposts }, request)
+        return HttpResponse(html)
+
 class Login(APIView):
     def post(self, request, format=None):
         data = request.data

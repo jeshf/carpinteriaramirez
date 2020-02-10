@@ -4,7 +4,6 @@
     <list default="true" id="98b34b83-457f-4882-b1df-a206b47ef2fb" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/carpinteriaramirez/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/carpinteriaramirez/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sistema/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/sistema/forms.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sistema/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/sistema/views.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -186,6 +185,8 @@
       <workItem from="1581087224678" duration="691000" />
       <workItem from="1581088997860" duration="1991000" />
       <workItem from="1581092777284" duration="1735000" />
+      <workItem from="1581344287808" duration="1421000" />
+      <workItem from="1581346106120" duration="1862000" />
     </task>
     <servers />
   </component>
