@@ -87,9 +87,30 @@ def post(request):
 #retrieve all posts
 def allposts(request):
     template = get_template('posts.html')
+    allposts = Post.objects.all()
     if request.method=='GET':
-        allposts = Post.objects.all()
         html = template.render({'allposts':allposts }, request)
+        return HttpResponse(html)
+#retrieve all comments
+def allcomments(request):
+    template = get_template('comments.html')
+    allcomments = Comment.objects.all()
+    if request.method=='GET':
+        html = template.render({'allcomments':allcomments }, request)
+        return HttpResponse(html)
+#retrieve all services
+def allservices(request):
+    template = get_template('services.html')
+    allservices = Service.objects.all()
+    if request.method=='GET':
+        html = template.render({'allservices':allservices }, request)
+        return HttpResponse(html)
+#retrieve all payments
+def allpayments(request):
+    template = get_template('payments.html')
+    allpayments = Payment.objects.all()
+    if request.method == 'GET':
+        html = template.render({'allpayments': allpayments}, request)
         return HttpResponse(html)
 
 class Login(APIView):

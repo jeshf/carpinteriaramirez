@@ -37,6 +37,9 @@ urlpatterns = [
     url(r'^api/login/$', views.Login.as_view()),
     url(r'^api/newpost/$', views.post),
     url(r'^api/allposts/$', views.allposts),
+    url(r'^api/allcomments/$', views.allcomments),
+    url(r'^api/allservices/$', views.allservices),
+    url(r'^api/allpayments/$', views.allpayments),
     url(r'^api/logout/$', views.LogoutView.as_view()),
     #url(r'^api/user/', views.CustomRegisterView.as_view()),
 ]
