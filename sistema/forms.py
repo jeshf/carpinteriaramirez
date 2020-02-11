@@ -2,19 +2,16 @@ from django import forms
 #from django.contrib.auth.forms import UserCreationForm
 #from .models import CustomUser
 class ContactForm(forms.Form):
-    usuario = forms.CharField(max_length=45, widget=forms.TextInput(attrs={'placeholder':'Escribe tu nombre'}))
-    mensaje = forms.CharField(
-        max_length=1000,widget=forms.Textarea(attrs={'rows': 2, 'cols': 30, 'placeholder':'Escribe aqui tu comentario'}))
+    mensaje = forms.CharField(max_length=1000,
+    widget=forms.Textarea(attrs={'rows': 2, 'cols': 30, 'placeholder':'Escribe aqui tu comentario'}))
     flag = forms.CharField(widget=forms.HiddenInput())
     def clean(self):
         cleaned_data = super(ContactForm, self).clean()
-        usuario = cleaned_data.get('usuario')
         mensaje = cleaned_data.get('mensaje')
-        if not usuario or not mensaje:
-            raise forms.ValidationError('Los campos usuario y/o mensaje no pueden estar vacios')
+        if not mensaje:
+            raise forms.ValidationError('El campo mensaje no puede estar vacío')
 class ResponseForm(forms.Form):
-    respuesta = forms.CharField(
-        max_length=1000,
+    respuesta = forms.CharField(max_length=1000,
         widget=forms.Textarea(attrs={'rows': 2, 'cols': 68, 'placeholder':'Escribe aquí tu respuesta a este comentario'}),
         label='',)
     primarkey = forms.UUIDField(widget=forms.HiddenInput())
@@ -27,9 +24,8 @@ class ResponseForm(forms.Form):
 
 class SignInForm(forms.Form):
     usuario = forms.CharField(max_length=45, widget=forms.TextInput(attrs={'placeholder': 'Escribe tu nombre de usuario',
-                                                                           'class':'input-lg form-control'}))
-    password = forms.CharField(
-        max_length=45,
+                                                        'class':'input-lg form-control'}))
+    password = forms.CharField(max_length=45,
         widget=forms.PasswordInput(attrs={'placeholder': 'Escribe aqui tu contraseña','class':'input-lg form-control'}))
     flag = forms.CharField(widget=forms.HiddenInput())
     def clean(self):
@@ -41,22 +37,20 @@ class SignInForm(forms.Form):
 
 class SignUpForm(forms.Form):
     username = forms.CharField(max_length=45, widget=forms.TextInput(attrs={'placeholder': 'Escribe tu nombre de usuario',
-                                                                           'class':'input-lg form-control'}))
-    password = forms.CharField(
-        max_length=45,
+                                                        'class':'input-lg form-control'}))
+    password = forms.CharField(max_length=45,
         widget=forms.PasswordInput(attrs={'placeholder': 'Escribe aqui tu contraseña','class':'input-lg form-control'}))
-    password2 = forms.CharField(
-        max_length=45,
+    password2 = forms.CharField(max_length=45,
         widget=forms.PasswordInput(attrs={'placeholder': 'Escribe otra vez tu contraseña','class':'input-lg form-control'}))
     email = forms.CharField(max_length=60, widget=forms.EmailInput(attrs={'placeholder': 'Escribe tu correo electrónico',
-                                                                           'class':'input-lg form-control'}))
+                                                            'class':'input-lg form-control'}))
     name = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'placeholder': 'Escribe tu nombre(s)',
-                                                                           'class':'input-lg form-control'}))
+                                                            'class':'input-lg form-control'}))
     firstLastName = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'placeholder': 'Escribe tu apellido paterno',
-                                                                         'class': 'input-lg form-control'}))
+                                                            'class': 'input-lg form-control'}))
 
     secondLastName = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'placeholder': 'Escribe tu apellido materno',
-                                                                         'class': 'input-lg form-control'}))
+                                                            'class': 'input-lg form-control'}))
     flag = forms.CharField(widget=forms.HiddenInput())
     def clean(self):
         cleaned_data = super(SignUpForm, self).clean()

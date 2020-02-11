@@ -63,16 +63,15 @@ def image(request,pk):
             formr = ResponseForm(data=request.POST)
             formr.fields['respuesta'].error_messages = {'required': 'Este campo es requerido'}
             if formr.is_valid():
-                Response.objects.create(text=request.POST['respuesta'], comment=com)
+                Response.objects.create(repliedBy=request.user.username, text=request.POST['respuesta'], comment=com)
             formr= ResponseForm()
             html = template.render({'img': img,'post': post, 'comment': comment, 'form': form, 'formr': formr}, request)
             return HttpResponse(html)
         elif  request.POST['flag']=="comentar":
             form = ContactForm(data=request.POST)
             form.fields['mensaje'].error_messages = {'required': 'Este campo es requerido'}
-            form.fields['usuario'].error_messages = {'required': 'Este campo es requerido'}
             if form.is_valid():
-                Comment.objects.create(createdBy=request.POST['usuario'], text=request.POST['mensaje'], post=img)
+                Comment.objects.create(createdBy=request.user.username, text=request.POST['mensaje'], post=post)
             comment = Comment.objects.filter(post=post)
             form= ContactForm()
             html = template.render({'img': img,'post': post, 'comment': comment, 'form': form, 'formr':formr}, request)

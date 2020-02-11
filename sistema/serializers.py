@@ -12,6 +12,12 @@ class CommentSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Comment
         fields = '__all__'
+    #def create(self, validated_data):
+        #user = self.context['request'].user.username
+        #comment = super(CommentSerializer, self).create(validated_data)
+        #comment.createdBy = user
+        #comment.save()
+        #return comment
 
 class ImageSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
@@ -23,12 +29,12 @@ class ResponseSerializer(serializers.HyperlinkedModelSerializer):
         model = Response
         fields = '__all__'
 
-    def create(self, validated_data):
-        user = self.context['request'].user.username
-        response = super(ResponseSerializer, self).create(validated_data)
-        response.repliedBy = user
-        response.save()
-        return response
+    #def create(self, validated_data):
+        #user = self.context['request'].user.username
+        #response = super(ResponseSerializer, self).create(validated_data)
+        #response.repliedBy = user
+        #response.save()
+        #return response
 
 #logger = logging.getLogger(__name__)
 class UserSerializer(serializers.ModelSerializer):
