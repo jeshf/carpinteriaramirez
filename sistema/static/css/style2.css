@@ -2,3 +2,24 @@ body {background-color:#eee;}
 .container-fluid {padding:50px;}
 .container{background-color:white;padding:50px;   }
 #title{font-family: 'Lobster', cursive;;}
+.text-large {
+  font-size: 135%;
+}
+@media (min-width: 1200px){
+    .navbar{
+        float:none;
+        margin: 0 auto;
+    }
+}
+@media (min-width: 1200px) {
+    .navbar{
+        max-width: 1170px;
+    }
+}
+
+.navbar-default .navbar-nav>li>a:focus,
+.navbar-default .navbar-nav>li>a:hover,
+.navbar-default .navbar-nav .open .dropdown-menu>li>a:focus,
+.navbar-default .navbar-nav .open .dropdown-menu>li>a:hover  {
+  background: #a9a9a9;
+}

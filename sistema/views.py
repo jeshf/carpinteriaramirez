@@ -46,7 +46,7 @@ def image(request,pk):
             comment = 0
         try:
             img = Image.objects.filter(post=post)
-        except Comment.DoesNotExist:
+        except Image.DoesNotExist:
             img = 0
     except Post.DoesNotExist:
         return HttpResponse(status=404)
@@ -76,6 +76,12 @@ def image(request,pk):
             form= ContactForm()
             html = template.render({'img': img,'post': post, 'comment': comment, 'form': form, 'formr':formr}, request)
             return HttpResponse(html)
+def home(request):
+    template = get_template('home.html')
+    img=Image.objects.all()[0:10]
+    if request.method=='GET':
+        html = template.render({'img': img}, request)
+        return HttpResponse(html)
 #create a new post
 def post(request):
     formp = PostForm()

@@ -1,0 +1,123 @@
+
+{% load static %}
+<!DOCTYPE html>
+
+
+	<title>Carpintería Ramírez</title>
+
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<head>
+		<link rel="stylesheet" href="{% static '/css/bootstrap.min.css' %}">
+		<!---- boostrap.min link local ----->
+
+		<link rel="stylesheet"href="{% static '/css/style2.css' %}">
+		<!---- boostrap.min link local ----->
+
+		<script src="{% static '/js/bootstrap.min.js' %}"></script>
+		<!---- Boostrap js link local ----->
+
+		<!---- <link rel="icon" href="images/icon.png" type="image/x-icon" />----->
+		<!---- Icon link local ----->
+            <link rel="stylesheet" href="{% static '/css/nivo-slider.css' %}">
+        <link rel="stylesheet" href="{% static '/css/style.css' %}">
+      <link rel="stylesheet" href="{% static '/css/bar.css' %}">
+      <script src="{% static '/js/jquery-3.1.1.min.js' %}"></script>
+    <script src="{% static '/js/jquery.nivo.slider.js' %}"></script>
+      <script type="text/javascript">
+		$(window).on('load', function() {
+		    $('#slider').nivoSlider();
+		});
+	</script>
+	<link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
+		<!---- Font awesom link local ----->
+	</head>
+	<body>
+    <header lang="es">
+
+    </header>
+	<div class="container-fluid">
+		<div class="container">
+         <nav class="navbar navbar-default navbar-fixed-top">
+
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/api/home/">Carpintería Ramírez</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="/api/home/">Página de inicio</a></li>
+            <li><a href="#about">Acerca de nosotros</a></li>
+            <li><a href="#contact">Página de contacto</a></li>
+            <li><a href="/api/login/">Inicia sesión o registrate</a></li>
+              <li><a href="/api/allposts/">Servicios y trabajos</a></li>
+          </ul>
+          <!--<ul class="nav navbar-nav navbar-right">
+            <li><a href="../navbar/">Default</a></li>
+            <li><a href="../navbar-static-top/">Static top</a></li>
+            <li class="active"><a href="./">Fixed top <span class="sr-only">(current)</span></a></li>
+          </ul>-->
+        </div>
+
+    </nav>
+			<h2 class="text-center" id="title">Carpintería Ramírez</h2>
+			 <p class="text-center">
+				<small id="passwordHelpInline" class="text-muted"> Atendidos por su amigo: Armando Ramírez Moreno Sígueme en facebook <a href="https://www.facebook.com/profile.php?id=100006842134922"> Cristofer Ramirez Ramirez</a></small>
+			</p>
+ 			<hr class="table-bordered">
+			<div class="row">
+				<div class="col-md-6 ">
+                    <div class="bg-gray">
+                    <h2 class="text-uppercase">
+                        Somos una empresa líder en distribución de servicios de carpintería y ebanistería.
+                    </h2>
+                    </div>
+                    <br>
+                    <div>
+                        <div class="text-justify">
+                        <mark  class="text-justify bg-info text-large">
+                            Carpintería Ramírez es una empresa especializada en la fabricación de muebles, derivados de la madera y
+                            mantenimiento de productos o servicios relacionados con la carpintería.
+                        </mark>
+                        </div>
+                        <br>
+                        <div class="text-justify">
+                        <mark class="text-justify bg-info text-large">
+                            Todos nuestros materiales, trabajos y servicios cumplen con todos los más altos regímenes de calidad para satisfacer a nuestros clientes.
+                        </mark>
+                        </div>
+                    </div>
+				</div>
+
+				<div class="col-md-1">
+					<!-------null------>
+				</div>
+
+				<div class="col-md-5">
+                    <div class="slider-wrapper theme-bar">
+                            <div id="slider" class="nivoSlider">
+                                {% if img != 0 %}
+                                    {% for imgs in img %}
+                                        <img src="{{ imgs.imagePath.url }}">
+                                    {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+				</div>
+			</div>
+		</div>
+		<p class="text-center">
+			<i id="passwordHelpInline" class="text-muted"> Carpintería Ramírez: El mueble que se ajusta a su medida,
+            como usted lo necesite aquí se lo fabricamos.</i>
+		</p>
+	</div>
+	</body>
+</html>
+
+
