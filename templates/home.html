@@ -54,9 +54,14 @@
           <ul class="nav navbar-nav">
             <li><a href="/api/home/">Página de inicio</a></li>
             <li><a href="#about">Acerca de nosotros</a></li>
-            <li><a href="#contact">Página de contacto</a></li>
+            <li><a href="#contact">Contacto</a></li>
             <li><a href="/api/login/">Inicia sesión o registrate</a></li>
               <li><a href="/api/allposts/">Servicios y trabajos</a></li>
+              {% if username != None %}
+                  <li style="background: transparent"><a style="background: transparent"><form method="POST" action="/api/logout/"><strong>Bienvenido: {{ username }}</strong>{% csrf_token %}
+                      <input type="submit" value="Cerrar sesión" class="bg-info"></form></a></li>
+
+              {% endif %}
           </ul>
           <!--<ul class="nav navbar-nav navbar-right">
             <li><a href="../navbar/">Default</a></li>

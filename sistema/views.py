@@ -79,8 +79,11 @@ def image(request,pk):
 def home(request):
     template = get_template('home.html')
     img=Image.objects.all()[0:10]
+    username = request.user.username
+    if username=='anonymous' or not username:
+        username=None
     if request.method=='GET':
-        html = template.render({'img': img}, request)
+        html = template.render({'img': img, 'username':username}, request)
         return HttpResponse(html)
 #create a new post
 def post(request):
@@ -93,8 +96,11 @@ def post(request):
 def allposts(request):
     template = get_template('posts.html')
     allposts = Post.objects.all()
+    username = request.user.username
+    if username == 'anonymous' or not username:
+        username = None
     if request.method=='GET':
-        html = template.render({'allposts':allposts }, request)
+        html = template.render({'allposts':allposts,'username':username }, request)
         return HttpResponse(html)
 #retrieve all comments
 def allcomments(request):
@@ -131,7 +137,7 @@ class Login(APIView):
                 if user.is_active:
                     login(request, account)
                     serialized = UserSerializer(account)
-                    return render(request, 'profile.html', {'object': serialized.data})
+                    return HttpResponseRedirect("/api/home/")
                 else:
                     return HttpResponse('Unauthorized', status=401)
             else:
@@ -140,7 +146,7 @@ class Login(APIView):
             serializer = UserSerializer(data=data)
             if serializer.is_valid():
                 serializer.save()
-            return render(request, 'profile.html', {'object': serializer.data})
+            return HttpResponseRedirect("/api/home/")
         else:
             return HttpResponse('Bad Request', status=400)
     def get(self, request, format=None):
