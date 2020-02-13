@@ -38,6 +38,7 @@ def image(request,pk):
     form = ContactForm()
     formr = ResponseForm()
     template = get_template('image.html')
+    username = request.user.username
     try:
         post = Post.objects.get(pk=pk)
         try:
@@ -51,7 +52,7 @@ def image(request,pk):
     except Post.DoesNotExist:
         return HttpResponse(status=404)
     if request.method=='GET':
-        html = template.render({'img': img, 'post': post, 'comment':comment, 'form':form, 'formr':formr }, request)
+        html = template.render({'img': img, 'post': post, 'comment':comment, 'form':form, 'formr':formr,'username':username }, request)
         return HttpResponse(html)
 
     elif request.method == 'POST':
@@ -65,7 +66,7 @@ def image(request,pk):
             if formr.is_valid():
                 Response.objects.create(repliedBy=request.user.username, text=request.POST['respuesta'], comment=com)
             formr= ResponseForm()
-            html = template.render({'img': img,'post': post, 'comment': comment, 'form': form, 'formr': formr}, request)
+            html = template.render({'img': img,'post': post, 'comment': comment, 'form': form, 'formr': formr,'username':username}, request)
             return HttpResponse(html)
         elif  request.POST['flag']=="comentar":
             form = ContactForm(data=request.POST)
@@ -74,7 +75,7 @@ def image(request,pk):
                 Comment.objects.create(createdBy=request.user.username, text=request.POST['mensaje'], post=post)
             comment = Comment.objects.filter(post=post)
             form= ContactForm()
-            html = template.render({'img': img,'post': post, 'comment': comment, 'form': form, 'formr':formr}, request)
+            html = template.render({'img': img,'post': post, 'comment': comment, 'form': form, 'formr':formr,'username':username}, request)
             return HttpResponse(html)
 def home(request):
     template = get_template('home.html')
@@ -139,9 +140,9 @@ class Login(APIView):
                     serialized = UserSerializer(account)
                     return HttpResponseRedirect("/api/home/")
                 else:
-                    return HttpResponse('Unauthorized', status=401)
+                    return HttpResponse('Bad Request', status=400)
             else:
-                return HttpResponse('Unauthorized', status=401)
+                return HttpResponse('Bad Request', status=400)
         elif flag=="register":
             serializer = UserSerializer(data=data)
             if serializer.is_valid():
@@ -150,9 +151,12 @@ class Login(APIView):
         else:
             return HttpResponse('Bad Request', status=400)
     def get(self, request, format=None):
+        username = request.user.username
+        if username == 'anonymous' or not username:
+            username = None
         formu = SignUpForm()
         form = SignInForm()
-        return render(request, 'login.html', {'form': form,'formu':formu})
+        return render(request, 'login.html', {'form': form,'formu':formu,'username':username  })
 
 class UserViewSet(viewsets.ModelViewSet):
     permission_classes = (permissions.IsAuthenticated, permissions.IsAdminUser)

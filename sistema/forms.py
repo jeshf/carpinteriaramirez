@@ -3,7 +3,7 @@ from django import forms
 #from .models import CustomUser
 class ContactForm(forms.Form):
     mensaje = forms.CharField(max_length=1000,
-    widget=forms.Textarea(attrs={'rows': 2, 'cols': 30, 'placeholder':'Escribe aqui tu comentario'}))
+    widget=forms.Textarea(attrs={'rows': 2, 'cols': 100, 'placeholder':'Escribe aqui tu comentario'}), label='')
     flag = forms.CharField(widget=forms.HiddenInput())
     def clean(self):
         cleaned_data = super(ContactForm, self).clean()
