@@ -20,6 +20,9 @@
 		$(window).on('load', function() {
 		    $('#slider').nivoSlider();
 		});
+		$('.reply-button').click(function(){
+        $(this).after($('<textarea>').attr('class','reply-box'));
+        });
 	</script>
 	<link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
   </head>
@@ -77,13 +80,36 @@
                     </div>
                 <div class="col-xs-1 col-sm-1"></div>
                 </div>
+        <div class="row">
+            <div class="col-xs-1 col-sm-1"></div>
+            <div class="col-xs-10 col-sm-10 head bg-gray table-bordered text-center">
+                                <form method="post">
+                                    {% csrf_token %}
+                                    {{ form }}
+                                    <input type="hidden" name="flag" value="{{ "comentar" }}">
+                                    <button type="submit" class="btn btn-primary vertical">Enviar</button>
+                                </form>
+                </div>
+        <div class="col-xs-1 col-sm-1"></div>
+    </div>
                 <div class="row">
                 <br>
             <div class="col-xs-1 col-sm-1"></div>
             <div class="col-xs-10 col-sm-10 bg-gray table-bordered text-center">
                         {% if comment != 0 %}
                         {% for comments in comment %}
+                            <form method="post">
+                                    {% csrf_token %}
                             <textarea  rows="2" cols="80" disabled="True">{{ print}} {{comments.createdBy}} dijo: {{ comments.text }}</textarea>
+                            <button type="submit" class="btn btn-default vertical">Ver Respuestas</button>
+                                {% if replies != 0 and replies.0.comment == comments%}
+                                 {% for reply in replies %}
+                                     <textarea  rows="2" cols="40" disabled="True">{{ print}} {{reply.repliedBy}} dijo: {{ reply.text }}</textarea>
+                                 {% endfor %}
+                                {% endif %}
+                                    <input type="hidden" name="commentid" value="{{ comments.id }}">
+                                    <input type="hidden" name="flag" value="{{ "respuestas" }}">
+                            </form>
                             <form method="post">
                                     {% csrf_token %}
                                     {{ formr }}<button type="submit" class="btn btn-default vertical">Responder</button><br/>
@@ -94,18 +120,6 @@
             </div>
             <div class="col-xs-1 col-sm-1"></div>
                 </div>
-                    <div class="row">
-            <div class="col-xs-1 col-sm-1"></div>
-            <div class="col-xs-10 col-sm-10 head bg-gray table-bordered text-center">
-                                <form method="post">
-                                    {% csrf_token %}
-                                    {{ form }}
-                                    <input type="hidden" name="flag" value="{{ "comentar" }}">
-                                    <button type="submit" class="btn btn-primary center-block">Enviar</button>
-                                </form>
-                </div>
-        <div class="col-xs-1 col-sm-1"></div>
-    </div>
                 </div>
                 </div>
 		<p class="text-center">

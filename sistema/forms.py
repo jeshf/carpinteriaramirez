@@ -3,7 +3,7 @@ from django import forms
 #from .models import CustomUser
 class ContactForm(forms.Form):
     mensaje = forms.CharField(max_length=1000,
-    widget=forms.Textarea(attrs={'rows': 2, 'cols': 100, 'placeholder':'Escribe aqui tu comentario'}), label='')
+    widget=forms.Textarea(attrs={'rows': 2, 'cols': 68, 'placeholder':'Escribe aqui tu comentario'}), label='')
     flag = forms.CharField(widget=forms.HiddenInput())
     def clean(self):
         cleaned_data = super(ContactForm, self).clean()
@@ -75,3 +75,6 @@ class PostForm(forms.Form):
         postDescription = cleaned_data.get('postDescription')
         if not postTitle:
             raise forms.ValidationError('El campo título no puede estar vacio')
+class CommentRepliesForm(forms.Form):
+    commentid = forms.UUIDField(widget=forms.HiddenInput())
+    flag = forms.CharField(widget=forms.HiddenInput())

@@ -37,8 +37,12 @@ class ImageViewSet(viewsets.ModelViewSet):
 def image(request,pk):
     form = ContactForm()
     formr = ResponseForm()
+    formar = CommentRepliesForm()
     template = get_template('image.html')
     username = request.user.username
+    if not username:
+        username = None
+    replies = 0
     try:
         post = Post.objects.get(pk=pk)
         try:
@@ -52,7 +56,8 @@ def image(request,pk):
     except Post.DoesNotExist:
         return HttpResponse(status=404)
     if request.method=='GET':
-        html = template.render({'img': img, 'post': post, 'comment':comment, 'form':form, 'formr':formr,'username':username }, request)
+        html = template.render({'img': img, 'post': post, 'comment':comment, 'form':form, 'formr':formr,
+                                'replies':replies,'formar':formar,'username':username }, request)
         return HttpResponse(html)
 
     elif request.method == 'POST':
@@ -64,9 +69,14 @@ def image(request,pk):
             formr = ResponseForm(data=request.POST)
             formr.fields['respuesta'].error_messages = {'required': 'Este campo es requerido'}
             if formr.is_valid():
-                Response.objects.create(repliedBy=request.user.username, text=request.POST['respuesta'], comment=com)
+                usr=request.user.username
+                if (not request.user.username):
+                    usr="Anónimo"
+                Response.objects.create(repliedBy=usr, text=request.POST['respuesta'], comment=com)
             formr= ResponseForm()
-            html = template.render({'img': img,'post': post, 'comment': comment, 'form': form, 'formr': formr,'username':username}, request)
+            replies = 0
+            html = template.render({'img': img,'post': post, 'comment': comment, 'form': form, 'formr': formr,
+                                    'replies':replies,'formar':formar,'username':username}, request)
             return HttpResponse(html)
         elif  request.POST['flag']=="comentar":
             form = ContactForm(data=request.POST)
@@ -75,14 +85,25 @@ def image(request,pk):
                 Comment.objects.create(createdBy=request.user.username, text=request.POST['mensaje'], post=post)
             comment = Comment.objects.filter(post=post)
             form= ContactForm()
-            html = template.render({'img': img,'post': post, 'comment': comment, 'form': form, 'formr':formr,'username':username}, request)
+            replies = 0
+            html = template.render({'img': img,'post': post, 'comment': comment, 'form': form, 'formr':formr,
+                                    'replies':replies,'formar':formar,'username':username}, request)
+            return HttpResponse(html)
+        elif  request.POST['flag']=="respuestas":
+            com=Comment.objects.get(id=request.POST['commentid'])
+            replies=Response.objects.filter(comment=com)
+            for reply in replies:
+                print(reply.text)
+            formar = CommentRepliesForm()
+            html = template.render({'img': img,'post': post, 'comment': comment, 'form': form, 'formr':formr,
+                                    'formar':formar,'username':username, 'replies':replies}, request)
             return HttpResponse(html)
 def home(request):
     template = get_template('home.html')
     img=Image.objects.all()[0:10]
     username = request.user.username
-    if username=='anonymous' or not username:
-        username=None
+    if not username:
+        username = None
     if request.method=='GET':
         html = template.render({'img': img, 'username':username}, request)
         return HttpResponse(html)
@@ -98,7 +119,7 @@ def allposts(request):
     template = get_template('posts.html')
     allposts = Post.objects.all()
     username = request.user.username
-    if username == 'anonymous' or not username:
+    if not username:
         username = None
     if request.method=='GET':
         html = template.render({'allposts':allposts,'username':username }, request)
@@ -152,7 +173,7 @@ class Login(APIView):
             return HttpResponse('Bad Request', status=400)
     def get(self, request, format=None):
         username = request.user.username
-        if username == 'anonymous' or not username:
+        if not username:
             username = None
         formu = SignUpForm()
         form = SignInForm()

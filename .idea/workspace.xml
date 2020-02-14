@@ -6,7 +6,6 @@
       <change beforePath="$PROJECT_DIR$/sistema/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/sistema/forms.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sistema/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/sistema/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/image.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/image.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/login.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -211,6 +210,11 @@
       <workItem from="1581625892202" duration="1732000" />
       <workItem from="1581627775615" duration="1723000" />
       <workItem from="1581629691291" duration="419000" />
+      <workItem from="1581692135803" duration="1703000" />
+      <workItem from="1581693935521" duration="2047000" />
+      <workItem from="1581697369522" duration="1727000" />
+      <workItem from="1581699183870" duration="1751000" />
+      <workItem from="1581701027107" duration="1461000" />
     </task>
     <servers />
   </component>
