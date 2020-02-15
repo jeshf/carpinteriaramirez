@@ -72,7 +72,7 @@ class PostForm(forms.Form):
     def clean(self):
         cleaned_data = super(ContactForm, self).clean()
         postTitle = cleaned_data.get('postTitle')
-        postDescription = cleaned_data.get('postDescription')
+        #postDescription = cleaned_data.get('postDescription')
         if not postTitle:
             raise forms.ValidationError('El campo título no puede estar vacio')
 class CommentRepliesForm(forms.Form):

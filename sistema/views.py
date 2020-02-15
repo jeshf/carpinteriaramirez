@@ -17,11 +17,11 @@ class PostViewSet(viewsets.ModelViewSet):
     permission_classes = (permissions.IsAuthenticated, permissions.IsAdminUser)
     queryset = Post.objects.all()
     serializer_class = PostSerializer
-    def create(self, request, *args, **kwargs):
-        response = super(PostViewSet, self).create(request, *args, **kwargs)
+    #def create(self, request, *args, **kwargs):
+        #response = super(PostViewSet, self).create(request, *args, **kwargs)
         # here may be placed additional operations for
         # extracting id of the object and using reverse()
-        return HttpResponseRedirect(redirect_to='/api/newpost/')
+        #return HttpResponseRedirect(redirect_to='/api/newpost/')
 
 class CommentViewSet(viewsets.ModelViewSet):
     permission_classes = ()
@@ -82,7 +82,10 @@ def image(request,pk):
             form = ContactForm(data=request.POST)
             form.fields['mensaje'].error_messages = {'required': 'Este campo es requerido'}
             if form.is_valid():
-                Comment.objects.create(createdBy=request.user.username, text=request.POST['mensaje'], post=post)
+                usr = request.user.username
+                if (not request.user.username):
+                    usr = "Anónimo"
+                Comment.objects.create(createdBy=usr, text=request.POST['mensaje'], post=post)
             comment = Comment.objects.filter(post=post)
             form= ContactForm()
             replies = 0
@@ -92,15 +95,13 @@ def image(request,pk):
         elif  request.POST['flag']=="respuestas":
             com=Comment.objects.get(id=request.POST['commentid'])
             replies=Response.objects.filter(comment=com)
-            for reply in replies:
-                print(reply.text)
             formar = CommentRepliesForm()
             html = template.render({'img': img,'post': post, 'comment': comment, 'form': form, 'formr':formr,
                                     'formar':formar,'username':username, 'replies':replies}, request)
             return HttpResponse(html)
 def home(request):
     template = get_template('home.html')
-    img=Image.objects.all()[0:10]
+    img=Image.objects.all()[0:8]
     username = request.user.username
     if not username:
         username = None
