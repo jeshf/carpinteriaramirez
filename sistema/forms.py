@@ -66,9 +66,10 @@ class SignUpForm(forms.Form):
         if password != password2:
             raise forms.ValidationError('Las contraseñas no pueden ser diferentes')
 class PostForm(forms.Form):
-    postTitle = forms.CharField(max_length=45, widget=forms.TextInput(attrs={'placeholder': 'Escribe el título de la publicación'}))
+    postTitle = forms.CharField(max_length=45, widget=forms.TextInput(attrs={'placeholder': 'Escribe el título de la publicación',
+                                                                             'class': 'input-lg form-control'}))
     postDescription = forms.CharField(
-        max_length=1000,widget=forms.Textarea(attrs={'rows': 2, 'cols': 30, 'placeholder':'Escribe la descripción de este trabajo'}))
+        max_length=1000,widget=forms.Textarea(attrs={'rows': 2, 'cols': 30, 'placeholder':'Escribe la descripción de este trabajo', 'class':'input-lg form-control'}))
     def clean(self):
         cleaned_data = super(ContactForm, self).clean()
         postTitle = cleaned_data.get('postTitle')

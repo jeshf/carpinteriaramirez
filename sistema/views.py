@@ -17,11 +17,11 @@ class PostViewSet(viewsets.ModelViewSet):
     permission_classes = (permissions.IsAuthenticated, permissions.IsAdminUser)
     queryset = Post.objects.all()
     serializer_class = PostSerializer
-    #def create(self, request, *args, **kwargs):
-        #response = super(PostViewSet, self).create(request, *args, **kwargs)
+    def create(self, request, *args, **kwargs):
+        response = super(PostViewSet, self).create(request, *args, **kwargs)
         # here may be placed additional operations for
         # extracting id of the object and using reverse()
-        #return HttpResponseRedirect(redirect_to='/api/newpost/')
+        return HttpResponseRedirect(redirect_to='/api/newpost/')
 
 class CommentViewSet(viewsets.ModelViewSet):
     permission_classes = ()
@@ -111,9 +111,13 @@ def home(request):
 #create a new post
 def post(request):
     formp = PostForm()
+    allposts = Post.objects.all()
+    username = request.user.username
+    if not username:
+        username = None
     template = get_template('createpost.html')
     if request.method=='GET':
-        html = template.render({'formp':formp }, request)
+        html = template.render({'formp':formp,'allposts':allposts,'username':username}, request)
         return HttpResponse(html)
 #retrieve all posts
 def allposts(request):
