@@ -18,7 +18,7 @@ class PostViewSet(viewsets.ModelViewSet):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
     def create(self, request, *args, **kwargs):
-        response = super(PostViewSet, self).create(request, *args, **kwargs)
+        super(PostViewSet, self).create(request, *args, **kwargs)
         # here may be placed additional operations for
         # extracting id of the object and using reverse()
         return HttpResponseRedirect(redirect_to='/api/newpost/')
@@ -32,6 +32,9 @@ class ImageViewSet(viewsets.ModelViewSet):
     permission_classes = (permissions.IsAuthenticated, permissions.IsAdminUser)
     queryset = Image.objects.all()
     serializer_class = ImageSerializer
+    #def create(self, request, *args, **kwargs):
+        #response=super(ImageViewSet, self).create(request, *args, **kwargs)
+        #return HttpResponseRedirect(redirect_to='/api/rest/posts/'+str(response.post.id)+'/addimages/')
 
 # desplegar una imagen en el archivo imagen.html
 def image(request,pk):
@@ -99,6 +102,34 @@ def image(request,pk):
             html = template.render({'img': img,'post': post, 'comment': comment, 'form': form, 'formr':formr,
                                     'formar':formar,'username':username, 'replies':replies}, request)
             return HttpResponse(html)
+def addimages(request,pk):
+    formi = ImageForm()
+    template = get_template('addimages.html')
+    username = request.user.username
+    if not username:
+        username = None
+    try:
+        post = Post.objects.get(pk=pk)
+        try:
+            img = Image.objects.filter(post=post)
+        except Image.DoesNotExist:
+            img = 0
+    except Post.DoesNotExist:
+        return HttpResponse(status=404)
+    if request.method=='GET':
+        html = template.render({'img': img, 'post': post, 'formi':formi,'username':username }, request)
+        return HttpResponse(html)
+    elif request.method == 'POST':
+        imagePath=request.FILES['imagePath']
+        posturl="/api/rest/posts/"+str(request.POST['postid'])+"/"
+        data = {'imagePath': imagePath,'post': posturl}
+        serializer = ImageSerializer(data=data)
+        if serializer.is_valid():
+            serializer.save()
+        else:
+            print(serializer.errors)
+            return HttpResponse('Bad Request', status=400)
+        return HttpResponseRedirect("/api/rest/posts/" + str(post.id) + "/addimages/")
 def home(request):
     template = get_template('home.html')
     img=Image.objects.all()[0:8]

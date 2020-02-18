@@ -4,7 +4,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Todas las publicaciones</title>
+    <title>Crear nuevas publicaciones</title>
 
      <script src="{% static '/js/jquery-3.1.1.min.js' %}"></script>
 		<!---- jquery link local dont forget to place this in first than other script or link or may not work ---->
@@ -63,7 +63,7 @@
                         <div class="middled">
                             {% for post in allposts %}
                             <div class="link-2">
-                            <a class="links" href="/api/rest/posts/{{ post.id }}/image/">
+                            <a class="links" href="/api/rest/posts/{{ post.id }}/addimages/">
                                 <span class="thick">{{ post.postTitle }}</span>
                                 <p class="l">Agregar imágenes</p>
                             </a>

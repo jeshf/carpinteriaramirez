@@ -33,6 +33,7 @@ urlpatterns = [
     url(r'^api/rest/', include(router.urls)),
     url(r'^backend/', admin.site.urls),
     url(r'^api/rest/posts/(?P<pk>[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})/image/$', views.image),
+    url(r'^api/rest/posts/(?P<pk>[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})/addimages/$', views.addimages),
     url(r'^api/login/$', views.Login.as_view()),
     url(r'^api/newpost/$', views.post),
     url(r'^api/allposts/$', views.allposts),

@@ -68,8 +68,8 @@ class SignUpForm(forms.Form):
 class PostForm(forms.Form):
     postTitle = forms.CharField(max_length=45, widget=forms.TextInput(attrs={'placeholder': 'Escribe el título de la publicación',
                                                                              'class': 'input-lg form-control'}))
-    postDescription = forms.CharField(
-        max_length=1000,widget=forms.Textarea(attrs={'rows': 2, 'cols': 30, 'placeholder':'Escribe la descripción de este trabajo', 'class':'input-lg form-control'}))
+    postDescription = forms.CharField(max_length=1000,widget=forms.Textarea(attrs={'rows': 2, 'cols': 30, 'placeholder':'Escribe la descripción de este trabajo',
+                                                                                   'class':'input-lg form-control'}))
     def clean(self):
         cleaned_data = super(ContactForm, self).clean()
         postTitle = cleaned_data.get('postTitle')
@@ -79,3 +79,6 @@ class PostForm(forms.Form):
 class CommentRepliesForm(forms.Form):
     commentid = forms.UUIDField(widget=forms.HiddenInput())
     flag = forms.CharField(widget=forms.HiddenInput())
+class ImageForm(forms.Form):
+    imagePath = forms.ImageField(widget=forms.HiddenInput())
+    postid = forms.UUIDField(widget=forms.HiddenInput())

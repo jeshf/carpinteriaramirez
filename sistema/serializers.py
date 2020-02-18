@@ -23,7 +23,12 @@ class ImageSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Image
         fields = '__all__'
-
+    def create(self, validated_data):
+        if not validated_data.get('imagePath'):
+            raise serializers.ValidationError('Selecciona una imagen')
+        instance = super(ImageSerializer, self).create(validated_data)
+        instance.save()
+        return instance
 class ResponseSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Response
@@ -50,7 +55,7 @@ class UserSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         if not validated_data.get('password'):
-            raise serializers.ValidationError('The password not empty')
+            raise serializers.ValidationError('La contraseña no puede estar vacía')
         instance = super(UserSerializer, self).create(validated_data)
         instance.set_password(validated_data.get('password'))
         instance.is_active=True

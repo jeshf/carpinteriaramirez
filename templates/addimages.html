@@ -1,0 +1,102 @@
+{% load static %}
+<!doctype html>
+<html lang="es">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+      <title>Carpinteria Ramírez</title>
+    <link rel="stylesheet" href="{% static '/css/bootstrap.min.css' %}">
+		<link rel="stylesheet"href="{% static '/css/style2.css' %}">
+		<script src="{% static '/js/bootstrap.min.js' %}"></script>
+            <link rel="stylesheet" href="{% static '/css/nivo-slider.css' %}">
+        <link rel="stylesheet" href="{% static '/css/style.css' %}">
+      <link rel="stylesheet" href="{% static '/css/bar.css' %}">
+      <script src="{% static '/js/jquery-3.1.1.min.js' %}"></script>
+    <script src="{% static '/js/jquery.nivo.slider.js' %}"></script>
+      <script type="text/javascript">
+		$(window).on('load', function() {
+		    $('#slider').nivoSlider();
+		});
+		$('.reply-button').click(function(){
+        $(this).after($('<textarea>').attr('class','reply-box'));
+        });
+	</script>
+	<link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
+  </head>
+  <body>
+<div class="container-fluid">
+		<div class="container">
+         <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/api/home/">Carpintería Ramírez</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="/api/newpost/">Publicaciones</a></li>
+            <li><a href="#contact">Comentarios</a></li>
+            <li><a href="/api/login/">Respuestas de comentarios</a></li>
+              <li><a href="/api/allposts/">Trabajos</a></li>
+                <li><a href="#about">Pagos de Trabajos</a></li>
+              {% if username != None %}
+                  <li style="background: transparent"><a style="background: transparent">
+                      <form method="POST" action="/api/logout/"><strong>Bienvenido: {{ username }}</strong>{% csrf_token %}
+                      <input type="submit" value="Cerrar sesión" class="bg-info"></form></a></li>
+              {% endif %}
+          </ul>
+          <!--<ul class="nav navbar-nav navbar-right">
+            <li><a href="../navbar/">Default</a></li>
+            <li><a href="../navbar-static-top/">Static top</a></li>
+            <li class="active"><a href="./">Fixed top <span class="sr-only">(current)</span></a></li>
+          </ul>-->
+        </div>
+
+    </nav>
+            <h1 class="bg-gray table-bordered text-uppercase text-center"><i>{{ post.postTitle }}</i></h1>
+			 <div class="bg-gray text-center table-bordered "><b>Descripción:</b> <label>{{ post.postDescription }}</label>
+                        </div>
+                        <br>
+ 			<hr class="table-bordered">
+                <div class="row">
+                <div class="col-xs-1 col-sm-1"></div>
+                <div class="text-center col-xs-10 col-sm-10 ">
+                    <div class="slider-wrapper theme-bar">
+                            <div id="slider" class="nivoSlider">
+                                {% if img != 0 %}
+                                    {% for imgs in img %}
+                                        <img src="{{ imgs.imagePath.url }}">
+                                    {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                <div class="col-xs-1 col-sm-1"></div>
+                </div>
+        <div class="row">
+            <div class="col-xs-1 col-sm-1"></div>
+            <div class="col-xs-10 col-sm-10 head bg-gray table-bordered text-center">
+                                <form method="post" enctype="multipart/form-data">
+                                    {% csrf_token %}
+                                    <input id="id_image" type="file" class="" name="imagePath">
+                                    <input type="hidden" value="{{ post.id }}" name="postid">
+                                    <input type="submit" value="Añadir imagen">
+                                </form>
+                </div>
+        <div class="col-xs-1 col-sm-1"></div>
+    </div>
+                </div>
+                </div>
+		<p class="text-center">
+			<i id="passwordHelpInline" class="text-muted"> Sitio de Administración para la Carpintería Ramírez.</i>
+		</p>
+	</div>
+  </body>
+</html>
