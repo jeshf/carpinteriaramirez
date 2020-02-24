@@ -12,6 +12,7 @@ from django.contrib.auth import login, authenticate, logout
 from django.views.generic.detail import DetailView
 from .forms import SignInForm
 from rest_framework.views import APIView
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 class PostViewSet(viewsets.ModelViewSet):
     permission_classes = (permissions.IsAuthenticated, permissions.IsAdminUser)
@@ -102,34 +103,38 @@ def image(request,pk):
             html = template.render({'img': img,'post': post, 'comment': comment, 'form': form, 'formr':formr,
                                     'formar':formar,'username':username, 'replies':replies}, request)
             return HttpResponse(html)
+@login_required
 def addimages(request,pk):
-    formi = ImageForm()
-    template = get_template('addimages.html')
-    username = request.user.username
-    if not username:
-        username = None
-    try:
-        post = Post.objects.get(pk=pk)
+    if request.user.is_superuser and request.user.is_staff:
+        formi = ImageForm()
+        template = get_template('addimages.html')
+        username = request.user.username
+        if not username:
+            username = None
         try:
-            img = Image.objects.filter(post=post)
-        except Image.DoesNotExist:
-            img = 0
-    except Post.DoesNotExist:
-        return HttpResponse(status=404)
-    if request.method=='GET':
-        html = template.render({'img': img, 'post': post, 'formi':formi,'username':username }, request)
-        return HttpResponse(html)
-    elif request.method == 'POST':
-        imagePath=request.FILES['imagePath']
-        posturl="/api/rest/posts/"+str(request.POST['postid'])+"/"
-        data = {'imagePath': imagePath,'post': posturl}
-        serializer = ImageSerializer(data=data)
-        if serializer.is_valid():
-            serializer.save()
-        else:
-            print(serializer.errors)
-            return HttpResponse('Bad Request', status=400)
-        return HttpResponseRedirect("/api/rest/posts/" + str(post.id) + "/addimages/")
+            post = Post.objects.get(pk=pk)
+            try:
+                img = Image.objects.filter(post=post)
+            except Image.DoesNotExist:
+                img = 0
+        except Post.DoesNotExist:
+            return HttpResponse(status=404)
+        if request.method == 'GET':
+            html = template.render({'img': img, 'post': post, 'formi': formi, 'username': username}, request)
+            return HttpResponse(html)
+        elif request.method == 'POST':
+            imagePath = request.FILES['imagePath']
+            posturl = "/api/rest/posts/" + str(request.POST['postid']) + "/"
+            data = {'imagePath': imagePath, 'post': posturl}
+            serializer = ImageSerializer(data=data)
+            if serializer.is_valid():
+                serializer.save()
+            else:
+                print(serializer.errors)
+                return HttpResponse('Bad Request', status=400)
+            return HttpResponseRedirect("/api/rest/posts/" + str(post.id) + "/addimages/")
+    else:
+        return HttpResponse('Forbidden access', status=403)
 def home(request):
     template = get_template('home.html')
     img=Image.objects.all()[0:8]
@@ -140,16 +145,20 @@ def home(request):
         html = template.render({'img': img, 'username':username}, request)
         return HttpResponse(html)
 #create a new post
+@login_required
 def post(request):
-    formp = PostForm()
-    allposts = Post.objects.all()
-    username = request.user.username
-    if not username:
-        username = None
-    template = get_template('createpost.html')
-    if request.method=='GET':
-        html = template.render({'formp':formp,'allposts':allposts,'username':username}, request)
-        return HttpResponse(html)
+    if request.user.is_superuser and request.user.is_staff:
+        formp = PostForm()
+        allposts = Post.objects.all()
+        username = request.user.username
+        if not username:
+            username = None
+        template = get_template('createpost.html')
+        if request.method == 'GET':
+            html = template.render({'formp': formp, 'allposts': allposts, 'username': username}, request)
+            return HttpResponse(html)
+    else:
+        return HttpResponse('Forbidden access', status=403)
 #retrieve all posts
 def allposts(request):
     template = get_template('posts.html')
