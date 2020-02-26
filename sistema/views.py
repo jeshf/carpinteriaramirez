@@ -144,7 +144,7 @@ def home(request):
     if request.method=='GET':
         html = template.render({'img': img, 'username':username}, request)
         return HttpResponse(html)
-#create a new post
+#create a new post and retrieve all posts
 @login_required
 def post(request):
     if request.user.is_superuser and request.user.is_staff:
@@ -159,6 +159,21 @@ def post(request):
             return HttpResponse(html)
     else:
         return HttpResponse('Forbidden access', status=403)
+#retrieve all comments
+@login_required
+def services(request):
+    if request.user.is_superuser and request.user.is_staff:
+        forms = ServiceForm()
+        services = Service.objects.all()
+        username = request.user.username
+        if not username:
+            username = None
+        template = get_template('createservice.html')
+        if request.method == 'GET':
+            html = template.render({'forms': forms, 'services': services, 'username': username}, request)
+            return HttpResponse(html)
+    else:
+        return HttpResponse('Forbidden access', status=403)
 #retrieve all posts
 def allposts(request):
     template = get_template('posts.html')
@@ -169,28 +184,6 @@ def allposts(request):
     if request.method=='GET':
         html = template.render({'allposts':allposts,'username':username }, request)
         return HttpResponse(html)
-#retrieve all comments
-def allcomments(request):
-    template = get_template('comments.html')
-    allcomments = Comment.objects.all()
-    if request.method=='GET':
-        html = template.render({'allcomments':allcomments }, request)
-        return HttpResponse(html)
-#retrieve all services
-def allservices(request):
-    template = get_template('services.html')
-    allservices = Service.objects.all()
-    if request.method=='GET':
-        html = template.render({'allservices':allservices }, request)
-        return HttpResponse(html)
-#retrieve all payments
-def allpayments(request):
-    template = get_template('payments.html')
-    allpayments = Payment.objects.all()
-    if request.method == 'GET':
-        html = template.render({'allpayments': allpayments}, request)
-        return HttpResponse(html)
-
 class Login(APIView):
     def post(self, request, format=None):
         data = request.data
@@ -234,11 +227,16 @@ class ResponseViewSet(viewsets.ModelViewSet):
     queryset = Response.objects.all()
     serializer_class = ResponseSerializer
 
+
 class ServiceViewSet(viewsets.ModelViewSet):
     permission_classes = (permissions.IsAuthenticated, permissions.IsAdminUser)
     queryset = Service.objects.all()
     serializer_class = ServiceSerializer
-
+    def create(self, request, *args, **kwargs):
+        super(ServiceViewSet, self).create(request, *args, **kwargs)
+        # here may be placed additional operations for
+        # extracting id of the object and using reverse()
+        return HttpResponseRedirect(redirect_to='/api/allservices/')
 class PaymentViewSet(viewsets.ModelViewSet):
     permission_classes = (permissions.IsAuthenticated, permissions.IsAdminUser)
     queryset = Payment.objects.all()

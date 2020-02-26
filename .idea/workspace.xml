@@ -3,9 +3,28 @@
   <component name="ChangeListManager">
     <list default="true" id="98b34b83-457f-4882-b1df-a206b47ef2fb" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/carpinteriaramirez/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/carpinteriaramirez/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/media/arrows.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/carpinteriaramirez/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/carpinteriaramirez/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/media/Botiquin.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/media/Botiquin_DXAuMo8.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/media/Botiquin_jnd4qx2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/media/Botiquin_t9eZfji.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/media/Botiquin_tEPWKAL.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/media/Closet.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/media/Closet_2jgqYWp.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/media/Closet_Infmrn0.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/media/Closet_LLTuNKk.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/media/Closet_gJWfb4X.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/media/Closet_gW5sfri.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/media/cocina_integral_color_tabaco_semimate.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/media/cocina_integral_color_tabaco_semimate_99OnWkE.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/media/cocina_integral_color_tabaco_semimate_UHfyohm.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sistema/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/sistema/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sistema/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/sistema/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sistema/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/sistema/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/payments.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/profile.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/services.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/signup.html" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../store/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../store/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -235,6 +254,14 @@
       <workItem from="1582058304941" duration="808000" />
       <workItem from="1582556620255" duration="946000" />
       <workItem from="1582558418336" duration="1247000" />
+      <workItem from="1582651452262" duration="598000" />
+      <workItem from="1582659109741" duration="601000" />
+      <workItem from="1582730785939" duration="1608000" />
+      <workItem from="1582732586262" duration="809000" />
+      <workItem from="1582740793569" duration="1748000" />
+      <workItem from="1582742620607" duration="1756000" />
+      <workItem from="1582744464255" duration="1757000" />
+      <workItem from="1582746313740" duration="1279000" />
     </task>
     <servers />
   </component>

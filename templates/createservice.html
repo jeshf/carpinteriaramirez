@@ -1,0 +1,115 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Agregar nuevos trabajos</title>
+
+     <script src="{% static '/js/jquery-3.1.1.min.js' %}"></script>
+		<!---- jquery link local dont forget to place this in first than other script or link or may not work ---->
+		<link rel="stylesheet" href="{% static '/css/bootstrap.min.css' %}">
+		<link rel="stylesheet"href="{% static '/css/style.css' %}">
+		<link rel="stylesheet"href="{% static '/css/style2.css' %}">
+<link rel="stylesheet"href="{% static '/css/style3.css' %}">
+		<script src="{% static '/js/bootstrap.min.js' %}"></script>
+		<!---- Boostrap js link local ----->
+		<link rel="icon" href="images/icon.png" type="image/x-icon" />
+		<!---- Icon link local ----->
+	<link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
+</head>
+<body>
+<header>
+</header>
+<div class="container-fluid">
+		<div class="container">
+         <nav class="navbar navbar-default navbar-fixed-top">
+
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/api/home/">Sitio de Administración</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="/api/newpost/">Publicaciones</a></li>
+            <li><a href="#contact">Comentarios</a></li>
+            <li><a href="/api/login/">Respuestas de comentarios</a></li>
+              <li><a href="/api/allposts/">Trabajos</a></li>
+                <li><a href="#about">Pagos de Trabajos</a></li>
+              {% if username != None %}
+                  <li style="background: transparent"><a style="background: transparent"><form method="POST" action="/api/logout/"><strong>Bienvenido: {{ username }}</strong>{% csrf_token %}
+                      <input type="submit" value="Cerrar sesión" class="bg-info"></form></a></li>
+
+              {% endif %}
+          </ul>
+          <!--<ul class="nav navbar-nav navbar-right">
+            <li><a href="../navbar/">Default</a></li>
+            <li><a href="../navbar-static-top/">Static top</a></li>
+            <li class="active"><a href="./">Fixed top <span class="sr-only">(current)</span></a></li>
+          </ul>-->
+        </div>
+    </nav>
+			<h1 class="text-center bg-gray table-bordered text-uppercase"><i>Aquí puedes acceder a todos tus trabajos</i></h1>
+ 			<hr class="table-bordered">
+                <div class="row">
+                <div class="text-center col-xs-10 col-sm-12 ">
+                <div class="wrapper tabled">
+                    <div class="stage table-bordered" id="page1">
+                        <div class="middled">
+                            {% for service in services %}
+                            <div class="link-2">
+                            <a class="links" href="/api/rest/services/{{ post.id }}/retrieve/">
+                                <span class="thick">{{ service.name }}</span>
+                                <p class="l">Ver datos</p>
+                            </a>
+                            <br>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                </div>
+                </div>
+        <hr class="table-bordered">
+        <h1 class="text-center bg-gray table-bordered text-uppercase"><i>Aquí puedes agregar nuevos trabajos</i></h1>
+        <hr class="table-bordered">
+        <div class="row">
+            <form action="/api/rest/services/" method="POST">
+                {% csrf_token %}
+
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <br>
+                      {{ forms.name }}
+                        <br>
+                       <label class="form-group vertical">Selecciona el costo del trabajo</label>  {{ forms.cost }}
+                        <input type="hidden" name="userid"></div>
+                        </div>
+                </div>
+                             <div class="col-md-2">
+                </div>
+                <div class="col-md-5">
+                    <div class="form-group">
+                    {{ forms.description }}
+                        <br>
+                            <label class="form-group vertical">Selecciona el porcentaje de avance</label>  {{ forms.percentage }}
+                        <br>
+                        <div class="text-center">
+                        <input type="submit" class="btn btn-lg btn-primary "   value="Agregar">
+                        </div>
+                        </div>
+                </div>
+
+        </div>
+        </div>
+		<p class="text-center">
+			<i id="passwordHelpInline" class="text-muted"> Sitio de Administración para la Carpintería Ramírez.</i>
+		</p>
+	</div>
+</body>
+</html>

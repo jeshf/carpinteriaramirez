@@ -2,7 +2,7 @@ from django import forms
 #from django.contrib.auth.forms import UserCreationForm
 #from .models import CustomUser
 class ContactForm(forms.Form):
-    mensaje = forms.CharField(max_length=1000,
+    mensaje = forms.CharField(max_length=500,
     widget=forms.Textarea(attrs={'rows': 2, 'cols': 68, 'placeholder':'Escribe aqui tu comentario'}), label='')
     flag = forms.CharField(widget=forms.HiddenInput())
     def clean(self):
@@ -11,7 +11,7 @@ class ContactForm(forms.Form):
         if not mensaje:
             raise forms.ValidationError('El campo mensaje no puede estar vacío')
 class ResponseForm(forms.Form):
-    respuesta = forms.CharField(max_length=1000,
+    respuesta = forms.CharField(max_length=500,
         widget=forms.Textarea(attrs={'rows': 2, 'cols': 68, 'placeholder':'Escribe aquí tu respuesta a este comentario'}),
         label='',)
     primarkey = forms.UUIDField(widget=forms.HiddenInput())
@@ -23,7 +23,7 @@ class ResponseForm(forms.Form):
             raise forms.ValidationError('El campo respuesta no puede estar vacío')
 
 class SignInForm(forms.Form):
-    usuario = forms.CharField(max_length=45, widget=forms.TextInput(attrs={'placeholder': 'Escribe tu nombre de usuario',
+    usuario = forms.CharField(max_length=20, widget=forms.TextInput(attrs={'placeholder': 'Escribe tu nombre de usuario',
                                                         'class':'input-lg form-control'}))
     password = forms.CharField(max_length=45,
         widget=forms.PasswordInput(attrs={'placeholder': 'Escribe aqui tu contraseña','class':'input-lg form-control'}))
@@ -36,7 +36,7 @@ class SignInForm(forms.Form):
             raise forms.ValidationError('Los campos usuario y/o password no pueden estar vacios')
 
 class SignUpForm(forms.Form):
-    username = forms.CharField(max_length=45, widget=forms.TextInput(attrs={'placeholder': 'Escribe tu nombre de usuario',
+    username = forms.CharField(max_length=20, widget=forms.TextInput(attrs={'placeholder': 'Escribe tu nombre de usuario',
                                                         'class':'input-lg form-control'}))
     password = forms.CharField(max_length=45,
         widget=forms.PasswordInput(attrs={'placeholder': 'Escribe aqui tu contraseña','class':'input-lg form-control'}))
@@ -44,12 +44,12 @@ class SignUpForm(forms.Form):
         widget=forms.PasswordInput(attrs={'placeholder': 'Escribe otra vez tu contraseña','class':'input-lg form-control'}))
     email = forms.CharField(max_length=60, widget=forms.EmailInput(attrs={'placeholder': 'Escribe tu correo electrónico',
                                                             'class':'input-lg form-control'}))
-    name = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'placeholder': 'Escribe tu nombre(s)',
+    name = forms.CharField(max_length=50, widget=forms.TextInput(attrs={'placeholder': 'Escribe tu nombre(s)',
                                                             'class':'input-lg form-control'}))
-    firstLastName = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'placeholder': 'Escribe tu apellido paterno',
+    firstLastName = forms.CharField(max_length=50, widget=forms.TextInput(attrs={'placeholder': 'Escribe tu apellido paterno',
                                                             'class': 'input-lg form-control'}))
 
-    secondLastName = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'placeholder': 'Escribe tu apellido materno',
+    secondLastName = forms.CharField(max_length=50, widget=forms.TextInput(attrs={'placeholder': 'Escribe tu apellido materno',
                                                             'class': 'input-lg form-control'}))
     flag = forms.CharField(widget=forms.HiddenInput())
     def clean(self):
@@ -66,9 +66,9 @@ class SignUpForm(forms.Form):
         if password != password2:
             raise forms.ValidationError('Las contraseñas no pueden ser diferentes')
 class PostForm(forms.Form):
-    postTitle = forms.CharField(max_length=45, widget=forms.TextInput(attrs={'placeholder': 'Escribe el título de la publicación',
+    postTitle = forms.CharField(max_length=50, widget=forms.TextInput(attrs={'placeholder': 'Escribe el título de la publicación',
                                                                              'class': 'input-lg form-control'}))
-    postDescription = forms.CharField(max_length=1000,widget=forms.Textarea(attrs={'rows': 2, 'cols': 30, 'placeholder':'Escribe la descripción de este trabajo',
+    postDescription = forms.CharField(max_length=500,widget=forms.Textarea(attrs={'rows': 2, 'cols': 30, 'placeholder':'Escribe la descripción de este trabajo',
                                                                                    'class':'input-lg form-control'}))
     def clean(self):
         cleaned_data = super(ContactForm, self).clean()
@@ -82,3 +82,19 @@ class CommentRepliesForm(forms.Form):
 class ImageForm(forms.Form):
     imagePath = forms.ImageField(widget=forms.HiddenInput())
     postid = forms.UUIDField(widget=forms.HiddenInput())
+class ServiceForm(forms.Form):
+    name = forms.CharField(max_length=50, widget=forms.TextInput(attrs={'placeholder': 'Escribe el nombre del trabajo',
+                                                'class':'input-lg form-control'}))
+    description = forms.CharField(max_length=200,widget=forms.Textarea(attrs={'rows': 2, 'cols': 68, 'placeholder':'Escribe aqui tu comentario',
+                                                'class':'input-lg form-control'}))
+    cost = forms.FloatField(widget=forms.NumberInput(attrs={'step':'1','class':'vertical input-sm'}))
+    percentage = forms.IntegerField(widget=forms.NumberInput(attrs={'step':'1','class':'vertical input-sm'}),required=False)
+    userid = forms.UUIDField(widget=forms.HiddenInput())
+    def clean(self):
+        cleaned_data = super(ServiceForm, self).clean()
+        name = cleaned_data.get('name')
+        description = cleaned_data.get('description')
+        cost = cleaned_data.get('cost')
+        # postDescription = cleaned_data.get('postDescription')
+        if not name or not description or not cost:
+            raise forms.ValidationError('Llena los campos faltantes')

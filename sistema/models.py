@@ -21,7 +21,7 @@ class Post (AbstractModel):
         return self.postTitle
 
 class Comment (AbstractModel):
-    createdBy = models.CharField(max_length=50, null=False, blank=False)
+    createdBy = models.CharField(max_length=20, null=False, blank=False)
     text = models.CharField(max_length=500, null=False, blank=False)
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
     def __str__(self):
@@ -34,7 +34,7 @@ class Image (AbstractModel):
         return self.imagePath
 
 class Response (AbstractModel):
-    repliedBy = models.CharField(max_length=50, null=True, blank=True)
+    repliedBy = models.CharField(max_length=20, null=True, blank=True)
     text = models.CharField(max_length=500, null=False, blank=False)
     comment = models.ForeignKey(Comment, on_delete=models.CASCADE)
     def __str__(self):
@@ -108,8 +108,8 @@ class CustomUser(AbstractBaseUser,PermissionsMixin):
     #def is_staff(self):
         #return self.is_staff
 class Service (AbstractModel):
-     name = models.CharField(max_length=30, null=False, blank=False)
-     description = models.CharField(max_length=200, null=False, blank=False)
+     name = models.CharField(max_length=50, null=False, blank=False)
+     description = models.CharField(max_length=500, null=False, blank=False)
      cost = models.FloatField(null=False, blank=False)
      percentage = models.IntegerField(null=True, blank=True)
      user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
