@@ -79,7 +79,7 @@
         <h1 class="text-center bg-gray table-bordered text-uppercase"><i>Aquí puedes agregar nuevos trabajos</i></h1>
         <hr class="table-bordered">
         <div class="row">
-            <form action="/api/rest/services/" method="POST">
+            <form method="POST">
                 {% csrf_token %}
 
                 <div class="col-md-5">
@@ -87,11 +87,17 @@
                         <br>
                       {{ forms.name }}
                         <br>
-                       <label class="form-group vertical">Selecciona el costo del trabajo</label>  {{ forms.cost }}
-                        <input type="hidden" name="userid"></div>
+                       <label class="form-group">Selecciona el costo del trabajo</label>  {{ forms.cost }}
+                    <br>
+                    </div>
+                <label class="form-group vertical">Elige el cliente a que pertenece</label>
+                    <select name="userid">
+                        {% for us in users  %}
+                            <option value="{{ us.id }}">{{ us.name }} {{ us.firstLastName }} {{ us.secondLastName }}</option>
+                        {% endfor %}
+                    </select>
                         </div>
-                </div>
-                             <div class="col-md-2">
+                <div class="col-md-2">
                 </div>
                 <div class="col-md-5">
                     <div class="form-group">

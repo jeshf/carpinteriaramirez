@@ -165,13 +165,22 @@ def services(request):
     if request.user.is_superuser and request.user.is_staff:
         forms = ServiceForm()
         services = Service.objects.all()
+        users=get_user_model().objects.all()
         username = request.user.username
         if not username:
             username = None
         template = get_template('createservice.html')
         if request.method == 'GET':
-            html = template.render({'forms': forms, 'services': services, 'username': username}, request)
+            html = template.render({'forms': forms, 'services': services,'users':users,'username': username}, request)
             return HttpResponse(html)
+        elif request.method == 'POST':
+            usr=get_user_model().objects.get(pk=request.POST['userid'])
+            percentage=request.POST['percentage']
+            if percentage == "":
+                percentage=0
+            Service.objects.create(name=request.POST['name'], description=request.POST['description'],
+            cost=request.POST['cost'],percentage= percentage, user=usr)
+            return HttpResponseRedirect(redirect_to='/api/allservices/')
     else:
         return HttpResponse('Forbidden access', status=403)
 #retrieve all posts
@@ -232,11 +241,6 @@ class ServiceViewSet(viewsets.ModelViewSet):
     permission_classes = (permissions.IsAuthenticated, permissions.IsAdminUser)
     queryset = Service.objects.all()
     serializer_class = ServiceSerializer
-    def create(self, request, *args, **kwargs):
-        super(ServiceViewSet, self).create(request, *args, **kwargs)
-        # here may be placed additional operations for
-        # extracting id of the object and using reverse()
-        return HttpResponseRedirect(redirect_to='/api/allservices/')
 class PaymentViewSet(viewsets.ModelViewSet):
     permission_classes = (permissions.IsAuthenticated, permissions.IsAdminUser)
     queryset = Payment.objects.all()
