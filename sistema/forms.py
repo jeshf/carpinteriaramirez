@@ -95,6 +95,19 @@ class ServiceForm(forms.Form):
         name = cleaned_data.get('name')
         description = cleaned_data.get('description')
         cost = cleaned_data.get('cost')
-        # postDescription = cleaned_data.get('postDescription')
+        percentage = cleaned_data.get('percentage')
         if not name or not description or not cost:
+            raise forms.ValidationError('Llena los campos faltantes')
+        if percentage < 0 or percentage > 100:
+            raise forms.ValidationError('El porcentaje debe ser entre 0 y 100')
+class PaymentForm(forms.Form):
+    date = forms.DateField(widget=forms.DateInput(attrs={'class':'vertical'}))
+    amountPaid = forms.FloatField(widget=forms.NumberInput(attrs={'step': '1', 'class': 'vertical input-sm'}))
+    serviceid = forms.UUIDField(widget=forms.Select())
+    def clean(self):
+        cleaned_data = super(ServiceForm, self).clean()
+        date = cleaned_data.get('date')
+        amountPaid = cleaned_data.get('amountPaid')
+        serviceid = cleaned_data.get('serviceid')
+        if not date or not amountPaid or not serviceid:
             raise forms.ValidationError('Llena los campos faltantes')

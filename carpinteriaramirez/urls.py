@@ -39,7 +39,7 @@ urlpatterns = [
     url(r'^api/allposts/$', views.allposts),
     #url(r'^api/allcomments/$', views.allcomments),
     url(r'^api/allservices/$', views.services),
-    #url(r'^api/allpayments/$', views.allpayments),
+    url(r'^api/allpayments/$', views.payments),
     url(r'^api/home/$', views.home),
     url(r'^api/logout/$', views.LogoutView.as_view()),
     #url(r'^api/user/', views.CustomRegisterView.as_view()),

@@ -52,17 +52,17 @@
           </ul>-->
         </div>
     </nav>
-			<h1 class="text-center bg-gray table-bordered text-uppercase"><i>Aquí puedes acceder a todos tus trabajos</i></h1>
+			<h1 class="text-center bg-gray table-bordered text-uppercase"><i>Aquí puedes ver todos los pagos de los clientes</i></h1>
  			<hr class="table-bordered">
                 <div class="row">
                 <div class="text-center col-xs-10 col-sm-12 ">
                 <div class="wrapper tabled">
                     <div class="stage table-bordered" id="page1">
                         <div class="middled">
-                            {% for service in services %}
+                            {% for payment in payments %}
                             <div class="link-2">
-                            <a class="links" href="/api/rest/services/{{ post.id }}/retrieve/">
-                                <span class="thick">{{ service.name }}</span>
+                            <a class="links" href="/api/rest/payments/{{ payment.id }}/retrieve/">
+                                <span class="thick">{{ payment.date }}</span>
                                 <p class="l">Ver datos</p>
                             </a>
                             <br>
@@ -74,7 +74,7 @@
                 </div>
                 </div>
         <hr class="table-bordered">
-        <h1 class="text-center bg-gray table-bordered text-uppercase"><i>Aquí puedes agregar nuevos trabajos</i></h1>
+        <h1 class="text-center bg-gray table-bordered text-uppercase"><i>Aquí puedes agregar nuevos pagos</i></h1>
         <hr class="table-bordered">
         <div class="row">
             <form method="POST">
@@ -83,15 +83,13 @@
                 <div class="col-md-5">
                     <div class="form-group">
                         <br>
-                      {{ forms.name }}
-                        <br>
-                       <label class="form-group">Selecciona el costo del trabajo</label>  {{ forms.cost }}
+                       <label class="form-group">Selecciona la cantidad del pago(abono)</label>  {{ formp.amountPaid }}
                     <br>
                     </div>
-                <label class="form-group vertical">Elige el cliente al que pertenece</label>
-                    <select name="userid">
-                        {% for us in users  %}
-                            <option value="{{ us.id }}">{{ us.name }} {{ us.firstLastName }} {{ us.secondLastName }}</option>
+                <label class="form-group vertical">Elige el trabajo al que pertenece</label>
+                    <select name="serviceid">
+                        {% for service in services %}
+                            <option value="{{ service.id }}">{{ service.name }}</option>
                         {% endfor %}
                     </select>
                         </div>
@@ -99,11 +97,8 @@
                 </div>
                 <div class="col-md-5">
                     <div class="form-group">
-                    {{ forms.description }}
+                            <label class="form-group vertical">Selecciona la fecha del pago</label>  {{ formp.date }}
                         <br>
-                            <label class="form-group vertical">Selecciona el porcentaje de avance</label>  {{ forms.percentage }}
-                        <br>
-
                         <div class="text-center">
                         <input type="submit" class="btn btn-lg btn-primary "   value="Agregar">
                         </div>

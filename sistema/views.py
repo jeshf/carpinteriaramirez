@@ -159,7 +159,7 @@ def post(request):
             return HttpResponse(html)
     else:
         return HttpResponse('Forbidden access', status=403)
-#retrieve all comments
+#retrieve all services
 @login_required
 def services(request):
     if request.user.is_superuser and request.user.is_staff:
@@ -181,6 +181,35 @@ def services(request):
             Service.objects.create(name=request.POST['name'], description=request.POST['description'],
             cost=request.POST['cost'],percentage= percentage, user=usr)
             return HttpResponseRedirect(redirect_to='/api/allservices/')
+    else:
+        return HttpResponse('Forbidden access', status=403)
+#retrieve all payments
+@login_required
+def payments(request):
+    if request.user.is_superuser and request.user.is_staff:
+        formp = PaymentForm()
+        services = Service.objects.all()
+        payments=Payment.objects.all()
+        username = request.user.username
+        if not username:
+            username = None
+        template = get_template('createpayment.html')
+        if request.method == 'GET':
+            html = template.render({'formp': formp, 'services': services,'payments':payments,'username': username}, request)
+            return HttpResponse(html)
+        elif request.method == 'POST':
+            service=Service.objects.get(pk=request.POST['serviceid'])
+            total=service.cost
+            allpaysservice=Payment.objects.filter(service=service)
+            totalpayed=0
+            amountPaid=request.POST['amountPaid']
+            for pay in allpaysservice:
+                totalpayed = totalpayed + int(pay.amountPaid)
+            totalpayed = totalpayed + int(amountPaid)
+            totalRemaining=total-totalpayed
+            Payment.objects.create(total=total, date=request.POST['date'], amountPaid=amountPaid,
+                                   totalRemaining=totalRemaining,service=service)
+            return HttpResponseRedirect(redirect_to='/api/allpayments/')
     else:
         return HttpResponse('Forbidden access', status=403)
 #retrieve all posts
