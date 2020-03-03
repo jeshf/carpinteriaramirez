@@ -160,47 +160,49 @@ def post(request):
     else:
         return HttpResponse('Forbidden access', status=403)
 #retrieve all services
-@login_required
-def services(request):
-    if request.user.is_superuser and request.user.is_staff:
-        forms = ServiceForm()
-        services = Service.objects.all()
-        users=get_user_model().objects.all()
-        username = request.user.username
-        if not username:
-            username = None
-        template = get_template('createservice.html')
-        if request.method == 'GET':
-            html = template.render({'forms': forms, 'services': services,'users':users,'username': username}, request)
-            return HttpResponse(html)
-        elif request.method == 'POST':
-            usr=get_user_model().objects.get(pk=request.POST['userid'])
-            percentage=request.POST['percentage']
-            if percentage == "":
-                percentage=0
-            Service.objects.create(name=request.POST['name'], description=request.POST['description'],
-            cost=request.POST['cost'],percentage= percentage, user=usr)
-            return HttpResponseRedirect(redirect_to='/api/allservices/')
-    else:
-        return HttpResponse('Forbidden access', status=403)
+# @login_required
+# def services(request):
+#     if request.user.is_superuser and request.user.is_staff:
+#         forms = ServiceForm()
+#         services = Service.objects.all()
+#         users=get_user_model().objects.all()
+#         username = request.user.username
+#         if not username:
+#             username = None
+#         template = get_template('createservice.html')
+#         if request.method == 'GET':
+#             html = template.render({'forms': forms, 'services': services,'users':users,'username': username}, request)
+#             return HttpResponse(html)
+#         elif request.method == 'POST':
+#             usr=get_user_model().objects.get(pk=request.POST['userid'])
+#             percentage=request.POST['percentage']
+#             if percentage == "":
+#                 percentage=0
+#             Service.objects.create(name=request.POST['name'], description=request.POST['description'],
+#             cost=request.POST['cost'],percentage= percentage, user=usr)
+#             return HttpResponseRedirect(redirect_to='/api/allservices/')
+#     else:
+#         return HttpResponse('Forbidden access', status=403)
 #retrieve all payments
 @login_required
-def payments(request):
+def payments(request,pk):
     if request.user.is_superuser and request.user.is_staff:
         formp = PaymentForm()
-        services = Service.objects.all()
-        payments=Payment.objects.all()
+        ser = Service.objects.get(pk=pk)
+        payments=Payment.objects.filter(service=ser)
+        u=ser.user
         username = request.user.username
         if not username:
             username = None
+        if not payments:
+            payments = None
         template = get_template('createpayment.html')
         if request.method == 'GET':
-            html = template.render({'formp': formp, 'services': services,'payments':payments,'username': username}, request)
+            html = template.render({'ser':ser,'u':u,'formp': formp, 'payments':payments,'username': username}, request)
             return HttpResponse(html)
         elif request.method == 'POST':
-            service=Service.objects.get(pk=request.POST['serviceid'])
-            total=service.cost
-            allpaysservice=Payment.objects.filter(service=service)
+            total=ser.cost
+            allpaysservice=Payment.objects.filter(service=ser)
             totalpayed=0
             amountPaid=request.POST['amountPaid']
             for pay in allpaysservice:
@@ -208,8 +210,47 @@ def payments(request):
             totalpayed = totalpayed + int(amountPaid)
             totalRemaining=total-totalpayed
             Payment.objects.create(total=total, date=request.POST['date'], amountPaid=amountPaid,
-                                   totalRemaining=totalRemaining,service=service)
-            return HttpResponseRedirect(redirect_to='/api/allpayments/')
+                                   totalRemaining=totalRemaining,service=ser)
+            return HttpResponseRedirect(redirect_to='/api/rest/payments/'+str(pk)+'/addpayments/')
+    else:
+        return HttpResponse('Forbidden access', status=403)
+#retrieve all users to access their services
+@login_required
+def clients(request):
+    if request.user.is_superuser and request.user.is_staff:
+        users=get_user_model().objects.filter(is_superuser=False, is_staff=False)
+        username = request.user.username
+        if not username:
+            username = None
+        template = get_template('users.html')
+        if request.method == 'GET':
+            html = template.render({'users':users,'username': username}, request)
+            return HttpResponse(html)
+    else:
+        return HttpResponse('Forbidden access', status=403)
+#retrieve all services to access their payments
+@login_required
+def usersservices(request,pk):
+    if request.user.is_superuser and request.user.is_staff:
+        forms = ServiceForm()
+        u=get_user_model().objects.get(pk=pk)
+        services = Service.objects.filter(user=u)
+        username = request.user.username
+        if not username:
+            username = None
+        if not services:
+            services=None
+        template = get_template('usersservices.html')
+        if request.method == 'GET':
+            html = template.render({'forms': forms, 'services': services,'u':u,'username': username}, request)
+            return HttpResponse(html)
+        elif request.method == 'POST':
+            percentage=request.POST['percentage']
+            if percentage == "":
+                percentage=0
+            Service.objects.create(name=request.POST['name'], description=request.POST['description'],
+            cost=request.POST['cost'],percentage= percentage, user=u)
+            return HttpResponseRedirect(redirect_to='/api/rest/services/'+str(u.id)+'/addservices/')
     else:
         return HttpResponse('Forbidden access', status=403)
 #retrieve all posts

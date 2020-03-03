@@ -4,7 +4,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Todas las publicaciones</title>
+    <title>Ver los trabajos del cliente</title>
 
      <script src="{% static '/js/jquery-3.1.1.min.js' %}"></script>
 		<!---- jquery link local dont forget to place this in first than other script or link or may not work ---->
@@ -14,7 +14,7 @@
 <link rel="stylesheet"href="{% static '/css/style3.css' %}">
 		<script src="{% static '/js/bootstrap.min.js' %}"></script>
 		<!---- Boostrap js link local ----->
-			<link rel="icon" href="media/icon.png" type="image/x-icon" />
+		<link rel="icon" href="media/icon.png" type="image/x-icon" />
 		<!---- Icon link local ----->
 	<link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
 </head>
@@ -32,15 +32,13 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="/api/home/">Carpintería Ramírez</a>
+          <a class="navbar-brand" href="/api/home/">Sitio de Administración</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li><a href="/api/home/">Página de inicio</a></li>
-            <li><a href="#about">Acerca de nosotros</a></li>
-            <li><a href="#contact">Contacto</a></li>
-            <li><a href="/api/login/">Inicia sesión o registrate</a></li>
-              <li><a href="/api/allposts/">Servicios y trabajos</a></li>
+            <li><a href="/api/newpost/">Agrega y accede a tus publicaciones</a></li>
+              <li><a href="/api/allservices/">Administra tus Trabajos</a></li>
+                <li><a href="/api/allpayments/">Administra tus Pagos de Trabajos</a></li>
               {% if username != None %}
                   <li style="background: transparent"><a style="background: transparent"><form method="POST" action="/api/logout/"><strong>Bienvenido: {{ username }}</strong>{% csrf_token %}
                       <input type="submit" value="Cerrar sesión" class="bg-info"></form></a></li>
@@ -53,24 +51,20 @@
             <li class="active"><a href="./">Fixed top <span class="sr-only">(current)</span></a></li>
           </ul>-->
         </div>
-
     </nav>
-            <h1 class="text-center bg-gray table-bordered text-uppercase"><i>Aquí puedes ver todos nuestros trabajos</i></h1>
-			 <p class="text-center">
-				<i id="passwordHelpInline" class="text-muted"> Atendidos por su amigo: Armando Ramírez Moreno Sígueme en facebook <a href="https://www.facebook.com/profile.php?id=100006842134922">Mi perfil en facebook</a></i>
-			</p>
+        {%if services != None %}
+			<h1 class="text-center bg-gray table-bordered text-uppercase"><i>Trabajos del cliente {{ u.name }} {{ u.firstLastName }} {{ u.secondLastName }}</i></h1>
  			<hr class="table-bordered">
                 <div class="row">
-
                 <div class="text-center col-xs-10 col-sm-12 ">
                 <div class="wrapper tabled">
                     <div class="stage table-bordered" id="page1">
                         <div class="middled">
-                            {% for post in allposts %}
+                            {% for service in services %}
                             <div class="link-2">
-                            <a class="links" href="/api/rest/posts/{{ post.id }}/image/">
-                                <span class="thick">{{ post.postTitle }}</span>
-                                <p class="l">Ver imágenes</p>
+                            <a class="links" href="/api/rest/payments/{{ service.id }}/addpayments/">
+                                <span class="thick">{{ service.name }}</span>
+                                <p class="l">Ver datos y pagos</p>
                             </a>
                             <br>
                             </div>
@@ -79,12 +73,43 @@
                     </div>
                 </div>
                 </div>
-
                 </div>
-            </div>
+        {% endif %}
+        <hr class="table-bordered">
+        <h1 class="text-center bg-gray table-bordered text-uppercase"><i>Agrega trabajos de {{ u.name }} {{ u.firstLastName }} {{ u.secondLastName }}</i></h1>
+        <hr class="table-bordered">
+        <div class="row">
+            <form method="POST">
+                {% csrf_token %}
+
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <br>
+                      {{ forms.name }}
+                        <br>
+                       <label class="form-group">Selecciona el costo del trabajo</label>  {{ forms.cost }}
+                    <br>
+                    </div>
+                        </div>
+                <div class="col-md-2">
+                </div>
+                <div class="col-md-5">
+                    <div class="form-group">
+                    {{ forms.description }}
+                        <br>
+                            <label class="form-group vertical">Selecciona el porcentaje de avance</label>  {{ forms.percentage }}
+                        <br>
+
+                        <div class="text-center">
+                        <input type="submit" class="btn btn-lg btn-primary "   value="Agregar">
+                        </div>
+                        </div>
+                </div>
+
+        </div>
+        </div>
 		<p class="text-center">
-			<i id="passwordHelpInline" class="text-muted"> Carpintería Ramírez: El mueble que se ajusta a su medida,
-            como usted lo necesite aquí se lo fabricamos.</i>
+			<i id="passwordHelpInline" class="text-muted"> Sitio de Administración para la Carpintería Ramírez.</i>
 		</p>
 	</div>
 </body>

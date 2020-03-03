@@ -91,7 +91,7 @@ STATICFILES_DIRS = (
 '/home/jesus/django-projects-environments/carpinteriaramirez/sistema/static',
 )
 STATIC_URL = '/static/'
-
+DATE_INPUT_FORMATS = ['%d-%m-%Y']
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
@@ -130,9 +130,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'es-mx'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/Mexico_City'
 
 USE_I18N = True
 

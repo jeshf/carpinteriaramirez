@@ -85,11 +85,10 @@ class ImageForm(forms.Form):
 class ServiceForm(forms.Form):
     name = forms.CharField(max_length=50, widget=forms.TextInput(attrs={'placeholder': 'Escribe el nombre del trabajo',
                                                 'class':'input-lg form-control'}))
-    description = forms.CharField(max_length=200,widget=forms.Textarea(attrs={'rows': 2, 'cols': 68, 'placeholder':'Escribe aqui tu comentario',
+    description = forms.CharField(max_length=200,widget=forms.Textarea(attrs={'rows': 2, 'cols': 68, 'placeholder':'Escribe aqui la descripción',
                                                 'class':'input-lg form-control'}))
     cost = forms.FloatField(widget=forms.NumberInput(attrs={'step':'1','class':'vertical input-sm'}))
     percentage = forms.IntegerField(widget=forms.NumberInput(attrs={'step':'1','class':'vertical input-sm'}),required=False)
-    userid = forms.UUIDField(widget=forms.Select())
     def clean(self):
         cleaned_data = super(ServiceForm, self).clean()
         name = cleaned_data.get('name')
@@ -100,8 +99,10 @@ class ServiceForm(forms.Form):
             raise forms.ValidationError('Llena los campos faltantes')
         if percentage < 0 or percentage > 100:
             raise forms.ValidationError('El porcentaje debe ser entre 0 y 100')
+class DateInput(forms.DateInput):
+    input_type = 'date'
 class PaymentForm(forms.Form):
-    date = forms.DateField(widget=forms.DateInput(attrs={'class':'vertical'}))
+    date = forms.DateField(widget=DateInput())
     amountPaid = forms.FloatField(widget=forms.NumberInput(attrs={'step': '1', 'class': 'vertical input-sm'}))
     serviceid = forms.UUIDField(widget=forms.Select())
     def clean(self):

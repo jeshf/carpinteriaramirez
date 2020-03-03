@@ -3,10 +3,18 @@
   <component name="ChangeListManager">
     <list default="true" id="98b34b83-457f-4882-b1df-a206b47ef2fb" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/carpinteriaramirez/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/carpinteriaramirez/settings.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/carpinteriaramirez/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/carpinteriaramirez/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sistema/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/sistema/forms.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sistema/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/sistema/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/addimages.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/addimages.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/createpayment.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/createpayment.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/createpost.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/createpost.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/createservice.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/createservice.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/home.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/image.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/image.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/posts.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/posts.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../store/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../store/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -251,6 +259,13 @@
       <workItem from="1582897906145" duration="1656000" />
       <workItem from="1582899674859" duration="1795000" />
       <workItem from="1582901566969" duration="141000" />
+      <workItem from="1583162273871" duration="1682000" />
+      <workItem from="1583167863014" duration="1738000" />
+      <workItem from="1583169880686" duration="1731000" />
+      <workItem from="1583171704215" duration="435000" />
+      <workItem from="1583246600629" duration="1708000" />
+      <workItem from="1583248406397" duration="1738000" />
+      <workItem from="1583250225006" duration="509000" />
     </task>
     <servers />
   </component>

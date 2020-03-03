@@ -4,7 +4,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Agregar nuevos trabajos</title>
+    <title>Agregar nuevos pagos</title>
 
      <script src="{% static '/js/jquery-3.1.1.min.js' %}"></script>
 		<!---- jquery link local dont forget to place this in first than other script or link or may not work ---->
@@ -14,7 +14,7 @@
 <link rel="stylesheet"href="{% static '/css/style3.css' %}">
 		<script src="{% static '/js/bootstrap.min.js' %}"></script>
 		<!---- Boostrap js link local ----->
-		<link rel="icon" href="images/icon.png" type="image/x-icon" />
+			<link rel="icon" href="media/icon.png" type="image/x-icon" />
 		<!---- Icon link local ----->
 	<link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
 </head>
@@ -52,7 +52,8 @@
           </ul>-->
         </div>
     </nav>
-			<h1 class="text-center bg-gray table-bordered text-uppercase"><i>Aquí puedes ver todos los pagos de los clientes</i></h1>
+        {%if payments != None %}
+			<h1 class="text-center bg-gray table-bordered text-uppercase"><i>Pagos del cliente {{ u.name }} {{ u.firstLastName }} {{ u.secondLastName }}</i></h1>
  			<hr class="table-bordered">
                 <div class="row">
                 <div class="text-center col-xs-10 col-sm-12 ">
@@ -73,8 +74,9 @@
                 </div>
                 </div>
                 </div>
+        {% endif %}
         <hr class="table-bordered">
-        <h1 class="text-center bg-gray table-bordered text-uppercase"><i>Aquí puedes agregar nuevos pagos</i></h1>
+        <h1 class="text-center bg-gray table-bordered text-uppercase"><i>Agrega nuevos pagos al trabajo {{ ser.name }}</i></h1>
         <hr class="table-bordered">
         <div class="row">
             <form method="POST">
@@ -86,12 +88,6 @@
                        <label class="form-group">Selecciona la cantidad del pago(abono)</label>  {{ formp.amountPaid }}
                     <br>
                     </div>
-                <label class="form-group vertical">Elige el trabajo al que pertenece</label>
-                    <select name="serviceid">
-                        {% for service in services %}
-                            <option value="{{ service.id }}">{{ service.name }}</option>
-                        {% endfor %}
-                    </select>
                         </div>
                 <div class="col-md-2">
                 </div>
