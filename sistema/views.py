@@ -159,6 +159,34 @@ def post(request):
             return HttpResponse(html)
     else:
         return HttpResponse('Forbidden access', status=403)
+@login_required
+def singleservice(request,pk):
+    if request.user.is_superuser and request.user.is_staff:
+        forms = ServiceForm()
+        users = get_user_model().objects.filter(is_superuser=False, is_staff=False)
+        username = request.user.username
+        service=Service.objects.get(pk=pk)
+        if not username:
+            username = None
+        template = get_template('servicedata.html')
+        if request.method == 'GET':
+            html = template.render({'forms': forms, 'users': users, 'username': username,'service':service}, request)
+            return HttpResponse(html)
+        elif request.method == 'POST':
+            usr=get_user_model().objects.get(pk=request.POST['userid'])
+            try:
+                service.name = request.POST['name']
+                service.cost = request.POST['cost']
+                service.description = request.POST['description']
+                service.percentage = request.POST['percentage']
+                service.user =usr
+                service.save()
+            except Service.DoesNotExist:
+                Service.create(name=request.POST['name'], cost=request.POST['cost'], percentage=request.POST['percentage'],
+                               description=request.POST['description'],user=usr)
+        return HttpResponseRedirect(redirect_to='/api/rest/services/' + str(pk) + '/data/')
+    else:
+        return HttpResponse('Forbidden access', status=403)
 #retrieve all services
 # @login_required
 # def services(request):
@@ -275,6 +303,8 @@ class Login(APIView):
                 user = get_user_model().objects.get(username=username)
                 if user.is_active:
                     login(request, account)
+                    if user.is_superuser and user.is_staff:
+                        return HttpResponseRedirect("/api/allclients/")
                     serialized = UserSerializer(account)
                     return HttpResponseRedirect("/api/home/")
                 else:

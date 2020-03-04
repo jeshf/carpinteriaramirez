@@ -89,6 +89,7 @@ class ServiceForm(forms.Form):
                                                 'class':'input-lg form-control'}))
     cost = forms.FloatField(widget=forms.NumberInput(attrs={'step':'1','class':'vertical input-sm'}))
     percentage = forms.IntegerField(widget=forms.NumberInput(attrs={'step':'1','class':'vertical input-sm'}),required=False)
+    userid = forms.UUIDField(widget=forms.HiddenInput(),required=False)
     def clean(self):
         cleaned_data = super(ServiceForm, self).clean()
         name = cleaned_data.get('name')

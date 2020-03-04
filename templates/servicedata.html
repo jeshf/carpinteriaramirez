@@ -4,7 +4,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Ver los trabajos del cliente</title>
+    <title>Ver datos del trabajo</title>
 
      <script src="{% static '/js/jquery-3.1.1.min.js' %}"></script>
 		<!---- jquery link local dont forget to place this in first than other script or link or may not work ---->
@@ -14,7 +14,7 @@
 <link rel="stylesheet"href="{% static '/css/style3.css' %}">
 		<script src="{% static '/js/bootstrap.min.js' %}"></script>
 		<!---- Boostrap js link local ----->
-		<link rel="icon" href="media/icon.png" type="image/x-icon" />
+			<link rel="icon" href="media/icon.png" type="image/x-icon" />
 		<!---- Icon link local ----->
 	<link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
 </head>
@@ -52,8 +52,7 @@
           </ul>-->
         </div>
     </nav>
-        {%if services != None %}
-			<h1 class="text-center bg-gray table-bordered text-uppercase"><i>Trabajos del cliente {{ u.name }} {{ u.firstLastName }} {{ u.secondLastName }}</i></h1>
+			{% comment %}<h1 class="text-center bg-gray table-bordered text-uppercase"><i>Aquí puedes acceder a todos tus trabajos</i></h1>
  			<hr class="table-bordered">
                 <div class="row">
                 <div class="text-center col-xs-10 col-sm-12 ">
@@ -62,18 +61,10 @@
                         <div class="middled">
                             {% for service in services %}
                             <div class="link-2">
-                            <div class="table-bordered">
-                            <a class="links" href="/api/rest/payments/{{ service.id }}/addpayments/">
+                            <a class="links" href="/api/rest/services/{{ post.id }}/retrieve/">
                                 <span class="thick">{{ service.name }}</span>
-                                <p class="l">Ver pagos</p>
+                                <p class="l">Ver datos</p>
                             </a>
-                                </div>
-                                                            <div class="table-bordered">
-                                <a class="links vertical" href="/api/rest/services/{{ service.id }}/data/">
-                                <span class="thick">Ver datos</span>
-                                <p class="l">Editar/Eliminar</p>
-                            </a>
-                                                            </div>
                             <br>
                             </div>
                             {% endfor %}
@@ -82,34 +73,41 @@
                 </div>
                 </div>
                 </div>
-        {% endif %}
-        <hr class="table-bordered">
-        <h1 class="text-center bg-gray table-bordered text-uppercase"><i>Agrega trabajos de {{ u.name }} {{ u.firstLastName }} {{ u.secondLastName }}</i></h1>
+        <hr class="table-bordered">{% endcomment %}
+        <h1 class="text-center bg-gray table-bordered text-uppercase"><i>Edita el trabajo del cliente {{ service.u.name }} {{ service.u.firstLastName }}</i></h1>
         <hr class="table-bordered">
         <div class="row">
             <form method="POST">
                 {% csrf_token %}
-
                 <div class="col-md-5">
                     <div class="form-group">
                         <br>
-                      {{ forms.name }}
+                        <label class="form-group vertical">Edita el nombre de este trabajo</label>
+                      <input type="text" class="form-control" name="name"value="{{ print }}{{ service.name }}">
                         <br>
-                       <label class="form-group">Selecciona el costo del trabajo</label>  {{ forms.cost }}
+                       <label class="form-group">Selecciona el costo del trabajo</label>
+                        <input type="number" name="cost" value="{{ service.cost }}">
                     <br>
                     </div>
+                <label class="form-group vertical">Cambia el cliente al que pertenece</label>
+                    <select name="userid">
+                        {% for us in users  %}
+                            <option value="{{ us.id }}"{% if service.user.id == us.id %} selected="selected"{% endif %}>{{ us.name }} {{ us.firstLastName }} {{ us.secondLastName }}</option>
+                        {% endfor %}
+                    </select>
                         </div>
                 <div class="col-md-2">
                 </div>
                 <div class="col-md-5">
                     <div class="form-group">
-                    {{ forms.description }}
+                        <label class="form-group vertical">Edita la descripción de este trabajo</label>
+                        <textarea name="description" class="form-control">{{ print }}{{ service.description  }}</textarea>
                         <br>
-                            <label class="form-group vertical">Selecciona el porcentaje de avance</label>  {{ forms.percentage }}
+                            <label class="form-group vertical">Selecciona el porcentaje de avance</label>
+                        <input type="number" name="percentage" class="form-control" value="{{ service.percentage }}">
                         <br>
-
                         <div class="text-center">
-                        <input type="submit" class="btn btn-lg btn-primary "   value="Agregar">
+                        <input type="submit" class="btn btn-lg btn-primary "   value="Guardar cambios">
                         </div>
                         </div>
                 </div>
