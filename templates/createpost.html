@@ -61,10 +61,18 @@
                         <div class="middled">
                             {% for post in allposts %}
                             <div class="link-2">
+                            <div class="table-bordered">
                             <a class="links" href="/api/rest/posts/{{ post.id }}/addimages/">
                                 <span class="thick">{{ post.postTitle }}</span>
                                 <p class="l">Agregar imágenes</p>
                             </a>
+                                </div>
+                                <div class="table-bordered">
+                                    <a class="links" href="/api/rest/posts/{{ post.id }}/data/">
+                                <span class="thick">Ver datos</span>
+                                <p class="l">Editar/Eliminar</p>
+                            </a>
+                                </div>
                             <br>
                             </div>
                             {% endfor %}
@@ -93,9 +101,9 @@
                 </div>
                 <div class="col-md-2">
                     <div class="form-group">
-                         <br>
- 									  <input type="submit" class="btn btn-lg btn-primary "   value="Crear">
- 							</div>
+                        <br>
+                        <input type="submit" class="btn btn-lg btn-primary "   value="Crear">
+                    </div>
                 </div>
             </form>
         </div>

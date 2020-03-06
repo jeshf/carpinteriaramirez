@@ -44,6 +44,7 @@ urlpatterns = [
     url(r'^api/rest/payments/(?P<pk>[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})/addpayments/$', views.payments),
     url(r'^api/rest/services/(?P<pk>[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})/data/$', views.singleservice),
     url(r'^api/rest/payments/(?P<pk>[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})/data/$', views.singlepayment),
+    url(r'^api/rest/posts/(?P<pk>[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})/data/$', views.singlepost),
     url(r'^api/home/$', views.home),
     url(r'^api/logout/$', views.LogoutView.as_view()),
     #url(r'^api/user/', views.CustomRegisterView.as_view()),

@@ -334,6 +334,35 @@ def allposts(request):
     if request.method=='GET':
         html = template.render({'allposts':allposts,'username':username }, request)
         return HttpResponse(html)
+def singlepost(request,pk):
+    if request.user.is_superuser and request.user.is_staff:
+        formp = PostForm()
+        formd = DeleteService()
+        username = request.user.username
+        post = Post.objects.get(pk=pk)
+        if not username:
+            username = None
+        template = get_template('postdata.html')
+        if request.method == 'GET':
+            html = template.render(
+                {'formp': formp, 'formd': formd, 'username': username, 'post': post},request)
+            return HttpResponse(html)
+        elif request.method == 'POST':
+            if request.POST['delete'] == "update":
+                try:
+                    post.postTitle = request.POST['postTitle']
+                    post.postDescription = request.POST['postDescription']
+                    post.save()
+                except Payment.DoesNotExist:
+                    pass
+                return HttpResponseRedirect(redirect_to='/api/rest/posts/' + str(pk) + '/data/')
+            elif request.POST['delete'] == "delete":
+                Post.objects.filter(pk=pk).delete()
+                return HttpResponseRedirect(
+                    redirect_to='/api/newpost/')
+
+    else:
+        return HttpResponse('Forbidden access', status=403)
 class Login(APIView):
     def post(self, request, format=None):
         data = request.data
