@@ -2,15 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="98b34b83-457f-4882-b1df-a206b47ef2fb" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/templates/servicedata.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/carpinteriaramirez/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/carpinteriaramirez/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sistema/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/sistema/forms.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sistema/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/sistema/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/addimages.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/addimages.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/createpayment.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/createpayment.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/createpost.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/createpost.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/createservice.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/createservice.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/servicedata.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/servicedata.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/users.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/users.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/usersservices.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/usersservices.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../store/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../store/.idea/workspace.xml" afterDir="false" />
@@ -268,6 +267,12 @@
       <workItem from="1583336236882" duration="1731000" />
       <workItem from="1583338064642" duration="1892000" />
       <workItem from="1583340224316" duration="153000" />
+      <workItem from="1583418432655" duration="1640000" />
+      <workItem from="1583420196906" duration="1726000" />
+      <workItem from="1583505232105" duration="582000" />
+      <workItem from="1583507003378" duration="1659000" />
+      <workItem from="1583508825410" duration="1728000" />
+      <workItem from="1583510646305" duration="1482000" />
     </task>
     <servers />
   </component>

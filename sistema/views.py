@@ -163,6 +163,7 @@ def post(request):
 def singleservice(request,pk):
     if request.user.is_superuser and request.user.is_staff:
         forms = ServiceForm()
+        formd = DeleteService()
         users = get_user_model().objects.filter(is_superuser=False, is_staff=False)
         username = request.user.username
         service=Service.objects.get(pk=pk)
@@ -170,21 +171,63 @@ def singleservice(request,pk):
             username = None
         template = get_template('servicedata.html')
         if request.method == 'GET':
-            html = template.render({'forms': forms, 'users': users, 'username': username,'service':service}, request)
+            html = template.render({'formd':formd,'forms': forms, 'users': users, 'username': username,'service':service}, request)
             return HttpResponse(html)
         elif request.method == 'POST':
-            usr=get_user_model().objects.get(pk=request.POST['userid'])
-            try:
-                service.name = request.POST['name']
-                service.cost = request.POST['cost']
-                service.description = request.POST['description']
-                service.percentage = request.POST['percentage']
-                service.user =usr
-                service.save()
-            except Service.DoesNotExist:
-                Service.create(name=request.POST['name'], cost=request.POST['cost'], percentage=request.POST['percentage'],
-                               description=request.POST['description'],user=usr)
-        return HttpResponseRedirect(redirect_to='/api/rest/services/' + str(pk) + '/data/')
+            if request.POST['delete']=="update":
+                usr=get_user_model().objects.get(pk=request.POST['userid'])
+                try:
+                     service.name = request.POST['name']
+                     service.cost = request.POST['cost']
+                     service.description = request.POST['description']
+                     service.percentage = request.POST['percentage']
+                     service.user =usr
+                     service.save()
+                except Service.DoesNotExist:
+                     pass
+                return HttpResponseRedirect(redirect_to='/api/rest/services/' + str(pk) + '/data/')
+            elif request.POST['delete']=="delete":
+                Service.objects.filter(pk=pk).delete()
+                return HttpResponseRedirect(redirect_to='/api/rest/services/'+str(service.user.id)+'/addservices/')
+
+    else:
+        return HttpResponse('Forbidden access', status=403)
+def singlepayment(request,pk):
+    if request.user.is_superuser and request.user.is_staff:
+        forms = ServiceForm()
+        formd = DeleteService()
+        services = Service.objects.all()
+        username = request.user.username
+        payment=Payment.objects.get(pk=pk)
+        if not username:
+            username = None
+        template = get_template('paymentdata.html')
+        if request.method == 'GET':
+            html = template.render({'formd':formd,'forms': forms, 'services': services, 'username': username,'payment':payment}, request)
+            return HttpResponse(html)
+        elif request.method == 'POST':
+            if request.POST['delete']=="update":
+                service=Service.objects.get(pk=request.POST['serviceid'])
+                try:
+                     payment.date = request.POST['date']
+                     payment.amountPaid = request.POST['amountPaid']
+                     payment.total = service.cost
+                     payment.service =service
+                     payment.save()
+                     pays = Payment.objects.filter(service=service)
+                     totalp = 0
+                     for pay in pays:
+                         totalp = totalp + pay.amountPaid
+                     totalRemaining = service.cost - totalp
+                     payment.totalRemaining = totalRemaining
+                     payment.save()
+                except Payment.DoesNotExist:
+                     pass
+                return HttpResponseRedirect(redirect_to='/api/rest/payments/' + str(pk) + '/data/')
+            elif request.POST['delete']=="delete":
+                Payment.objects.filter(pk=pk).delete()
+                return HttpResponseRedirect(redirect_to='/api/rest/payments/'+str(payment.service.id)+'/addpayments/')
+
     else:
         return HttpResponse('Forbidden access', status=403)
 #retrieve all services

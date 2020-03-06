@@ -1,18 +1,22 @@
-
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Agregar nuevos trabajos</title>
+    <title>Ver datos del pago</title>
 
      <script src="{% static '/js/jquery-3.1.1.min.js' %}"></script>
 		<!---- jquery link local dont forget to place this in first than other script or link or may not work ---->
 		<link rel="stylesheet" href="{% static '/css/bootstrap.min.css' %}">
 		<link rel="stylesheet"href="{% static '/css/style.css' %}">
 		<link rel="stylesheet"href="{% static '/css/style2.css' %}">
-<link rel="stylesheet"href="{% static '/css/style3.css' %}">
+        <link rel="stylesheet"href="{% static '/css/style3.css' %}">
 		<script src="{% static '/js/bootstrap.min.js' %}"></script>
+    <script type="text/javascript">
+        $(document).on('click', '.confirm-delete', function(){
+        return confirm('¿Estás seguro que quieres eliminarlo?');
+        })
+    </script>
 		<!---- Boostrap js link local ----->
 			<link rel="icon" href="media/icon.png" type="image/x-icon" />
 		<!---- Icon link local ----->
@@ -37,7 +41,7 @@
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
             <li><a href="/api/newpost/">Agrega y accede a tus publicaciones</a></li>
-                <li><a href="/api/allclients/">Administra tus Trabajos (por cliente)</a></li>
+              <li><a href="/api/allclients/">Administra tus Trabajos (por cliente)</a></li>
 {#                <li><a href="/api/allpayments/">Administra tus Pagos de Trabajos</a></li>#}
               {% if username != None %}
                   <li style="background: transparent"><a style="background: transparent"><form method="POST" action="/api/logout/"><strong>Bienvenido: {{ username }}</strong>{% csrf_token %}
@@ -52,7 +56,7 @@
           </ul>-->
         </div>
     </nav>
-			<h1 class="text-center bg-gray table-bordered text-uppercase"><i>Aquí puedes acceder a todos tus trabajos</i></h1>
+			{% comment %}<h1 class="text-center bg-gray table-bordered text-uppercase"><i>Aquí puedes acceder a todos tus trabajos</i></h1>
  			<hr class="table-bordered">
                 <div class="row">
                 <div class="text-center col-xs-10 col-sm-12 ">
@@ -73,43 +77,57 @@
                 </div>
                 </div>
                 </div>
-        <hr class="table-bordered">
-        <h1 class="text-center bg-gray table-bordered text-uppercase"><i>Aquí puedes agregar nuevos trabajos</i></h1>
+        <hr class="table-bordered">{% endcomment %}
+        <h1 class="text-center bg-gray table-bordered text-uppercase"><i>Información del pago del cliente {{ payment.service.user.name }} {{ payment.service.user.firstLastName }}</i></h1>
         <hr class="table-bordered">
         <div class="row">
             <form method="POST">
                 {% csrf_token %}
-
                 <div class="col-md-5">
                     <div class="form-group">
+
+                        <label class="form-group vertical">El resto de lo que queda por pagar</label>
+                        <input type="number"  disabled="True" value="{{ payment.totalRemaining }}">
                         <br>
-                      {{ forms.name }}
-                        <br>
-                       <label class="form-group">Selecciona el costo del trabajo</label>  {{ forms.cost }}
+                        <label class="form-group">Selecciona la cantidad del pago(abono)</label>
+                        <input type="number" name="amountPaid" value="{{ payment.amountPaid }}">
                     <br>
-                    </div>
-                <label class="form-group vertical">Elige el cliente al que pertenece</label>
-                    <select name="userid">
-                        {% for us in users  %}
-                            <option value="{{ us.id }}">{{ us.name }} {{ us.firstLastName }} {{ us.secondLastName }}</option>
+                        <label class="form-group vertical">Trabajo al que pertenece</label>
+                    <select name="serviceid">
+                        {% for service in services  %}
+                            <option value="{{ service.id }}"{% if payment.service.id == service.id %} selected="selected"{% endif %}>{{ service.name }} del cliente {{ service.user.name }} {{ service.user.firstLastName }}</option>
                         {% endfor %}
                     </select>
+                    </div>
                         </div>
                 <div class="col-md-2">
+                    <input type="hidden" name="delete" value="update">
                 </div>
                 <div class="col-md-5">
                     <div class="form-group">
-                    {{ forms.description }}
+                        <label class="form-group vertical">Cambia la fecha del pago</label>
+                        <input type="date" name="date" value={{ payment.date|date:'Y-m-d'}}>
                         <br>
-                            <label class="form-group vertical">Selecciona el porcentaje de avance</label>  {{ forms.percentage }}
+                            <label class="form-group vertical">Costo total del trabajo</label>
+                        <input type="number" name="percentage" disabled="True" value="{{ payment.total }}">
                         <br>
-
                         <div class="text-center">
-                        <input type="submit" class="btn btn-lg btn-primary "   value="Agregar">
+                        <input type="submit" class="btn btn-lg btn-primary "   value="Guardar cambios">
                         </div>
                         </div>
                 </div>
             </form>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <form method="POST">
+                    {% csrf_token %}
+                <div class="text-center">
+                    <input type="hidden" name="delete" value="delete">
+                    <input type="submit" class="btn btn-lg btn-primary confirm-delete "   value="Eliminar">
+                </div>
+                    </form>
+        </div>
         </div>
         </div>
 		<p class="text-center">

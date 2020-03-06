@@ -113,3 +113,5 @@ class PaymentForm(forms.Form):
         serviceid = cleaned_data.get('serviceid')
         if not date or not amountPaid or not serviceid:
             raise forms.ValidationError('Llena los campos faltantes')
+class DeleteService(forms.Form):
+    delete = forms.CharField(widget=forms.HiddenInput(), required=False)
