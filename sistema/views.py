@@ -340,12 +340,14 @@ def singlepost(request,pk):
         formd = DeleteService()
         username = request.user.username
         post = Post.objects.get(pk=pk)
+        images = Image.objects.filter(post=post)
         if not username:
             username = None
         template = get_template('postdata.html')
+        contador=0
         if request.method == 'GET':
-            html = template.render(
-                {'formp': formp, 'formd': formd, 'username': username, 'post': post},request)
+            html = template.render({'formp': formp,'contador':contador,
+            'images':images,'formd': formd, 'username': username, 'post': post},request)
             return HttpResponse(html)
         elif request.method == 'POST':
             if request.POST['delete'] == "update":
@@ -358,9 +360,10 @@ def singlepost(request,pk):
                 return HttpResponseRedirect(redirect_to='/api/rest/posts/' + str(pk) + '/data/')
             elif request.POST['delete'] == "delete":
                 Post.objects.filter(pk=pk).delete()
-                return HttpResponseRedirect(
-                    redirect_to='/api/newpost/')
-
+                return HttpResponseRedirect(redirect_to='/api/newpost/')
+            elif request.POST['delete'] == "deleteimg":
+                Image.objects.filter(pk=request.POST['imgid']).delete()
+                return HttpResponseRedirect(redirect_to='/api/rest/posts/' + str(pk) + '/data/')
     else:
         return HttpResponse('Forbidden access', status=403)
 class Login(APIView):
@@ -376,8 +379,8 @@ class Login(APIView):
                 if user.is_active:
                     login(request, account)
                     if user.is_superuser and user.is_staff:
-                        return HttpResponseRedirect("/api/allclients/")
-                    serialized = UserSerializer(account)
+                        return HttpResponseRedirect("/api/newpost/")
+                    #serialized = UserSerializer(account)
                     return HttpResponseRedirect("/api/home/")
                 else:
                     return HttpResponse('Bad Request', status=400)

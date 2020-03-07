@@ -3,10 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="98b34b83-457f-4882-b1df-a206b47ef2fb" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/carpinteriaramirez/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/carpinteriaramirez/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sistema/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/sistema/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sistema/static/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/sistema/static/css/style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sistema/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/sistema/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/createpost.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/createpost.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/usersservices.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/usersservices.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/postdata.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/postdata.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../store/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../store/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -270,6 +270,10 @@
       <workItem from="1583510646305" duration="1482000" />
       <workItem from="1583532897457" duration="1718000" />
       <workItem from="1583534715247" duration="1031000" />
+      <workItem from="1583591633117" duration="1669000" />
+      <workItem from="1583593405961" duration="1737000" />
+      <workItem from="1583595249947" duration="1711000" />
+      <workItem from="1583597103981" duration="311000" />
     </task>
     <servers />
   </component>

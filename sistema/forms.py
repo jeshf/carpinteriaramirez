@@ -115,3 +115,4 @@ class PaymentForm(forms.Form):
             raise forms.ValidationError('Llena los campos faltantes')
 class DeleteService(forms.Form):
     delete = forms.CharField(widget=forms.HiddenInput(), required=False)
+    imgid = forms.UUIDField(widget=forms.HiddenInput(), required=False)
