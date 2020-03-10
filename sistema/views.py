@@ -107,6 +107,7 @@ def image(request,pk):
 def addimages(request,pk):
     if request.user.is_superuser and request.user.is_staff:
         formi = ImageForm()
+        formar = CommentRepliesForm()
         template = get_template('addimages.html')
         username = request.user.username
         if not username:
@@ -114,25 +115,34 @@ def addimages(request,pk):
         try:
             post = Post.objects.get(pk=pk)
             try:
+                comment = Comment.objects.filter(post=post)
+            except Comment.DoesNotExist:
+                comment = 0
+            try:
                 img = Image.objects.filter(post=post)
             except Image.DoesNotExist:
                 img = 0
         except Post.DoesNotExist:
             return HttpResponse(status=404)
         if request.method == 'GET':
-            html = template.render({'img': img, 'post': post, 'formi': formi, 'username': username}, request)
+            html = template.render({'img': img, 'post': post,'formar':formar,
+                    'comment':comment,'formi': formi, 'username': username}, request)
             return HttpResponse(html)
         elif request.method == 'POST':
-            imagePath = request.FILES['imagePath']
-            posturl = "/api/rest/posts/" + str(request.POST['postid']) + "/"
-            data = {'imagePath': imagePath, 'post': posturl}
-            serializer = ImageSerializer(data=data)
-            if serializer.is_valid():
-                serializer.save()
-            else:
-                print(serializer.errors)
-                return HttpResponse('Bad Request', status=400)
-            return HttpResponseRedirect("/api/rest/posts/" + str(post.id) + "/addimages/")
+            if request.POST['flag']=="add":
+                imagePath = request.FILES['imagePath']
+                posturl = "/api/rest/posts/" + str(request.POST['postid']) + "/"
+                data = {'imagePath': imagePath, 'post': posturl}
+                serializer = ImageSerializer(data=data)
+                if serializer.is_valid():
+                    serializer.save()
+                else:
+                    print(serializer.errors)
+                    return HttpResponse('Bad Request', status=400)
+                return HttpResponseRedirect("/api/rest/posts/" + str(post.id) + "/addimages/")
+            elif request.POST['flag']=="delete":
+                Comment.objects.filter(pk=request.POST['commentid']).delete()
+                return HttpResponseRedirect("/api/rest/posts/" + str(post.id) + "/addimages/")
     else:
         return HttpResponse('Forbidden access', status=403)
 def home(request):
