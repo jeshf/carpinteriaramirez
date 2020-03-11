@@ -108,6 +108,7 @@ def addimages(request,pk):
     if request.user.is_superuser and request.user.is_staff:
         formi = ImageForm()
         formar = CommentRepliesForm()
+        formr = ResponseForm()
         template = get_template('addimages.html')
         username = request.user.username
         if not username:
@@ -124,9 +125,12 @@ def addimages(request,pk):
                 img = 0
         except Post.DoesNotExist:
             return HttpResponse(status=404)
+        responses=Response.objects.all()
+        if responses.count()==0:
+            responses=0
         if request.method == 'GET':
             html = template.render({'img': img, 'post': post,'formar':formar,
-                    'comment':comment,'formi': formi, 'username': username}, request)
+            'formr':formr,'responses':responses,'comment':comment,'formi': formi, 'username': username}, request)
             return HttpResponse(html)
         elif request.method == 'POST':
             if request.POST['flag']=="add":
@@ -142,6 +146,9 @@ def addimages(request,pk):
                 return HttpResponseRedirect("/api/rest/posts/" + str(post.id) + "/addimages/")
             elif request.POST['flag']=="delete":
                 Comment.objects.filter(pk=request.POST['commentid']).delete()
+                return HttpResponseRedirect("/api/rest/posts/" + str(post.id) + "/addimages/")
+            elif request.POST['flag']=="deleteresponse":
+                Response.objects.filter(pk=request.POST['primarkey']).delete()
                 return HttpResponseRedirect("/api/rest/posts/" + str(post.id) + "/addimages/")
     else:
         return HttpResponse('Forbidden access', status=403)

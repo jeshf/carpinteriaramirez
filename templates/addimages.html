@@ -38,7 +38,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="/api/home/">Carpintería Ramírez</a>
+          <a class="navbar-brand" href="/api/login/">Inicia sesión</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
@@ -102,13 +102,20 @@
                                     {% csrf_token %}
                             <textarea  rows="2" cols="62" disabled="True">{{ print}} {{comments.createdBy}} dijo: {{ comments.text }}</textarea>
                             <button type="submit" class="btn btn-default vertical confirm-delete">Eliminar</button>
-                                {% comment %}{% if replies != 0 and replies.0.comment == comments%}
+                            {% if responses != 0 %}
+                                 {% for reply in responses %}
+                                     {% if reply.comment == comments%}
                                     <p>Respuestas:</p>
-                                 {% for reply in replies %}
-                                     <!--<a name="{{ reply.comment.id }}"></a>-->
+                                     <form method="post">
+                                    {% csrf_token %}
+
                                      <textarea  rows="2" cols="40" disabled="True">{{ print}} {{reply.repliedBy}} dijo: {{ reply.text }}</textarea>
+                                         <input type="hidden" name="flag" value="{{ "deleteresponse" }}">
+                                         <input type="hidden" name="primarkey" value="{{ reply.id }}">
+                                    <button type="submit" class="btn btn-default vertical confirm-delete">Eliminar</button>
+                                     </form>{% endif %}
                                  {% endfor %}
-                                {% endif %}{% endcomment %}
+                            {% endif %}
                                     <input type="hidden" name="commentid" value="{{ comments.id }}">
                                     <input type="hidden" name="flag" value="{{ "delete" }}">
                             </form>
