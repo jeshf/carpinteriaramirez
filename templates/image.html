@@ -18,13 +18,25 @@
       <script src="{% static '/js/jquery-3.1.1.min.js' %}"></script>
     <script src="{% static '/js/jquery.nivo.slider.js' %}"></script>
       <script type="text/javascript">
+          function Hide_Show(id){
+		    var caja = document.getElementById(id);
+		    //window.alert(id);
+		    if (caja.style.display == "none")
+            {
+                caja.style.display = "block";
+                //this.value="Ocultar Respuestas";
+            }
+		    else
+            {
+                caja.style.display = "none";
+                //this.value="Ver Respuestas";
+            }
+        }
 		$(window).on('load', function() {
 		    $('#slider').nivoSlider();
 		});
-		$('.reply-button').click(function(){
-        $(this).after($('<textarea>').attr('class','reply-box'));
-        });
-	</script>
+
+      </script>
 	<link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
   </head>
   <body>
@@ -99,20 +111,19 @@
             <div class="col-xs-10 col-sm-10 bg-gray table-bordered text-center">
                         {% if comment != 0 %}
                         {% for comments in comment %}
-                            <form method="post">
-                                    {% csrf_token %}
                             <textarea  rows="2" cols="62" disabled="True">{{ print}} {{comments.createdBy}} dijo: {{ comments.text }}</textarea>
-                            <button type="submit" class="btn btn-default vertical">Ver Respuestas</button>
-                                {% if replies != 0 and replies.0.comment == comments%}
+
+                            {% if replies != 0 %}
+                                <input type="submit" class="btn btn-default vertical"  onclick="Hide_Show('{{ comments.id }}')" value="Ver/Ocultar Respuestas">
+                                    <div id="{{comments.id}}" style="display:none">
                                     <p>Respuestas:</p>
                                  {% for reply in replies %}
-                                     <!--<a name="{{ reply.comment.id }}"></a>-->
+                                     {% if reply.comment == comments %}
                                      <textarea  rows="2" cols="40" disabled="True">{{ print}} {{reply.repliedBy}} dijo: {{ reply.text }}</textarea>
+                                     {% endif %}
                                  {% endfor %}
+                                    </div>
                                 {% endif %}
-                                    <input type="hidden" name="commentid" value="{{ comments.id }}">
-                                    <input type="hidden" name="flag" value="{{ "respuestas" }}">
-                            </form>
                             <form method="post">
                                     {% csrf_token %}
                                     {{ formr }}<button type="submit" class="btn btn-default vertical">Responder</button><br/>

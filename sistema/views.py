@@ -46,7 +46,8 @@ def image(request,pk):
     username = request.user.username
     if not username:
         username = None
-    replies = 0
+    comr=list()
+    isBreak= True
     try:
         post = Post.objects.get(pk=pk)
         try:
@@ -59,9 +60,15 @@ def image(request,pk):
             img = 0
     except Post.DoesNotExist:
         return HttpResponse(status=404)
+    if comment != 0:
+        replies =Response.objects.all()
+        #for reply in replies:
+            #comr.append(reply.comment)
+        if replies.count==0:
+            replies = 0
     if request.method=='GET':
         html = template.render({'img': img, 'post': post, 'comment':comment, 'form':form, 'formr':formr,
-                                'replies':replies,'formar':formar,'username':username }, request)
+                        'comr':comr,'replies':replies,'formar':formar,'username':username }, request)
         return HttpResponse(html)
 
     elif request.method == 'POST':
@@ -95,13 +102,6 @@ def image(request,pk):
             replies = 0
             html = template.render({'img': img,'post': post, 'comment': comment, 'form': form, 'formr':formr,
                                     'replies':replies,'formar':formar,'username':username}, request)
-            return HttpResponse(html)
-        elif  request.POST['flag']=="respuestas":
-            com=Comment.objects.get(id=request.POST['commentid'])
-            replies=Response.objects.filter(comment=com)
-            formar = CommentRepliesForm()
-            html = template.render({'img': img,'post': post, 'comment': comment, 'form': form, 'formr':formr,
-                                    'formar':formar,'username':username, 'replies':replies}, request)
             return HttpResponse(html)
 @login_required
 def addimages(request,pk):

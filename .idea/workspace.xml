@@ -3,8 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="98b34b83-457f-4882-b1df-a206b47ef2fb" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sistema/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/sistema/forms.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sistema/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/sistema/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/addimages.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/addimages.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/image.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/image.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../store/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../store/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -275,6 +276,14 @@
       <workItem from="1583766931760" duration="885000" />
       <workItem from="1583851550169" duration="1672000" />
       <workItem from="1583938196714" duration="1899000" />
+      <workItem from="1584027370428" duration="1643000" />
+      <workItem from="1584030046047" duration="1721000" />
+      <workItem from="1584031856889" duration="1742000" />
+      <workItem from="1584033710244" duration="1730000" />
+      <workItem from="1584035551557" duration="1718000" />
+      <workItem from="1584037456400" duration="1742000" />
+      <workItem from="1584039295716" duration="1741000" />
+      <workItem from="1584041289470" duration="1676000" />
     </task>
     <servers />
   </component>

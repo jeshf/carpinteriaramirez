@@ -3,7 +3,7 @@ from django import forms
 #from .models import CustomUser
 class ContactForm(forms.Form):
     mensaje = forms.CharField(max_length=500,
-    widget=forms.Textarea(attrs={'rows': 2, 'cols': 68, 'placeholder':'Escribe aqui tu comentario'}), label='')
+    widget=forms.Textarea(attrs={'rows': 2, 'cols': 75, 'placeholder':'Escribe aqui tu comentario'}), label='')
     flag = forms.CharField(widget=forms.HiddenInput())
     def clean(self):
         cleaned_data = super(ContactForm, self).clean()
@@ -12,7 +12,7 @@ class ContactForm(forms.Form):
             raise forms.ValidationError('El campo mensaje no puede estar vacío')
 class ResponseForm(forms.Form):
     respuesta = forms.CharField(max_length=500,
-        widget=forms.Textarea(attrs={'rows': 2, 'cols': 68, 'placeholder':'Escribe aquí tu respuesta a este comentario'}),
+        widget=forms.Textarea(attrs={'rows': 2, 'cols': 75, 'placeholder':'Escribe aquí tu respuesta a este comentario'}),
         label='',)
     primarkey = forms.UUIDField(widget=forms.HiddenInput())
     flag = forms.CharField(widget=forms.HiddenInput())
