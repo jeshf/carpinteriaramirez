@@ -84,11 +84,7 @@ def image(request,pk):
                 if (not request.user.username):
                     usr="Anónimo"
                 Response.objects.create(repliedBy=usr, text=request.POST['respuesta'], comment=com)
-            formr= ResponseForm()
-            replies = 0
-            html = template.render({'img': img,'post': post, 'comment': comment, 'form': form, 'formr': formr,
-                                    'replies':replies,'formar':formar,'username':username}, request)
-            return HttpResponse(html)
+            return HttpResponseRedirect("/api/rest/posts/" + str(post.id) + "/image/")
         elif  request.POST['flag']=="comentar":
             form = ContactForm(data=request.POST)
             form.fields['mensaje'].error_messages = {'required': 'Este campo es requerido'}
@@ -97,12 +93,7 @@ def image(request,pk):
                 if (not request.user.username):
                     usr = "Anónimo"
                 Comment.objects.create(createdBy=usr, text=request.POST['mensaje'], post=post)
-            comment = Comment.objects.filter(post=post)
-            form= ContactForm()
-            replies = 0
-            html = template.render({'img': img,'post': post, 'comment': comment, 'form': form, 'formr':formr,
-                                    'replies':replies,'formar':formar,'username':username}, request)
-            return HttpResponse(html)
+            return HttpResponseRedirect("/api/rest/posts/" + str(post.id) + "/image/")
 @login_required
 def addimages(request,pk):
     if request.user.is_superuser and request.user.is_staff:
