@@ -32,7 +32,7 @@
           <ul class="nav navbar-nav">
             <li><a href="/api/home/">Página de inicio</a></li>
             <li><a href="#about">Acerca de nosotros</a></li>
-            <li><a href="#contact">Contacto</a></li>
+            <li><a href="/api/contact/">Contacto</a></li>
             <li><a href="/api/login/">Inicia sesión o registrate</a></li>
               <li><a href="/api/allposts/">Servicios y trabajos</a></li>
               {% if username != None %}
@@ -94,8 +94,8 @@
                     <form role="form" method="post">
                         {% csrf_token %}
                         <div class="form-group">
-								{{ form.usuario }}
-                        </div>
+                                {{ form.usuario }}
+  </div>
                         <div class=" form-group">
 								    {{ form.password }}
                         </div>
