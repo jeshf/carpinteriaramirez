@@ -23,3 +23,11 @@ body {background-color:#eee;}
 .navbar-default .navbar-nav .open .dropdown-menu>li>a:hover  {
   background: #a9a9a9;
 }
+iframe {
+        width: 100% !important;
+        height: 400px !important;
+}
+.sma{
+    width: 2.2%;
+    height: auto;
+}
