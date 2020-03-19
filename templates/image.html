@@ -61,7 +61,7 @@
               <li><a href="/api/allposts/">Servicios y trabajos</a></li>
               {% if username != None %}
                   <li style="background: transparent"><a style="background: transparent">
-                      <form method="POST" action="/api/logout/"><strong>Bienvenido: {{ username }}</strong>{% csrf_token %}
+                      <li style="background: transparent"><a href="/api/client/services/"style="background: transparent"><form method="POST" action="/api/logout/"><strong>Tus trabajos: {{ username }}</strong>{% csrf_token %}
                       <input type="submit" value="Cerrar sesión" class="bg-info"></form></a></li>
               {% endif %}
           </ul>

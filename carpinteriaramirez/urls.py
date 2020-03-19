@@ -48,7 +48,7 @@ urlpatterns = [
     url(r'^api/home/$', views.home),
     url(r'^api/contact/$', views.contact),
     url(r'^api/logout/$', views.LogoutView.as_view()),
-
+    url(r'^api/client/services/$', views.clientservices),
     #url(r'^api/user/', views.CustomRegisterView.as_view()),
 ]
 if settings.DEBUG:

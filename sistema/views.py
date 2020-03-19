@@ -200,6 +200,8 @@ def singleservice(request,pk):
 
     else:
         return HttpResponse('Forbidden access', status=403)
+
+@login_required
 def singlepayment(request,pk):
     if request.user.is_superuser and request.user.is_staff:
         forms = ServiceForm()
@@ -307,6 +309,7 @@ def usersservices(request,pk):
             return HttpResponseRedirect(redirect_to='/api/rest/services/'+str(u.id)+'/addservices/')
     else:
         return HttpResponse('Forbidden access', status=403)
+
 #retrieve all posts
 def allposts(request):
     template = get_template('posts.html')
@@ -326,6 +329,8 @@ def contact(request):
     if request.method=='GET':
         html = template.render({'username':username }, request)
         return HttpResponse(html)
+
+@login_required
 def singlepost(request,pk):
     if request.user.is_superuser and request.user.is_staff:
         formp = PostForm()
@@ -392,7 +397,19 @@ class Login(APIView):
         formu = SignUpForm()
         form = SignInForm()
         return render(request, 'login.html', {'form': form,'formu':formu,'username':username  })
-
+@login_required
+def clientservices(request):
+    u = request.user
+    services = Service.objects.filter(user=u)
+    username = u.username
+    if not username:
+        username = None
+    if not services:
+        services = None
+    template = get_template('clientservices.html')
+    if request.method == 'GET':
+        html = template.render({'services': services, 'u': u, 'username': username}, request)
+        return HttpResponse(html)
 class UserViewSet(viewsets.ModelViewSet):
     permission_classes = (permissions.IsAuthenticated, permissions.IsAdminUser)
     queryset = get_user_model().objects.all()
