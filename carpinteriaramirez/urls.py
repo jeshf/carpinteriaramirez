@@ -49,6 +49,7 @@ urlpatterns = [
     url(r'^api/contact/$', views.contact),
     url(r'^api/logout/$', views.LogoutView.as_view()),
     url(r'^api/client/services/$', views.clientservices),
+    url(r'^api/rest/clientpayments/(?P<pk>[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})/$', views.clientpayments),
     #url(r'^api/user/', views.CustomRegisterView.as_view()),
 ]
 if settings.DEBUG:

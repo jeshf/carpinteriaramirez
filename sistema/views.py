@@ -270,7 +270,26 @@ def payments(request,pk):
             return HttpResponseRedirect(redirect_to='/api/rest/payments/'+str(pk)+'/addpayments/')
     else:
         return HttpResponse('Forbidden access', status=403)
-#retrieve all users to access their services
+@login_required
+def clientpayments(request,pk):
+    ser = Service.objects.get(pk=pk)
+    payments = Payment.objects.filter(service=ser)
+    u = ser.user
+    username = request.user.username
+    if not username:
+        username = None
+    if payments:
+        pay = payments[0]
+        for paym in payments:
+            if paym.date > pay.date:
+                pay=paym
+    else:
+        payments=0
+    template = get_template('clientpayments.html')
+    if request.method == 'GET':
+        html = template.render({'pay':pay,'ser': ser, 'u': u, 'payments': payments, 'username': username},request)
+        return HttpResponse(html)
+    #retrieve all users to access their services
 @login_required
 def clients(request):
     if request.user.is_superuser and request.user.is_staff:
@@ -314,11 +333,14 @@ def usersservices(request,pk):
 def allposts(request):
     template = get_template('posts.html')
     allposts = Post.objects.all()
+    images = Image.objects.all()
+    if images.count == 0:
+        images=0
     username = request.user.username
     if not username:
         username = None
     if request.method=='GET':
-        html = template.render({'allposts':allposts,'username':username }, request)
+        html = template.render({'images':images,'allposts':allposts,'username':username }, request)
         return HttpResponse(html)
 
 def contact(request):
