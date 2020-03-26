@@ -17,7 +17,7 @@
     <script src="{% static '/js/jquery.nivo.slider.js' %}"></script>
 <script type="text/javascript">
     $(window).on('load', function() {
-		    $('#slider').nivoSlider();
+		    $('.slider').nivoSlider();
 		});
       </script>
 </head>
@@ -75,7 +75,7 @@
   </div>
   <div class="panel-body">
 <div class="slider-wrapper theme-bar">
-                            <div id="slider" class="nivoSlider" >
+                            <div class="nivoSlider slider" >
                                 {% if images != 0 %}
                                     {% for image in images %}
                                         {% if image.post == post %}
