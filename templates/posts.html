@@ -5,7 +5,9 @@
 <head>
     <meta charset="UTF-8">
     <title>Todas las publicaciones</title>
+
 <link rel="stylesheet"href="{% static '/css/style3.css' %}">
+    <script src="{% static '/js/jquery-3.1.1.min.js' %}"></script>
 		<link rel="stylesheet" href="{% static '/css/bootstrap.min.css' %}">
 		<link rel="stylesheet"href="{% static '/css/style2.css' %}">
 		<script src="{% static '/js/bootstrap.min.js' %}"></script>
@@ -13,7 +15,6 @@
         <link rel="stylesheet" href="{% static '/css/style.css' %}">
       <link rel="stylesheet" href="{% static '/css/bar.css' %}">
       	<link rel="icon" href="media/icon.png" type="image/x-icon" />
-      <script src="{% static '/js/jquery-3.1.1.min.js' %}"></script>
     <script src="{% static '/js/jquery.nivo.slider.js' %}"></script>
 <script type="text/javascript">
     $(window).on('load', function() {
@@ -50,11 +51,6 @@
 
               {% endif %}
           </ul>
-          <!--<ul class="nav navbar-nav navbar-right">
-            <li><a href="../navbar/">Default</a></li>
-            <li><a href="../navbar-static-top/">Static top</a></li>
-            <li class="active"><a href="./">Fixed top <span class="sr-only">(current)</span></a></li>
-          </ul>-->
         </div>
 
     </nav>
@@ -64,9 +60,6 @@
 			</p>
  			<hr class="table-bordered">
                 <div class="row">
-
-
-
                             {% for post in allposts %}
                                                    <div class="col-md-4">
                             <div class="panel panel-default text-center">

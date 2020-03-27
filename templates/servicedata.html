@@ -18,9 +18,7 @@
         return confirm('¿Estás seguro que quieres eliminarlo?');
         })
     </script>
-		<!---- Boostrap js link local ----->
 			<link rel="icon" href="media/icon.png" type="image/x-icon" />
-		<!---- Icon link local ----->
 	<link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
 </head>
 <body>
@@ -43,42 +41,14 @@
           <ul class="nav navbar-nav">
             <li><a href="/api/newpost/">Agrega y accede a tus publicaciones</a></li>
               <li><a href="/api/allclients/">Administra tus Trabajos (por cliente)</a></li>
-{#                <li><a href="/api/allpayments/">Administra tus Pagos de Trabajos</a></li>#}
               {% if username != None %}
                   <li style="background: transparent"><a style="background: transparent"><form method="POST" action="/api/logout/"><strong>Bienvenido: {{ username }}</strong>{% csrf_token %}
                       <input type="submit" value="Cerrar sesión" class="bg-info"></form></a></li>
 
               {% endif %}
           </ul>
-          <!--<ul class="nav navbar-nav navbar-right">
-            <li><a href="../navbar/">Default</a></li>
-            <li><a href="../navbar-static-top/">Static top</a></li>
-            <li class="active"><a href="./">Fixed top <span class="sr-only">(current)</span></a></li>
-          </ul>-->
         </div>
     </nav>
-			{% comment %}<h1 class="text-center bg-gray table-bordered text-uppercase"><i>Aquí puedes acceder a todos tus trabajos</i></h1>
- 			<hr class="table-bordered">
-                <div class="row">
-                <div class="text-center col-xs-10 col-sm-12 ">
-                <div class="wrapper tabled">
-                    <div class="stage table-bordered" id="page1">
-                        <div class="middled">
-                            {% for service in services %}
-                            <div class="link-2">
-                            <a class="links" href="/api/rest/services/{{ post.id }}/retrieve/">
-                                <span class="thick">{{ service.name }}</span>
-                                <p class="l">Ver datos</p>
-                            </a>
-                            <br>
-                            </div>
-                            {% endfor %}
-                        </div>
-                    </div>
-                </div>
-                </div>
-                </div>
-        <hr class="table-bordered">{% endcomment %}
         <h1 class="text-center bg-gray table-bordered text-uppercase"><i>Edita el trabajo del cliente {{ service.u.name }} {{ service.u.firstLastName }}</i></h1>
         <hr class="table-bordered">
         <div class="row">

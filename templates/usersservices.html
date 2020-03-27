@@ -38,18 +38,12 @@
           <ul class="nav navbar-nav">
             <li><a href="/api/newpost/">Agrega y accede a tus publicaciones</a></li>
               <li><a href="/api/allclients/">Administra tus Trabajos (por cliente)</a></li>
-{#                <li><a href="/api/allpayments/">Administra tus Pagos de Trabajos</a></li>#}
               {% if username != None %}
                   <li style="background: transparent"><a style="background: transparent"><form method="POST" action="/api/logout/"><strong>Bienvenido: {{ username }}</strong>{% csrf_token %}
                       <input type="submit" value="Cerrar sesión" class="bg-info"></form></a></li>
 
               {% endif %}
           </ul>
-          <!--<ul class="nav navbar-nav navbar-right">
-            <li><a href="../navbar/">Default</a></li>
-            <li><a href="../navbar-static-top/">Static top</a></li>
-            <li class="active"><a href="./">Fixed top <span class="sr-only">(current)</span></a></li>
-          </ul>-->
         </div>
     </nav>
         {%if services != None %}

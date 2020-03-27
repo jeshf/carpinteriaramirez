@@ -1,29 +1,18 @@
-
 {% load static %}
 <!DOCTYPE html>
-
-
 	<title>Carpintería Ramírez</title>
-
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 	<head>
+        <script src="{% static '/js/jquery-3.1.1.min.js' %}"></script>
 		<link rel="stylesheet" href="{% static '/css/bootstrap.min.css' %}">
-		<!---- boostrap.min link local ----->
-
 		<link rel="stylesheet"href="{% static '/css/style2.css' %}">
-		<!---- boostrap.min link local ----->
-
 		<script src="{% static '/js/bootstrap.min.js' %}"></script>
-		<!---- Boostrap js link local ----->
-
 			<link rel="icon" href="media/icon.png" type="image/x-icon" />
-		<!---- Icon link local ----->
             <link rel="stylesheet" href="{% static '/css/nivo-slider.css' %}">
         <link rel="stylesheet" href="{% static '/css/style.css' %}">
       <link rel="stylesheet" href="{% static '/css/bar.css' %}">
-      <script src="{% static '/js/jquery-3.1.1.min.js' %}"></script>
     <script src="{% static '/js/jquery.nivo.slider.js' %}"></script>
       <script type="text/javascript">
 		$(window).on('load', function() {
@@ -31,7 +20,6 @@
 		});
 	</script>
 	<link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
-		<!---- Font awesom link local ----->
 	</head>
 	<body>
     <header lang="es">
@@ -63,17 +51,9 @@
 
               {% endif %}
           </ul>
-          <!--<ul class="nav navbar-nav navbar-right">
-            <li><a href="../navbar/">Default</a></li>
-            <li><a href="../navbar-static-top/">Static top</a></li>
-            <li class="active"><a href="./">Fixed top <span class="sr-only">(current)</span></a></li>
-          </ul>-->
         </div>
-
     </nav>
-        <!--<div class="text-large">-->
 			<h1 class="text-center " id="title">Carpintería Ramírez</h1>
-        <!--</div>-->
 			 <p class="text-center">
 				<i id="passwordHelpInline" class="text-muted"> Atendidos por su amigo: Armando Ramírez Moreno Sígueme en facebook <a href="https://www.facebook.com/profile.php?id=100006842134922">Mi perfil en facebook</a></i>
 			</p>

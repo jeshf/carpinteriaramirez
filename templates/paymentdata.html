@@ -4,9 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Ver datos del pago</title>
-
      <script src="{% static '/js/jquery-3.1.1.min.js' %}"></script>
-		<!---- jquery link local dont forget to place this in first than other script or link or may not work ---->
 		<link rel="stylesheet" href="{% static '/css/bootstrap.min.css' %}">
 		<link rel="stylesheet"href="{% static '/css/style.css' %}">
 		<link rel="stylesheet"href="{% static '/css/style2.css' %}">
@@ -17,9 +15,7 @@
         return confirm('¿Estás seguro que quieres eliminarlo?');
         })
     </script>
-		<!---- Boostrap js link local ----->
 			<link rel="icon" href="media/icon.png" type="image/x-icon" />
-		<!---- Icon link local ----->
 	<link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
 </head>
 <body>
@@ -49,35 +45,8 @@
 
               {% endif %}
           </ul>
-          <!--<ul class="nav navbar-nav navbar-right">
-            <li><a href="../navbar/">Default</a></li>
-            <li><a href="../navbar-static-top/">Static top</a></li>
-            <li class="active"><a href="./">Fixed top <span class="sr-only">(current)</span></a></li>
-          </ul>-->
         </div>
     </nav>
-			{% comment %}<h1 class="text-center bg-gray table-bordered text-uppercase"><i>Aquí puedes acceder a todos tus trabajos</i></h1>
- 			<hr class="table-bordered">
-                <div class="row">
-                <div class="text-center col-xs-10 col-sm-12 ">
-                <div class="wrapper tabled">
-                    <div class="stage table-bordered" id="page1">
-                        <div class="middled">
-                            {% for service in services %}
-                            <div class="link-2">
-                            <a class="links" href="/api/rest/services/{{ post.id }}/retrieve/">
-                                <span class="thick">{{ service.name }}</span>
-                                <p class="l">Ver datos</p>
-                            </a>
-                            <br>
-                            </div>
-                            {% endfor %}
-                        </div>
-                    </div>
-                </div>
-                </div>
-                </div>
-        <hr class="table-bordered">{% endcomment %}
         <h1 class="text-center bg-gray table-bordered text-uppercase"><i>Información del pago del cliente {{ payment.service.user.name }} {{ payment.service.user.firstLastName }}</i></h1>
         <hr class="table-bordered">
         <div class="row">

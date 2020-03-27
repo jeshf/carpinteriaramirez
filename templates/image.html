@@ -2,12 +2,10 @@
 <!doctype html>
 <html lang="es">
   <head>
-    <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <!-- Bootstrap CSS -->
       <title>Carpinteria Ramírez</title>
+      <script src="{% static '/js/jquery-3.1.1.min.js' %}"></script>
     <link rel="stylesheet" href="{% static '/css/bootstrap.min.css' %}">
 		<link rel="stylesheet"href="{% static '/css/style2.css' %}">
 		<script src="{% static '/js/bootstrap.min.js' %}"></script>
@@ -15,7 +13,6 @@
         <link rel="stylesheet" href="{% static '/css/style.css' %}">
       <link rel="stylesheet" href="{% static '/css/bar.css' %}">
       	<link rel="icon" href="media/icon.png" type="image/x-icon" />
-      <script src="{% static '/js/jquery-3.1.1.min.js' %}"></script>
     <script src="{% static '/js/jquery.nivo.slider.js' %}"></script>
       <script type="text/javascript">
           function Hide_Show(id){
@@ -43,6 +40,7 @@
 <div class="container-fluid">
 		<div class="container">
          <nav class="navbar navbar-default navbar-fixed-top">
+
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
             <span class="sr-only">Toggle navigation</span>
@@ -60,18 +58,12 @@
             <li><a href="/api/login/">Inicia sesión o registrate</a></li>
               <li><a href="/api/allposts/">Servicios y trabajos</a></li>
               {% if username != None %}
-                  <li style="background: transparent"><a style="background: transparent">
-                      <li style="background: transparent"><a href="/api/client/services/"style="background: transparent"><form method="POST" action="/api/logout/"><strong>Tus trabajos: {{ username }}</strong>{% csrf_token %}
+                  <li style="background: transparent"><a href="/api/client/services/"style="background: transparent"><form method="POST" action="/api/logout/"><strong>Tus trabajos: {{ username }}</strong>{% csrf_token %}
                       <input type="submit" value="Cerrar sesión" class="bg-info"></form></a></li>
+
               {% endif %}
           </ul>
-          <!--<ul class="nav navbar-nav navbar-right">
-            <li><a href="../navbar/">Default</a></li>
-            <li><a href="../navbar-static-top/">Static top</a></li>
-            <li class="active"><a href="./">Fixed top <span class="sr-only">(current)</span></a></li>
-          </ul>-->
         </div>
-
     </nav>
             <h1 class="bg-gray table-bordered text-uppercase text-center"><i>{{ post.postTitle }}</i></h1>
 			 <div class="bg-gray text-center table-bordered "><b>Descripción:</b> <label>{{ post.postDescription }}</label>
