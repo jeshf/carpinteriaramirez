@@ -73,18 +73,21 @@ def image(request,pk):
 
     elif request.method == 'POST':
         if request.POST['flag']=="responder":
-            try:
-                com=Comment.objects.get(pk=request.POST['primarkey'])
-            except Comment.DoesNotExist:
-                com=0
-            formr = ResponseForm(data=request.POST)
-            formr.fields['respuesta'].error_messages = {'required': 'Este campo es requerido'}
-            if formr.is_valid():
-                usr=request.user.username
-                if (not request.user.username):
-                    usr="Anónimo"
-                Response.objects.create(repliedBy=usr, text=request.POST['respuesta'], comment=com)
-            return HttpResponseRedirect("/api/rest/posts/" + str(post.id) + "/image/")
+            if request.user.is_staff and request.user.is_superuser:
+                try:
+                    com = Comment.objects.get(pk=request.POST['primarkey'])
+                except Comment.DoesNotExist:
+                    com = 0
+                formr = ResponseForm(data=request.POST)
+                formr.fields['respuesta'].error_messages = {'required': 'Este campo es requerido'}
+                if formr.is_valid():
+                    usr = request.user.username
+                    if (not request.user.username):
+                        usr = "Anónimo"
+                    Response.objects.create(repliedBy=usr, text=request.POST['respuesta'], comment=com)
+                return HttpResponseRedirect("/api/rest/posts/" + str(post.id) + "/image/")
+            else:
+                return HttpResponse('Forbidden access', status=403)
         elif  request.POST['flag']=="comentar":
             form = ContactForm(data=request.POST)
             form.fields['mensaje'].error_messages = {'required': 'Este campo es requerido'}

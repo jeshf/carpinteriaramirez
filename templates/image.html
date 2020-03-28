@@ -97,12 +97,16 @@
                 </div>
         <div class="col-xs-1 col-sm-1"></div>
     </div>
+        {% if comment != 0 %}
                 <div class="row">
                 <br>
             <div class="col-xs-1 col-sm-1"></div>
+
             <div class="col-xs-10 col-sm-10 bg-gray table-bordered text-center">
-                        {% if comment != 0 %}
+
                         {% for comments in comment %}
+                            <div class="table-bordered">
+                            <br>
                             <textarea  rows="2" cols="62" disabled="True">{{ print}} {{comments.createdBy}} dijo: {{ comments.text }}</textarea>
 
                             {% if replies != 0 %}
@@ -122,10 +126,14 @@
                                     <input type="hidden" name="primarkey" value="{{ comments.id }}">
                                     <input type="hidden" name="flag" value="{{ "responder" }}">
                             </form>
-                        {% endfor %}{% endif %}
+                            <br>
+                            </div>
+                        {% endfor %}
             </div>
+
             <div class="col-xs-1 col-sm-1"></div>
                 </div>
+        {% endif %}
                 </div>
                 </div>
 		<p class="text-center">
