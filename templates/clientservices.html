@@ -61,15 +61,32 @@
     <p class="-text">{{ service.description }}</p>
     <p class="card-text">Costo: {{service.cost}}</p>
     <strong><a href="/api/rest/clientpayments/{{ service.id }}/">Ver tus pagos</a></strong>
-  </div>
-  <div class="text-muted">
-      <p class="card-text">Progreso del trabajo</p>
+  <br>
+       <div class="text-muted table-bordered bg-info">
+      <strong>Progreso del trabajo:</strong>
+      {% if service.percentage > -1 and service.percentage < 25%}
+      <p class="card-text">Corte y lijado del diseño solicitado, que conforman los patrones del mueble.</p>
+      {% endif %}
+      {% if service.percentage > 24 and service.percentage < 50%}
+      <p class="card-text">Ensamblado de los diferentes patrones del diseño.</p>
+      {% endif %}
+      {% if service.percentage > 49 and service.percentage < 75%}
+      <p class="card-text">Acabado de barniz y lijado para dejar todas las partes finas.</p>
+      {% endif %}
+  {% if service.percentage > 74 and service.percentage < 100%}
+      <p class="card-text">Instalación de visagras, cristales, tiradores y todos los complementos del mueble.</p>
+      {% endif %}
+  {% if service.percentage == 100 %}
+      <p class="card-text">Listo para ser despachado.</p>
+      {% endif %}
    <div class='progress'>
                         <div class='progress-bar progress-bar-striped active' role='progressbar' aria-valuenow="{{service.percentage}}" aria-valuemin='0' aria-valuemax='100' style='width: {{ service.percentage }}%'>
                             <span>{{ print }}{{ service.percentage }}% Completado</span>
                         </div>
       </div>
   </div>
+  </div>
+
 </div>
                                 </div>
                             {% endfor %}

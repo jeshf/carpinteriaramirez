@@ -3,24 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="98b34b83-457f-4882-b1df-a206b47ef2fb" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/media/Botiquin.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/media/Closet.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/media/cocina_int1.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/media/cocina_int2.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/media/cocina_int2_xz57nWT.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/media/cocina_integral_color_tabaco_semimate.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sistema/static/css/style2.css" beforeDir="false" afterPath="$PROJECT_DIR$/sistema/static/css/style2.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sistema/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/sistema/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/addimages.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/addimages.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/createpayment.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/createpayment.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/createpost.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/createpost.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/createservice.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/createservice.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/image.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/image.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/paymentdata.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/paymentdata.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/postdata.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/postdata.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/servicedata.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/servicedata.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/users.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/users.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/usersservices.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/usersservices.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/clientservices.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/clientservices.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../store/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../store/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -330,6 +313,8 @@
       <workItem from="1585418667992" duration="982000" />
       <workItem from="1585420746660" duration="1260000" />
       <workItem from="1585422605935" duration="1055000" />
+      <workItem from="1585579095365" duration="1704000" />
+      <workItem from="1585580929875" duration="737000" />
     </task>
     <servers />
   </component>
