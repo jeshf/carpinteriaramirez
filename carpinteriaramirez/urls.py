@@ -46,6 +46,7 @@ urlpatterns = [
     url(r'^api/rest/payments/(?P<pk>[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})/data/$', views.singlepayment),
     url(r'^api/rest/posts/(?P<pk>[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})/data/$', views.singlepost),
     url(r'^api/home/$', views.home),
+    url(r'^api/about/$', views.about),
     url(r'^api/contact/$', views.contact),
     url(r'^api/logout/$', views.LogoutView.as_view()),
     url(r'^api/client/services/$', views.clientservices),

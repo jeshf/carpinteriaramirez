@@ -155,6 +155,15 @@ def home(request):
     if request.method=='GET':
         html = template.render({'img': img, 'username':username}, request)
         return HttpResponse(html)
+def about(request):
+    template = get_template('about.html')
+    img=Image.objects.all()[0:8]
+    username = request.user.username
+    if not username:
+        username = None
+    if request.method=='GET':
+        html = template.render({'img': img, 'username':username}, request)
+        return HttpResponse(html)
 #create a new post and retrieve all posts
 @login_required
 def post(request):
