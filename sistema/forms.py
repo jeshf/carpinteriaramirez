@@ -116,3 +116,10 @@ class PaymentForm(forms.Form):
 class DeleteService(forms.Form):
     delete = forms.CharField(widget=forms.HiddenInput(), required=False)
     imgid = forms.UUIDField(widget=forms.HiddenInput(), required=False)
+class SearchForm(forms.Form):
+    name = forms.CharField(max_length=50,widget=forms.TextInput())
+    def clean(self):
+        cleaned_data = super(SearchForm, self).clean()
+        name = cleaned_data.get('name')
+        if not name:
+            raise forms.ValidationError('Llena el campo por favor')

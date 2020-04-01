@@ -346,15 +346,23 @@ def allposts(request):
     template = get_template('posts.html')
     allposts = Post.objects.all()
     images = Image.objects.all()
-    if images.count == 0:
-        images=0
+    sform = SearchForm()
+
     username = request.user.username
     if not username:
         username = None
     if request.method=='GET':
-        html = template.render({'images':images,'allposts':allposts,'username':username }, request)
+        html = template.render({'images':images,'allposts':allposts,'username':username,'sform':sform }, request)
         return HttpResponse(html)
-
+    elif request.method == 'POST':
+        name=request.POST['name']
+        allposts = Post.objects.filter(postTitle__icontains=name)
+        # filtrando con icontains no importan las mayusculas ni minusculas
+        if allposts.count == 0:
+            allposts = 0
+        sform = SearchForm()
+        html = template.render({'images': images, 'allposts':allposts, 'username': username, 'sform': sform}, request)
+        return HttpResponse(html)
 def contact(request):
     template = get_template('contacto.html')
     username = request.user.username

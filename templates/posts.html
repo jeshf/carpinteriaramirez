@@ -13,6 +13,7 @@
 		<script src="{% static '/js/bootstrap.min.js' %}"></script>
             <link rel="stylesheet" href="{% static '/css/nivo-slider.css' %}">
         <link rel="stylesheet" href="{% static '/css/style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
       <link rel="stylesheet" href="{% static '/css/bar.css' %}">
       	<link rel="icon" href="media/icon.png" type="image/x-icon" />
     <script src="{% static '/js/jquery.nivo.slider.js' %}"></script>
@@ -40,11 +41,14 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li><a href="/api/home/">Página de inicio</a></li>
             <li><a href="/api/about/">Acerca de nosotros</a></li>
             <li><a href="/api/contact/">Contacto</a></li>
             <li><a href="/api/login/">Inicia sesión o registrate</a></li>
               <li><a href="/api/allposts/">Servicios y trabajos</a></li>
+            <li ><a style="background: transparent"><form method="POST">{% csrf_token %}
+            <input type="text" placeholder="Busca un trabajo" name="name">
+            <button type="submit"><i class="fa fa-search"></i></button>
+            </form></a></li>
               {% if username != None %}
                   <li style="background: transparent"><a href="/api/client/services/"style="background: transparent"><form method="POST" action="/api/logout/"><strong>Tus trabajos: {{ username }}</strong>{% csrf_token %}
                       <input type="submit" value="Cerrar sesión" class="bg-info"></form></a></li>
@@ -64,7 +68,7 @@
                                                    <div class="col-md-4">
                             <div class="panel panel-default text-center">
   <div class="panel-heading panel-title">
-    <h4>Titulo: {{post.postTitle}}</h4>
+    <h4>{{post.postTitle}}</h4>
   </div>
   <div class="panel-body">
 <div class="slider-wrapper theme-bar">
