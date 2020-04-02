@@ -332,12 +332,14 @@ def usersservices(request,pk):
             html = template.render({'forms': forms, 'services': services,'u':u,'username': username}, request)
             return HttpResponse(html)
         elif request.method == 'POST':
-            percentage=request.POST['percentage']
-            if percentage == "":
-                percentage=0
-            Service.objects.create(name=request.POST['name'], description=request.POST['description'],
-            cost=request.POST['cost'],percentage= percentage, user=u)
-            return HttpResponseRedirect(redirect_to='/api/rest/services/'+str(u.id)+'/addservices/')
+            forms = ServiceForm(data=request.POST)
+            if forms.is_valid():
+                Service.objects.create(name=request.POST['name'], description=request.POST['description'],
+                cost=request.POST['cost'],percentage= request.POST['percentage'], user=u)
+                return HttpResponseRedirect(redirect_to='/api/rest/services/'+str(u.id)+'/addservices/')
+            else:
+                html = template.render({'forms': forms, 'services': services, 'u': u, 'username': username}, request)
+                return HttpResponse(html)
     else:
         return HttpResponse('Forbidden access', status=403)
 
@@ -426,10 +428,25 @@ class Login(APIView):
             else:
                 return HttpResponse('Bad Request', status=400)
         elif flag=="register":
-            serializer = UserSerializer(data=data)
-            if serializer.is_valid():
-                serializer.save()
-            return HttpResponseRedirect("/api/home/")
+            formu = SignUpForm(data=request.POST)
+            #formu.fields['username'].error_messages = {'required': 'Este campo es requerido'}
+            #formu.fields['name'].error_messages = {'required': 'Este campo es requerido'}
+            #formu.fields['firstLastName'].error_messages = {'required': 'Este campo es requerido'}
+            #formu.fields['secondLastName'].error_messages = {'required': 'Este campo es requerido'}
+            #formu.fields['password'].error_messages = {'required': 'Este campo es requerido'}
+            #formu.fields['password2'].error_messages = {'required': 'Este campo es requerido'}
+            #formu.fields['email'].error_messages = {'required': 'Este campo es requerido'}
+            if formu.is_valid():
+                serializer = UserSerializer(data=data)
+                if serializer.is_valid():
+                    serializer.save()
+                return HttpResponseRedirect("/api/login/")
+            else:
+                username = request.user.username
+                if not username:
+                    username = None
+                form = SignInForm()
+                return render(request, 'login.html', {'form': form,'formu':formu,'username':username  })
         else:
             return HttpResponse('Bad Request', status=400)
     def get(self, request, format=None):
